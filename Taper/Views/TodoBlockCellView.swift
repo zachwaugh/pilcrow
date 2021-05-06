@@ -19,8 +19,11 @@ final class TodoBlockCellView: UICollectionViewCell {
     
     func configure(with todo: TodoBlock) {
         var attributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont.systemFont(ofSize: 17, weight: .regular)
+            .font: UIFont.systemFont(ofSize: 17, weight: .regular),
+            .foregroundColor: UIColor.black
         ]
+        
+        let typingAttributes = attributes
         
         if todo.completed {
             checkboxButton.setImage(UIImage(named: "checked"), for: .normal)
@@ -29,10 +32,10 @@ final class TodoBlockCellView: UICollectionViewCell {
             attributes[.strikethroughStyle] = NSUnderlineStyle.single.rawValue
         } else {
             checkboxButton.setImage(UIImage(named: "unchecked"), for: .normal)
-            attributes[.foregroundColor] = UIColor.black
         }
         
         textView.attributedText = NSAttributedString(string: todo.content, attributes: attributes)
+        textView.typingAttributes = typingAttributes
     }
     
     func focus() {
