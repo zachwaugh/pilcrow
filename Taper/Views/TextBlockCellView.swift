@@ -14,6 +14,10 @@ final class TextBlockCellView: UICollectionViewCell {
         textView.text = block.content
     }
     
+    func focus() {
+        textView.becomeFirstResponder()
+    }
+    
     private func setup() {
         contentView.addSubview(textView)
         

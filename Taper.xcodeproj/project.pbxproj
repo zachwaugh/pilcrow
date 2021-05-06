@@ -10,6 +10,7 @@
 		928EF89726444AF000437680 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928EF89626444AF000437680 /* Document.swift */; };
 		928EF89B26444E7E00437680 /* TextBlockCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928EF89A26444E7E00437680 /* TextBlockCellView.swift */; };
 		928EF89D26444F1D00437680 /* TodoBlockCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928EF89C26444F1D00437680 /* TodoBlockCellView.swift */; };
+		928EF8A02644610400437680 /* Blocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928EF89F2644610400437680 /* Blocks.swift */; };
 		92C581172644472800E062A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C581162644472800E062A0 /* AppDelegate.swift */; };
 		92C581192644472800E062A0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C581182644472800E062A0 /* SceneDelegate.swift */; };
 		92C5811B2644472800E062A0 /* DocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C5811A2644472800E062A0 /* DocumentViewController.swift */; };
@@ -41,6 +42,7 @@
 		928EF89626444AF000437680 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
 		928EF89A26444E7E00437680 /* TextBlockCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBlockCellView.swift; sourceTree = "<group>"; };
 		928EF89C26444F1D00437680 /* TodoBlockCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoBlockCellView.swift; sourceTree = "<group>"; };
+		928EF89F2644610400437680 /* Blocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blocks.swift; sourceTree = "<group>"; };
 		92C581132644472800E062A0 /* Taper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Taper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92C581162644472800E062A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92C581182644472800E062A0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -100,6 +102,32 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		928EF89E264460F700437680 /* Document */ = {
+			isa = PBXGroup;
+			children = (
+				928EF89626444AF000437680 /* Document.swift */,
+				928EF89F2644610400437680 /* Blocks.swift */,
+			);
+			path = Document;
+			sourceTree = "<group>";
+		};
+		928EF8A12644618700437680 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				92C5811F2644472800E062A0 /* Assets.xcassets */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		928EF8A22644619300437680 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				92C5811C2644472800E062A0 /* Main.storyboard */,
+				92C581212644472800E062A0 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
 		92C5810A2644472700E062A0 = {
 			isa = PBXGroup;
 			children = (
@@ -127,9 +155,8 @@
 				92C581472644473300E062A0 /* View Controllers */,
 				928EF89926444E6D00437680 /* Views */,
 				92C581462644472F00E062A0 /* Models */,
-				92C5811C2644472800E062A0 /* Main.storyboard */,
-				92C5811F2644472800E062A0 /* Assets.xcassets */,
-				92C581212644472800E062A0 /* LaunchScreen.storyboard */,
+				928EF8A22644619300437680 /* Storyboards */,
+				928EF8A12644618700437680 /* Assets */,
 				92C581242644472800E062A0 /* Info.plist */,
 			);
 			path = Taper;
@@ -156,7 +183,7 @@
 		92C581462644472F00E062A0 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				928EF89626444AF000437680 /* Document.swift */,
+				928EF89E264460F700437680 /* Document */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -304,6 +331,7 @@
 				92C5811B2644472800E062A0 /* DocumentViewController.swift in Sources */,
 				92C581172644472800E062A0 /* AppDelegate.swift in Sources */,
 				928EF89D26444F1D00437680 /* TodoBlockCellView.swift in Sources */,
+				928EF8A02644610400437680 /* Blocks.swift in Sources */,
 				92C581192644472800E062A0 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

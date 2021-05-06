@@ -12,24 +12,37 @@ final class TodoBlockCellView: UICollectionViewCell {
     
     func configure(with block: TodoBlock) {
         textView.text = block.content
-        checkboxView.image = block.completed ? UIImage(systemName: "checkmark") : nil
+        checkboxView.image = block.completed ? checkedImage : uncheckedImage
     }
     
-    private func setup() {
+    func focus() {
+        textView.becomeFirstResponder()
+    }
+    
+    private var checkedImage: UIImage? {
+        UIImage(named: "checked")
+    }
+    
+    private var uncheckedImage: UIImage? {
+        UIImage(named: "unchecked")
+    }
+    
+    private func setup() {        
         contentView.addSubview(checkboxView)
         contentView.addSubview(textView)
         
         NSLayoutConstraint.activate([
             checkboxView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             checkboxView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            checkboxView.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor),
             checkboxView.heightAnchor.constraint(equalToConstant: 30),
             checkboxView.widthAnchor.constraint(equalToConstant: 30),
 
             textView.leadingAnchor.constraint(equalTo: checkboxView.trailingAnchor, constant: 8),
             textView.trailingAnchor.constraint(equalTo:  contentView.trailingAnchor),
-            textView.topAnchor.constraint(equalTo:  contentView.topAnchor),
+            textView.topAnchor.constraint(equalTo: checkboxView.topAnchor, constant: 4),
             textView.bottomAnchor.constraint(equalTo:  contentView.bottomAnchor),
+            
+            contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: 28)
         ])
     }
     
@@ -38,9 +51,8 @@ final class TodoBlockCellView: UICollectionViewCell {
     private let checkboxView: UIImageView = {
         let view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.cornerRadius = 4
-        view.layer.borderWidth = 1
-        view.layer.borderColor = UIColor.lightGray.cgColor
+        view.contentMode = .scaleAspectFit
+        view.tintColor = .gray
         return view
     }()
     

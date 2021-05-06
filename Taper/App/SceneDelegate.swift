@@ -9,15 +9,16 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let document = Document(
             title: "Test Document",
             blocks: [
-                TextBlock(content: "This is a paragraph"),
-                TextBlock(content: "This is another paragraph that is much longer so it will wrap to multiple lines"),
-                TodoBlock(completed: false, content: "This is a new todo"),
-                TodoBlock(completed: true, content: "This is a completed todo")
+                .text(TextBlock(content: "This is a paragraph")),
+                .text(TextBlock(content: "This is another paragraph that is much longer so it will wrap to multiple lines")),
+                .todo(TodoBlock(completed: false, content: "This is a new todo")),
+                .todo(TodoBlock(completed: true, content: "This is a completed todo that is also much longer so we can test how it wraps"))
             ]
         )
         
         let documentController = DocumentViewController(document: document)
-        let navController = UINavigationController(rootViewController: documentController)
+        let navController = UINavigationController()
+        navController.viewControllers = [UIViewController(), documentController]
         window?.rootViewController = navController
     }
 
