@@ -1,6 +1,12 @@
 import UIKit
 
+protocol TextCellDelegate: AnyObject {
+    func textCellDidUpdateContent(cell: TextBlockCellView, content: String)
+}
+
 final class TextBlockCellView: UICollectionViewCell {
+    weak var delegate: TextCellDelegate?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -31,13 +37,21 @@ final class TextBlockCellView: UICollectionViewCell {
     
     // MARK: - Views
     
-    private let textView: UITextView = {
+    private lazy var textView: UITextView = {
         let view = UITextView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.isScrollEnabled = false
         view.textContainerInset = .zero
         view.textContainer.lineFragmentPadding = 0
         view.font = UIFont.systemFont(ofSize: 17)
+        view.delegate = self
+        
         return view
     }()
+}
+
+extension TextBlockCellView: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        delegate?.textCellDidUpdateContent(cell: self, content: textView.text ?? "")
+    }
 }

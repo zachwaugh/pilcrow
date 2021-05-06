@@ -12,13 +12,19 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 .text(TextBlock(content: "This is a paragraph")),
                 .text(TextBlock(content: "This is another paragraph that is much longer so it will wrap to multiple lines")),
                 .todo(TodoBlock(completed: false, content: "This is a new todo")),
-                .todo(TodoBlock(completed: true, content: "This is a completed todo that is also much longer so we can test how it wraps"))
+                .text(TextBlock(content: "More text")),
+                .todo(TodoBlock(completed: true, content: "This is a completed todo that is also much longer so we can test how it wraps")),
+                .text(TextBlock(content: "And a final paragraph")),
             ]
         )
         
         let documentController = DocumentViewController(document: document)
         let navController = UINavigationController()
-        navController.viewControllers = [UIViewController(), documentController]
+        
+        let emptyViewController = UIViewController()
+        emptyViewController.navigationItem.backButtonDisplayMode = .minimal
+
+        navController.viewControllers = [emptyViewController, documentController]
         window?.rootViewController = navController
     }
 

@@ -8,7 +8,7 @@ final class DocumentViewController: UIViewController {
     private var document: Document
     
     init(document: Document?) {
-        self.document = document ?? Document(title: "Untitled", blocks: [])
+        self.document = document ?? Document()
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -22,12 +22,13 @@ final class DocumentViewController: UIViewController {
         title = document.title
         setupViews()
         configureCollectionView()
-        configureGestures()
+//        configureGestures()
         configureNavigationBar()
         configureDataSource()
     }
     
     private func configureNavigationBar() {
+        navigationItem.backButtonDisplayMode = .minimal
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(appendNewBlock))
     }
     
@@ -44,22 +45,28 @@ final class DocumentViewController: UIViewController {
                 return self.todoBlockCell(for: indexPath, block: block)
             }
         })
-        
+
+        updateDataSource(animated: false)
+    }
+    
+    private func updateDataSource(animated: Bool) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Block>()
         snapshot.appendSections([.main])
         snapshot.appendItems(document.blocks)
-        dataSource.apply(snapshot, animatingDifferences: false)
+        dataSource.apply(snapshot, animatingDifferences: animated)
     }
 
     private func textBlockCell(for indexPath: IndexPath, block: TextBlock) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "text", for: indexPath) as! TextBlockCellView
         cell.configure(with: block)
+        cell.delegate = self
         return cell
     }
 
     private func todoBlockCell(for indexPath: IndexPath, block: TodoBlock) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "todo", for: indexPath) as! TodoBlockCellView
         cell.configure(with: block)
+        cell.delegate = self
         return cell
     }
     
@@ -77,11 +84,12 @@ final class DocumentViewController: UIViewController {
     // MARK: - Actions
     
     @objc private func appendNewBlock() {
-        document.blocks.append(.todo(TodoBlock(completed: false, content: "")))
-        var snapshot = NSDiffableDataSourceSnapshot<Section, Block>()
-        snapshot.appendSections([.main])
-        snapshot.appendItems(document.blocks)
-        dataSource.apply(snapshot, animatingDifferences: true)
+        let newBlock = Block.todo(TodoBlock(completed: false, content: ""))
+        document.blocks.append(newBlock)
+        updateDataSource(animated: true)
+        
+        guard let indexPath = dataSource.indexPath(for: newBlock), let cell = collectionView.cellForItem(at: indexPath) as? TodoBlockCellView else { return }
+        cell.focus()
     }
 
     // MARK: - Views
@@ -107,7 +115,6 @@ final class DocumentViewController: UIViewController {
         let view = UICollectionView(frame: .zero, collectionViewLayout: makeCollectionViewLayout())
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .systemBackground
-        view.delegate = self
         
         return view
     }()
@@ -127,6 +134,42 @@ final class DocumentViewController: UIViewController {
     }
 }
 
-extension DocumentViewController: UICollectionViewDelegate {
+extension DocumentViewController: TodoCellDelegate {
+    func todoCellDidToggleCheckBox(cell: TodoBlockCellView) {
+        guard let indexPath = collectionView.indexPath(for: cell),
+              case var .todo(todo) = document.blocks[indexPath.row]
+        else {
+            return
+        }
+        
+        todo.toggle()
+        document.blocks[indexPath.row] = .todo(todo)
+        updateDataSource(animated: true)
+    }
     
+    func todoCellDidUpdateContent(cell: TodoBlockCellView, content: String) {
+        guard let indexPath = collectionView.indexPath(for: cell),
+              case var .todo(todo) = document.blocks[indexPath.row]
+        else {
+            return
+        }
+
+        todo.content = content
+        document.blocks[indexPath.row] = .todo(todo)
+        collectionView.collectionViewLayout.invalidateLayout()
+    }
+}
+
+extension DocumentViewController: TextCellDelegate {
+    func textCellDidUpdateContent(cell: TextBlockCellView, content: String) {
+        guard let indexPath = collectionView.indexPath(for: cell),
+              case var .text(text) = document.blocks[indexPath.row]
+        else {
+            return
+        }
+        
+        text.content = content
+        document.blocks[indexPath.row] = .text(text)
+        collectionView.collectionViewLayout.invalidateLayout()
+    }
 }

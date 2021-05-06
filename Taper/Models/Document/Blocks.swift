@@ -7,11 +7,15 @@ enum Block: Hashable {
 
 struct TextBlock: Hashable {
     let identifier = UUID()
-    let content: String
+    var content: String
 }
 
 struct TodoBlock: Hashable {
     let identifier = UUID()
-    let completed: Bool
-    let content: String
+    var completed: Bool
+    var content: String
+    
+    mutating func toggle() {
+        completed.toggle()
+    }
 }
