@@ -1,22 +1,24 @@
-//
-//  SceneDelegate.swift
-//  Taper
-//
-//  Created by Zach Waugh on 5/6/21.
-//
-
 import UIKit
 
-class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
+final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
-
-
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
+        
+        let document = Document(
+            title: "Test Document",
+            blocks: [
+                TextBlock(content: "This is a paragraph"),
+                TextBlock(content: "This is another paragraph that is much longer so it will wrap to multiple lines"),
+                TodoBlock(completed: false, content: "This is a new todo"),
+                TodoBlock(completed: true, content: "This is a completed todo")
+            ]
+        )
+        
+        let documentController = DocumentViewController(document: document)
+        let navController = UINavigationController(rootViewController: documentController)
+        window?.rootViewController = navController
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
