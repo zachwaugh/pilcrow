@@ -21,6 +21,8 @@
 		92973AA82645B1EB00B836B5 /* ListItemBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92973AA72645B1EB00B836B5 /* ListItemBlock.swift */; };
 		92973AAA2645B20300B836B5 /* ListItemStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92973AA92645B20300B836B5 /* ListItemStyle.swift */; };
 		92973AAC2645B32D00B836B5 /* DocumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92973AAB2645B32D00B836B5 /* DocumentsViewController.swift */; };
+		92973AAE2645B9B200B836B5 /* BlockKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92973AAD2645B9B200B836B5 /* BlockKind.swift */; };
+		92973AB12645BAB300B836B5 /* ReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92973AB02645BAB300B836B5 /* ReusableCell.swift */; };
 		92C581172644472800E062A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C581162644472800E062A0 /* AppDelegate.swift */; };
 		92C581192644472800E062A0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C581182644472800E062A0 /* SceneDelegate.swift */; };
 		92C5811B2644472800E062A0 /* DocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C5811A2644472800E062A0 /* DocumentViewController.swift */; };
@@ -64,6 +66,8 @@
 		92973AA72645B1EB00B836B5 /* ListItemBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemBlock.swift; sourceTree = "<group>"; };
 		92973AA92645B20300B836B5 /* ListItemStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemStyle.swift; sourceTree = "<group>"; };
 		92973AAB2645B32D00B836B5 /* DocumentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsViewController.swift; sourceTree = "<group>"; };
+		92973AAD2645B9B200B836B5 /* BlockKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockKind.swift; sourceTree = "<group>"; };
+		92973AB02645BAB300B836B5 /* ReusableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableCell.swift; sourceTree = "<group>"; };
 		92C581132644472800E062A0 /* Taper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Taper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92C581162644472800E062A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92C581182644472800E062A0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -164,6 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				92973A9C26458E4200B836B5 /* FocusableView.swift */,
+				92973AB02645BAB300B836B5 /* ReusableCell.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -172,11 +177,19 @@
 			isa = PBXGroup;
 			children = (
 				928EF89F2644610400437680 /* Blocks.swift */,
+				92973AAD2645B9B200B836B5 /* BlockKind.swift */,
 				92973AA12645B1AD00B836B5 /* TextBlock.swift */,
 				92973AA32645B1CA00B836B5 /* TodoBlock.swift */,
 				92973AA72645B1EB00B836B5 /* ListItemBlock.swift */,
 			);
 			path = Blocks;
+			sourceTree = "<group>";
+		};
+		92973AAF2645BAA300B836B5 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		92C5810A2644472700E062A0 = {
@@ -206,6 +219,7 @@
 				92C581462644472F00E062A0 /* Models */,
 				92C581472644473300E062A0 /* View Controllers */,
 				928EF89926444E6D00437680 /* Views */,
+				92973AAF2645BAA300B836B5 /* Extensions */,
 				92973A9B26458E3400B836B5 /* Protocols */,
 				928EF8A22644619300437680 /* Storyboards */,
 				928EF8A12644618700437680 /* Assets */,
@@ -385,6 +399,7 @@
 				92973A952644BBAB00B836B5 /* TextStyle.swift in Sources */,
 				92973A9F2645908C00B836B5 /* TextBlockCellView.swift in Sources */,
 				928EF89B26444E7E00437680 /* BaseTextCellView.swift in Sources */,
+				92973AAE2645B9B200B836B5 /* BlockKind.swift in Sources */,
 				92973AAC2645B32D00B836B5 /* DocumentsViewController.swift in Sources */,
 				928EF89726444AF000437680 /* Document.swift in Sources */,
 				92C5811B2644472800E062A0 /* DocumentViewController.swift in Sources */,
@@ -393,6 +408,7 @@
 				92973AAA2645B20300B836B5 /* ListItemStyle.swift in Sources */,
 				92973A9D26458E4200B836B5 /* FocusableView.swift in Sources */,
 				928EF89D26444F1D00437680 /* TodoBlockCellView.swift in Sources */,
+				92973AB12645BAB300B836B5 /* ReusableCell.swift in Sources */,
 				928EF8A02644610400437680 /* Blocks.swift in Sources */,
 				92C581192644472800E062A0 /* SceneDelegate.swift in Sources */,
 				92973A97264589FE00B836B5 /* ListItemBlockCellView.swift in Sources */,

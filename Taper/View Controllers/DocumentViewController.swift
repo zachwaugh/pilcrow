@@ -30,24 +30,13 @@ final class DocumentViewController: UIViewController {
     private func configureNavigationBar() {
         navigationItem.backButtonDisplayMode = .minimal
         
-        let menu = UIMenu(title: "", children: [
-            UIAction(title: "To Do", handler: { _ in
-                self.appendNewBlock(TodoBlock().asBlock())
-            }),
-            UIAction(title: "Bullet List Item", handler: { _ in
-                self.appendNewBlock(ListItemBlock().asBlock())
-            }),
-            UIAction(title: "Numbered List Item", handler: { _ in
-                self.appendNewBlock(ListItemBlock(style: .number(1)).asBlock())
-            }),
-            UIAction(title: "Paragraph", handler: { _ in
-                self.appendNewBlock(TextBlock().asBlock())
-            }),
-            UIAction(title: "Heading", handler: { _ in
-                self.appendNewBlock(TextBlock(style: .heading).asBlock())
-            }),
-        ])
+        let actions = BlockKind.allCases.map { kind in
+            UIAction(title: kind.title, image: kind.image, handler: { [weak self] _ in
+                self?.insertNewBlock(for: kind)
+            })
+        }
         
+        let menu = UIMenu(title: "", children: actions)
         navigationItem.rightBarButtonItem = UIBarButtonItem(systemItem: .add, menu: menu)
     }
     
@@ -92,14 +81,14 @@ final class DocumentViewController: UIViewController {
     }
     
     private func textBlockCell(for indexPath: IndexPath, block: TextBlock) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "text", for: indexPath) as! TextBlockCellView
+        let cell = collectionView.dequeueReusableCell(TextBlockCellView.self, for: indexPath)
         cell.configure(with: block)
         cell.delegate = self
         return cell
     }
 
     private func todoBlockCell(for indexPath: IndexPath, block: TodoBlock) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "todo", for: indexPath) as! TodoBlockCellView
+        let cell = collectionView.dequeueReusableCell(TodoBlockCellView.self, for: indexPath)
         cell.configure(with: block)
         cell.delegate = self
         cell.todoDelegate = self
@@ -107,7 +96,7 @@ final class DocumentViewController: UIViewController {
     }
     
     private func listItemBlockCell(for indexPath: IndexPath, block: ListItemBlock) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "listItem", for: indexPath) as! ListItemBlockCellView
+        let cell = collectionView.dequeueReusableCell(ListItemBlockCellView.self, for: indexPath)
         cell.configure(with: block)
         cell.delegate = self
         return cell
@@ -129,7 +118,7 @@ final class DocumentViewController: UIViewController {
         }
     }
     
-    // MARK: - Actions
+    // MARK: - Blocks
     
     private func insertBlock(_ block: Block, after indexPath: IndexPath) {
         if indexPath.row >= document.blocks.count - 1 {
@@ -139,6 +128,32 @@ final class DocumentViewController: UIViewController {
             updateDataSource()
             focusBlock(block)
         }
+    }
+    
+    private func insertNewBlock(for kind: BlockKind) {
+        let block = makeBlock(for: kind)
+        insertNewBlock(block)
+    }
+    
+    private func makeBlock(for kind: BlockKind) -> Block {
+        switch kind {
+        case .heading:
+            return TextBlock(style: .heading).asBlock()
+        case .paragraph:
+            return TextBlock(style: .paragraph).asBlock()
+        case .todo:
+            return TodoBlock().asBlock()
+        case .bulletListItem:
+            return ListItemBlock(style: .bullet).asBlock()
+        case .numberedListItem:
+            return ListItemBlock(style: .number(1)).asBlock()
+        }
+    }
+    
+    /// Inserts will happen by default after active row, or at the end
+    private func insertNewBlock(_ block: Block) {
+        // TODO: find current active block
+        appendNewBlock(block)
     }
     
     /// Appends a block at the end, ensuring it's the correct type based on the
@@ -218,9 +233,9 @@ final class DocumentViewController: UIViewController {
     }
     
     private func configureCollectionView() {
-        collectionView.register(TextBlockCellView.self, forCellWithReuseIdentifier: "text")
-        collectionView.register(TodoBlockCellView.self, forCellWithReuseIdentifier: "todo")
-        collectionView.register(ListItemBlockCellView.self, forCellWithReuseIdentifier: "listItem")
+        BlockKind.allCases.forEach {
+            collectionView.registerReusableCell($0.cellClass)
+        }
     }
     
     private lazy var collectionView: UICollectionView = {

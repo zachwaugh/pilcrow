@@ -1,4 +1,4 @@
-import Foundation
+import UIKit
 
 enum Block: Hashable {
     case text(TextBlock)
