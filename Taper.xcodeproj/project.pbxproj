@@ -12,6 +12,7 @@
 		928EF89D26444F1D00437680 /* TodoBlockCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928EF89C26444F1D00437680 /* TodoBlockCellView.swift */; };
 		928EF8A02644610400437680 /* Blocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928EF89F2644610400437680 /* Blocks.swift */; };
 		92973A952644BBAB00B836B5 /* TextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92973A942644BBAB00B836B5 /* TextStyle.swift */; };
+		92973A97264589FE00B836B5 /* ListItemBlockCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92973A96264589FE00B836B5 /* ListItemBlockCellView.swift */; };
 		92C581172644472800E062A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C581162644472800E062A0 /* AppDelegate.swift */; };
 		92C581192644472800E062A0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C581182644472800E062A0 /* SceneDelegate.swift */; };
 		92C5811B2644472800E062A0 /* DocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C5811A2644472800E062A0 /* DocumentViewController.swift */; };
@@ -46,6 +47,7 @@
 		928EF89F2644610400437680 /* Blocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blocks.swift; sourceTree = "<group>"; };
 		928EF8C32644816700437680 /* Taper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Taper.entitlements; sourceTree = "<group>"; };
 		92973A942644BBAB00B836B5 /* TextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStyle.swift; sourceTree = "<group>"; };
+		92973A96264589FE00B836B5 /* ListItemBlockCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemBlockCellView.swift; sourceTree = "<group>"; };
 		92C581132644472800E062A0 /* Taper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Taper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92C581162644472800E062A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92C581182644472800E062A0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 			children = (
 				928EF89A26444E7E00437680 /* TextBlockCellView.swift */,
 				928EF89C26444F1D00437680 /* TodoBlockCellView.swift */,
+				92973A96264589FE00B836B5 /* ListItemBlockCellView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -339,6 +342,7 @@
 				928EF89D26444F1D00437680 /* TodoBlockCellView.swift in Sources */,
 				928EF8A02644610400437680 /* Blocks.swift in Sources */,
 				92C581192644472800E062A0 /* SceneDelegate.swift in Sources */,
+				92973A97264589FE00B836B5 /* ListItemBlockCellView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

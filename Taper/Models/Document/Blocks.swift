@@ -3,13 +3,20 @@ import Foundation
 enum Block: Hashable {
     case text(TextBlock)
     case todo(TodoBlock)
+    case listItem(ListItemBlock)
     
     func empty() -> Block {
+        blockable.empty().asBlock()
+    }
+    
+    private var blockable: Blockable {
         switch self {
         case .text(let block):
-            return block.empty().asBlock()
+            return block
         case .todo(let block):
-            return block.empty().asBlock()
+            return block
+        case .listItem(let block):
+            return block
         }
     }
 }
@@ -48,5 +55,24 @@ struct TodoBlock: Hashable, Blockable {
     
     func empty() -> TodoBlock {
         TodoBlock()
+    }
+}
+
+
+enum ListItemStyle: Hashable {
+    case bullet, number(Int)
+}
+
+struct ListItemBlock: Hashable, Blockable {
+    let identifier = UUID()
+    var content: String = ""
+    var style: ListItemStyle = .bullet
+    
+    func asBlock() -> Block {
+        .listItem(self)
+    }
+    
+    func empty() -> ListItemBlock {
+        ListItemBlock(style: style)
     }
 }

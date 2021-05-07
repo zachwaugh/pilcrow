@@ -6,17 +6,22 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let _ = (scene as? UIWindowScene) else { return }
         
+        let blocks: [Blockable] = [
+            TextBlock(content: "This is a heading", style: .heading),
+            TextBlock(content: "This is a paragraph"),
+            ListItemBlock(content: "Bullet list item"),
+            ListItemBlock(content: "Ordered list item", style: .number(1)),
+            
+            TextBlock(content: "This is another paragraph that is much longer so it will wrap to multiple lines"),
+            TodoBlock(completed: false, content: "This is a new todo"),
+            TextBlock(content: "More text"),
+            TodoBlock(completed: true, content: "This is a completed todo that is also much longer so we can test how it wraps"),
+            TextBlock(content: "And a final paragraph"),
+        ]
+        
         let document = Document(
             title: "Test Document",
-            blocks: [
-                .text(TextBlock(content: "This is a heading", style: .heading)),
-                .text(TextBlock(content: "This is a paragraph")),
-                .text(TextBlock(content: "This is another paragraph that is much longer so it will wrap to multiple lines")),
-                .todo(TodoBlock(completed: false, content: "This is a new todo")),
-                .text(TextBlock(content: "More text")),
-                .todo(TodoBlock(completed: true, content: "This is a completed todo that is also much longer so we can test how it wraps")),
-                .text(TextBlock(content: "And a final paragraph")),
-            ]
+            blocks: blocks.map { $0.asBlock() }
         )
         
         let documentController = DocumentViewController(document: document)

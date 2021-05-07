@@ -34,6 +34,12 @@ final class DocumentViewController: UIViewController {
             UIAction(title: "To Do", handler: { _ in
                 self.appendNewBlock(TodoBlock().asBlock())
             }),
+            UIAction(title: "Bullet List Item", handler: { _ in
+                self.appendNewBlock(ListItemBlock().asBlock())
+            }),
+            UIAction(title: "Numbered List Item", handler: { _ in
+                self.appendNewBlock(ListItemBlock(style: .number(1)).asBlock())
+            }),
             UIAction(title: "Paragraph", handler: { _ in
                 self.appendNewBlock(TextBlock().asBlock())
             }),
@@ -56,6 +62,8 @@ final class DocumentViewController: UIViewController {
                 return self.textBlockCell(for: indexPath, block: block)
             case .todo(let block):
                 return self.todoBlockCell(for: indexPath, block: block)
+            case .listItem(let block):
+                return self.listItemBlockCell(for: indexPath, block: block)
             }
         })
 
@@ -85,6 +93,13 @@ final class DocumentViewController: UIViewController {
 
     private func todoBlockCell(for indexPath: IndexPath, block: TodoBlock) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "todo", for: indexPath) as! TodoBlockCellView
+        cell.configure(with: block)
+        cell.delegate = self
+        return cell
+    }
+    
+    private func listItemBlockCell(for indexPath: IndexPath, block: ListItemBlock) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "listItem", for: indexPath) as! ListItemBlockCellView
         cell.configure(with: block)
         cell.delegate = self
         return cell
@@ -154,6 +169,7 @@ final class DocumentViewController: UIViewController {
     private func configureCollectionView() {
         collectionView.register(TextBlockCellView.self, forCellWithReuseIdentifier: "text")
         collectionView.register(TodoBlockCellView.self, forCellWithReuseIdentifier: "todo")
+        collectionView.register(ListItemBlockCellView.self, forCellWithReuseIdentifier: "listItem")
     }
     
     private lazy var collectionView: UICollectionView = {
