@@ -23,6 +23,7 @@
 		92973AAC2645B32D00B836B5 /* DocumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92973AAB2645B32D00B836B5 /* DocumentsViewController.swift */; };
 		92973AAE2645B9B200B836B5 /* BlockKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92973AAD2645B9B200B836B5 /* BlockKind.swift */; };
 		92973AB12645BAB300B836B5 /* ReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92973AB02645BAB300B836B5 /* ReusableCell.swift */; };
+		92973AB42645E3B500B836B5 /* DocumentEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92973AB32645E3B500B836B5 /* DocumentEditor.swift */; };
 		92C581172644472800E062A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C581162644472800E062A0 /* AppDelegate.swift */; };
 		92C581192644472800E062A0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C581182644472800E062A0 /* SceneDelegate.swift */; };
 		92C5811B2644472800E062A0 /* DocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C5811A2644472800E062A0 /* DocumentViewController.swift */; };
@@ -68,6 +69,7 @@
 		92973AAB2645B32D00B836B5 /* DocumentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsViewController.swift; sourceTree = "<group>"; };
 		92973AAD2645B9B200B836B5 /* BlockKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockKind.swift; sourceTree = "<group>"; };
 		92973AB02645BAB300B836B5 /* ReusableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableCell.swift; sourceTree = "<group>"; };
+		92973AB32645E3B500B836B5 /* DocumentEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentEditor.swift; sourceTree = "<group>"; };
 		92C581132644472800E062A0 /* Taper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Taper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92C581162644472800E062A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92C581182644472800E062A0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				92973A9926458D4A00B836B5 /* TextEdit.swift */,
+				92973AB32645E3B500B836B5 /* DocumentEditor.swift */,
 			);
 			path = Edit;
 			sourceTree = "<group>";
@@ -417,6 +420,7 @@
 				92973A9D26458E4200B836B5 /* FocusableView.swift in Sources */,
 				928EF89D26444F1D00437680 /* TodoBlockCellView.swift in Sources */,
 				92973AB12645BAB300B836B5 /* ReusableCell.swift in Sources */,
+				92973AB42645E3B500B836B5 /* DocumentEditor.swift in Sources */,
 				928EF8A02644610400437680 /* Blocks.swift in Sources */,
 				92C581192644472800E062A0 /* SceneDelegate.swift in Sources */,
 				92973A97264589FE00B836B5 /* ListItemBlockCellView.swift in Sources */,
