@@ -20,15 +20,15 @@ final class TodoBlockCellView: UICollectionViewCell {
     func configure(with todo: TodoBlock) {
         var attributes: [NSAttributedString.Key: Any] = [
             .font: UIFont.systemFont(ofSize: 17, weight: .regular),
-            .foregroundColor: UIColor.black
+            .foregroundColor: UIColor.label
         ]
         
         let typingAttributes = attributes
         
         if todo.completed {
             checkboxButton.setImage(UIImage(named: "checked"), for: .normal)
-            attributes[.foregroundColor] = UIColor.lightGray
-            attributes[.strikethroughColor] = UIColor.lightGray
+            attributes[.foregroundColor] = UIColor.separator
+            attributes[.strikethroughColor] = UIColor.separator
             attributes[.strikethroughStyle] = NSUnderlineStyle.single.rawValue
         } else {
             checkboxButton.setImage(UIImage(named: "unchecked"), for: .normal)

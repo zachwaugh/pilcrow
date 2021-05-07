@@ -115,7 +115,7 @@ final class DocumentViewController: UIViewController {
         let view = UICollectionView(frame: .zero, collectionViewLayout: makeCollectionViewLayout())
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .systemBackground
-        
+        view.delegate = self
         return view
     }()
     
@@ -132,6 +132,10 @@ final class DocumentViewController: UIViewController {
         
         return UICollectionViewCompositionalLayout(section: section)
     }
+}
+
+extension DocumentViewController: UICollectionViewDelegate {
+    
 }
 
 extension DocumentViewController: TodoCellDelegate {

@@ -155,13 +155,13 @@
 		92C581152644472800E062A0 /* Taper */ = {
 			isa = PBXGroup;
 			children = (
-				928EF8C32644816700437680 /* Taper.entitlements */,
 				928EF89826444CDF00437680 /* App */,
 				92C581472644473300E062A0 /* View Controllers */,
 				928EF89926444E6D00437680 /* Views */,
 				92C581462644472F00E062A0 /* Models */,
 				928EF8A22644619300437680 /* Storyboards */,
 				928EF8A12644618700437680 /* Assets */,
+				928EF8C32644816700437680 /* Taper.entitlements */,
 				92C581242644472800E062A0 /* Info.plist */,
 			);
 			path = Taper;
