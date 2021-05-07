@@ -9,7 +9,7 @@ enum Block: Hashable {
         blockable.empty().asBlock()
     }
     
-    private var blockable: Blockable {
+    var blockable: Blockable {
         switch self {
         case .text(let block):
             return block
@@ -26,7 +26,11 @@ protocol Blockable {
     func empty() -> Self
 }
 
-struct TextBlock: Hashable, Blockable {
+protocol TextBlockable: Blockable {
+    var content: String { get set }
+}
+
+struct TextBlock: Hashable, TextBlockable {
     let identifier = UUID()
     var content: String = ""
     var style: TextStyle = .paragraph
@@ -40,7 +44,7 @@ struct TextBlock: Hashable, Blockable {
     }
 }
 
-struct TodoBlock: Hashable, Blockable {
+struct TodoBlock: Hashable, TextBlockable {
     let identifier = UUID()
     var completed: Bool = false
     var content: String = ""
@@ -63,7 +67,7 @@ enum ListItemStyle: Hashable {
     case bullet, number(Int)
 }
 
-struct ListItemBlock: Hashable, Blockable {
+struct ListItemBlock: Hashable, TextBlockable {
     let identifier = UUID()
     var content: String = ""
     var style: ListItemStyle = .bullet

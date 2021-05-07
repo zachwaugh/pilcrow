@@ -76,6 +76,10 @@ final class DocumentViewController: UIViewController {
         snapshot.appendItems(document.blocks)
         dataSource.apply(snapshot, animatingDifferences: animated)
     }
+    
+    private func replaceBlock(_ block: Block, at index: Int) {
+        
+    }
 
     // MARK: - Cells
     
@@ -128,6 +132,14 @@ final class DocumentViewController: UIViewController {
         }
     }
     
+    private func updateBlockTextContent(_ content: String, block: Block, at indexPath: IndexPath) {
+        guard var textBlock = block.blockable as? TextBlockable else { return }
+
+        textBlock.content = content
+        document.blocks[indexPath.row] = textBlock.asBlock()
+        collectionView.collectionViewLayout.invalidateLayout()
+    }
+    
     private func appendNewBlock(_ block: Block) {
         document.blocks.append(block)
         updateDataSource(animated: true)
@@ -148,8 +160,8 @@ final class DocumentViewController: UIViewController {
     }
     
     private func focusCell(at indexPath: IndexPath) {
-        guard let focusable = collectionView.cellForItem(at: indexPath) as? Focusable else { return }
-        focusable.focus()
+        guard let focusableView = collectionView.cellForItem(at: indexPath) as? FocusableView else { return }
+        focusableView.focus()
     }
 
     // MARK: - Views
@@ -176,7 +188,6 @@ final class DocumentViewController: UIViewController {
         let view = UICollectionView(frame: .zero, collectionViewLayout: makeCollectionViewLayout())
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .systemBackground
-        view.delegate = self
         return view
     }()
     
@@ -195,10 +206,6 @@ final class DocumentViewController: UIViewController {
     }
 }
 
-extension DocumentViewController: UICollectionViewDelegate {
-    
-}
-
 extension DocumentViewController: TodoCellDelegate {
     func todoCellDidToggleCheckBox(cell: TodoBlockCellView) {
         guard let indexPath = collectionView.indexPath(for: cell),
@@ -211,42 +218,20 @@ extension DocumentViewController: TodoCellDelegate {
         document.blocks[indexPath.row] = .todo(todo)
         updateDataSource(animated: true)
     }
-    
-    func todoCellDidUpdateContent(cell: TodoBlockCellView, content: String) {
-        guard let indexPath = collectionView.indexPath(for: cell),
-              case var .todo(todo) = document.blocks[indexPath.row]
-        else {
-            return
-        }
-
-        todo.content = content
-        document.blocks[indexPath.row] = .todo(todo)
-        collectionView.collectionViewLayout.invalidateLayout()
-    }
 }
 
 extension DocumentViewController: TextCellDelegate {
-    func textCellDidUpdateContent(cell: UICollectionViewCell, content: String) {
-        guard let indexPath = collectionView.indexPath(for: cell),
-              case var .text(text) = document.blocks[indexPath.row]
-        else {
-            return
-        }
-        
-        text.content = content
-        document.blocks[indexPath.row] = .text(text)
-        collectionView.collectionViewLayout.invalidateLayout()
-    }
-    
     func textCellDidEdit(cell: UICollectionViewCell, edit: TextEdit) {
         guard let indexPath = collectionView.indexPath(for: cell), let block = block(for: cell) else { return }
         
         print("cell did edit: \(edit), block: \(block)")
         switch edit {
-        case .enter:
+        case .insertNewline:
             insertBlock(block.empty(), after: indexPath)
-        case .delete:
+        case .deleteAtBeginning:
             deleteBlock(block)
+        case .update(let content):
+            updateBlockTextContent(content, block: block, at: indexPath)
         }
     }
 }

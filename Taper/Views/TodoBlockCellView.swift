@@ -4,8 +4,8 @@ protocol TodoCellDelegate: TextCellDelegate {
     func todoCellDidToggleCheckBox(cell: TodoBlockCellView)
 }
 
-final class TodoBlockCellView: UICollectionViewCell, Focusable {
-    weak var delegate: TodoCellDelegate?
+final class TodoBlockCellView: BaseTextCellView {
+    weak var todoDelegate: TodoCellDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -37,12 +37,8 @@ final class TodoBlockCellView: UICollectionViewCell, Focusable {
         textView.typingAttributes = typingAttributes
     }
     
-    func focus() {
-        textView.becomeFirstResponder()
-    }
-    
     @objc private func toggleCheckbox(_ sender: Any) {
-        delegate?.todoCellDidToggleCheckBox(cell: self)
+        todoDelegate?.todoCellDidToggleCheckBox(cell: self)
     }
     
     private func setup() {
@@ -77,35 +73,4 @@ final class TodoBlockCellView: UICollectionViewCell, Focusable {
         view.tintColor = .gray
         return view
     }()
-    
-    private lazy var textView: UITextView = {
-        let view = UITextView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.isScrollEnabled = false
-        view.textContainerInset = .zero
-        view.textContainer.lineFragmentPadding = 0
-        view.font = UIFont.systemFont(ofSize: 17)
-        view.delegate = self
-        return view
-    }()
-}
-
-extension TodoBlockCellView: UITextViewDelegate {
-    func textViewDidChange(_ textView: UITextView) {
-        delegate?.textCellDidUpdateContent(cell: self, content: textView.text ?? "")
-    }
-    
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        print("change - range: \(range), text: \(text)")
-        
-        if text == "\n" {
-            delegate?.textCellDidEdit(cell: self, edit: .enter)
-            return false
-        } else if text.isEmpty, range.location == 0, range.length == 0 {
-            delegate?.textCellDidEdit(cell: self, edit: .delete)
-            return false
-        } else {
-            return true
-        }
-    }
 }
