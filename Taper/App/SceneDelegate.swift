@@ -27,10 +27,9 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let documentController = DocumentViewController(document: document)
         let navController = UINavigationController()
         
-        let emptyViewController = UIViewController()
-        emptyViewController.navigationItem.backButtonDisplayMode = .minimal
+        let listViewController = DocumentsViewController(documents: [document])
 
-        navController.viewControllers = [emptyViewController, documentController]
+        navController.viewControllers = [listViewController, documentController]
         window?.rootViewController = navController
     }
 

@@ -7,8 +7,8 @@ final class DocumentViewController: UIViewController {
     
     private var document: Document
     
-    init(document: Document?) {
-        self.document = document ?? Document()
+    init(document: Document) {
+        self.document = document
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -57,20 +57,14 @@ final class DocumentViewController: UIViewController {
     private var dataSource: UICollectionViewDiffableDataSource<Section, Block>!
 
     private func configureDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<Section, Block>(collectionView: collectionView, cellProvider: { _, indexPath, block in
-            switch block {
-            case .text(let block):
-                return self.textBlockCell(for: indexPath, block: block)
-            case .todo(let block):
-                return self.todoBlockCell(for: indexPath, block: block)
-            case .listItem(let block):
-                return self.listItemBlockCell(for: indexPath, block: block)
-            }
-        })
+        dataSource = UICollectionViewDiffableDataSource<Section, Block>(collectionView: collectionView) { [weak self] _, indexPath, block in
+            self?.cell(for: indexPath, block: block)
+        }
 
         updateDataSource()
     }
     
+    /// Update data source snapshot from document
     private func updateDataSource(animated: Bool = false) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Block>()
         snapshot.appendSections([.main])
@@ -79,16 +73,23 @@ final class DocumentViewController: UIViewController {
         print("Updating data source with snapshot: \(snapshot.numberOfItems), animated? \(animated)")
         dataSource.apply(snapshot, animatingDifferences: animated)
     }
-    
-    private func replaceBlock(_ block: Block, at index: Int) {
-        
-    }
 
     // MARK: - Cells
     
     private func block(for cell: UICollectionViewCell) -> Block? {
         guard let indexPath = collectionView.indexPath(for: cell) else { return nil }
         return document.blocks[indexPath.row]
+    }
+    
+    private func cell(for indexPath: IndexPath, block: Block) -> UICollectionViewCell {
+        switch block {
+        case .text(let block):
+            return self.textBlockCell(for: indexPath, block: block)
+        case .todo(let block):
+            return self.todoBlockCell(for: indexPath, block: block)
+        case .listItem(let block):
+            return self.listItemBlockCell(for: indexPath, block: block)
+        }
     }
     
     private func textBlockCell(for indexPath: IndexPath, block: TextBlock) -> UICollectionViewCell {
@@ -186,6 +187,8 @@ final class DocumentViewController: UIViewController {
             focusBlock(document.blocks[previousIndex])
         }
     }
+    
+    // MARK: - Focus
     
     private func focusBlock(_ block: Block) {
         guard let index = document.blocks.firstIndex(of: block) else { return }
