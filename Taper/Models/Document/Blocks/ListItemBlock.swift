@@ -3,13 +3,13 @@ import Foundation
 struct ListItemBlock: Hashable, Identifiable, TextBlockContent {
     let id: String
     
-    var content: String = ""
+    var text: String = ""
     var number: Int = 1
     var style: ListItemStyle = .bulleted
     
-    init(content: String = "", number: Int = 1, style: ListItemStyle) {
+    init(text: String = "", number: Int = 1, style: ListItemStyle) {
         self.id = UUID().uuidString
-        self.content = content
+        self.text = text
         self.number = number
         self.style = style
     }

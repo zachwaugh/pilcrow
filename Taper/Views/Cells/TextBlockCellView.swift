@@ -12,7 +12,7 @@ final class TextBlockCellView: BaseTextCellView {
 
     func configure(with block: TextBlock) {
         textView.font = block.style.font
-        textView.text = block.content
+        textView.text = block.text
     }
 
     private func setup() {

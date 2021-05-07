@@ -121,10 +121,7 @@
 		928EF89926444E6D00437680 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				928EF89A26444E7E00437680 /* BaseTextCellView.swift */,
-				92973A9E2645908C00B836B5 /* TextBlockCellView.swift */,
-				928EF89C26444F1D00437680 /* TodoBlockCellView.swift */,
-				92973A96264589FE00B836B5 /* ListItemBlockCellView.swift */,
+				92973AB22645E0F500B836B5 /* Cells */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -190,6 +187,17 @@
 			children = (
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		92973AB22645E0F500B836B5 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				928EF89A26444E7E00437680 /* BaseTextCellView.swift */,
+				92973A9E2645908C00B836B5 /* TextBlockCellView.swift */,
+				928EF89C26444F1D00437680 /* TodoBlockCellView.swift */,
+				92973A96264589FE00B836B5 /* ListItemBlockCellView.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		92C5810A2644472700E062A0 = {

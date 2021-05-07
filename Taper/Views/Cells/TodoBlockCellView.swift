@@ -33,7 +33,7 @@ final class TodoBlockCellView: BaseTextCellView {
             checkboxButton.setImage(UIImage(named: "unchecked"), for: .normal)
         }
         
-        textView.attributedText = NSAttributedString(string: todo.content, attributes: attributes)
+        textView.attributedText = NSAttributedString(string: todo.text, attributes: attributes)
         textView.typingAttributes = typingAttributes
     }
     

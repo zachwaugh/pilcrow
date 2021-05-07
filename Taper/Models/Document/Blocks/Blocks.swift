@@ -32,11 +32,11 @@ extension BlockContent {
 }
 
 protocol TextBlockContent: BlockContent {
-    var content: String { get set }
+    var text: String { get set }
 }
 
 extension TextBlockContent {
     var isEmpty: Bool {
-        content.isEmpty
+        text.isEmpty
     }
 }

@@ -18,7 +18,7 @@ final class ListItemBlockCellView: BaseTextCellView {
             listItemLabel.text = "\(block.number)."
         }
         textView.font = TextStyle.paragraph.font
-        textView.text = block.content
+        textView.text = block.text
     }
     
     private func setup() {

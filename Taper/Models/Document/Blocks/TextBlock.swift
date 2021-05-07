@@ -2,12 +2,12 @@ import Foundation
 
 struct TextBlock: Hashable, Identifiable, Codable, TextBlockContent {
     let id: String
-    var content: String
+    var text: String
     var style: TextStyle
     
-    init(content: String = "", style: TextStyle = .paragraph) {
+    init(text: String = "", style: TextStyle = .paragraph) {
         self.id = UUID().uuidString
-        self.content = content
+        self.text = text
         self.style = style
     }
         
