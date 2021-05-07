@@ -1,9 +1,15 @@
 import Foundation
 
-struct TodoBlock: Hashable, TextBlockable {
-    let identifier = UUID()
-    var completed: Bool = false
-    var content: String = ""
+struct TodoBlock: Hashable, Identifiable, TextBlockContent {
+    let id: String
+    var completed: Bool
+    var content: String
+    
+    init(content: String = "", completed: Bool = false) {
+        self.id = UUID().uuidString
+        self.content = content
+        self.completed = completed
+    }
     
     mutating func toggle() {
         completed.toggle()

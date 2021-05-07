@@ -3,7 +3,7 @@ import UIKit
 enum BlockKind: CaseIterable {
     case heading, paragraph
     case todo
-    case bulletListItem, numberedListItem
+    case bulletedListItem, numberedListItem
     
     var title: String {
         switch self {
@@ -13,8 +13,8 @@ enum BlockKind: CaseIterable {
             return "Paragraph"
         case .todo:
             return "To do"
-        case .bulletListItem:
-            return "Bullet List"
+        case .bulletedListItem:
+            return "Bulleted List"
         case .numberedListItem:
             return "Numbered List"
         }
@@ -28,7 +28,7 @@ enum BlockKind: CaseIterable {
             return UIImage(systemName: "paragraphsign", withConfiguration: nil)
         case .todo:
             return UIImage(systemName: "checkmark.square", withConfiguration: nil)
-        case .bulletListItem:
+        case .bulletedListItem:
             return UIImage(systemName: "list.bullet", withConfiguration: nil)
         case .numberedListItem:
             return UIImage(systemName: "list.number", withConfiguration: nil)
@@ -43,7 +43,7 @@ enum BlockKind: CaseIterable {
             return TextBlockCellView.self
         case .todo:
             return TodoBlockCellView.self
-        case .bulletListItem:
+        case .bulletedListItem:
             return ListItemBlockCellView.self
         case .numberedListItem:
             return ListItemBlockCellView.self

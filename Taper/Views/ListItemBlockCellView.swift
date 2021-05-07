@@ -12,10 +12,10 @@ final class ListItemBlockCellView: BaseTextCellView {
     
     func configure(with block: ListItemBlock) {
         switch block.style {
-        case .bullet:
+        case .bulleted:
             listItemLabel.text = "•"
-        case .number(let number):
-            listItemLabel.text = "\(number)."
+        case .numbered:
+            listItemLabel.text = "\(block.number)."
         }
         textView.font = TextStyle.paragraph.font
         textView.text = block.content

@@ -143,10 +143,10 @@ final class DocumentViewController: UIViewController {
             return TextBlock(style: .paragraph).asBlock()
         case .todo:
             return TodoBlock().asBlock()
-        case .bulletListItem:
-            return ListItemBlock(style: .bullet).asBlock()
+        case .bulletedListItem:
+            return ListItemBlock(style: .bulleted).asBlock()
         case .numberedListItem:
-            return ListItemBlock(style: .number(1)).asBlock()
+            return ListItemBlock(style: .numbered).asBlock()
         }
     }
     
@@ -163,15 +163,15 @@ final class DocumentViewController: UIViewController {
             return
         }
         
-        if !block.blockable.isEmpty {
-            appendNewBlock(block.empty())
+        if !block.content.isEmpty {
+            appendNewBlock(block.content.empty().asBlock())
         } else {
             focusBlock(block)
         }
     }
     
     private func updateBlockTextContent(_ content: String, block: Block, at indexPath: IndexPath) {
-        guard var textBlock = block.blockable as? TextBlockable else { return }
+        guard var textBlock = block.content as? TextBlockContent else { return }
 
         // Update the underlying document, but the data source doesn't need to change
         // just invalidate the layout so it has the correct height
@@ -269,7 +269,7 @@ extension DocumentViewController: TodoCellDelegate {
         }
         
         todo.toggle()
-        document.blocks[indexPath.row] = .todo(todo)
+        document.blocks[indexPath.row] = todo.asBlock()
         updateDataSource(animated: true)
     }
 }
@@ -278,10 +278,9 @@ extension DocumentViewController: TextCellDelegate {
     func textCellDidEdit(cell: UICollectionViewCell, edit: TextEdit) {
         guard let indexPath = collectionView.indexPath(for: cell), let block = block(for: cell) else { return }
         
-        //print("cell did edit: \(edit), block: \(block)")
         switch edit {
         case .insertNewline:
-            insertBlock(block.next(), after: indexPath)
+            insertBlock(block.content.next().asBlock(), after: indexPath)
         case .deleteAtBeginning:
             deleteBlock(block)
         case .update(let content):

@@ -6,16 +6,16 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let _ = (scene as? UIWindowScene) else { return }
         
-        let blocks: [Blockable] = [
+        let blocks: [BlockContent] = [
             TextBlock(content: "This is a heading", style: .heading),
             TextBlock(content: "This is a paragraph"),
-            ListItemBlock(content: "Bullet list item"),
-            ListItemBlock(content: "Ordered list item", style: .number(1)),
+            ListItemBlock(content: "Bullet list item", style: .bulleted),
+            ListItemBlock(content: "Ordered list item", style: .numbered),
             
             TextBlock(content: "This is another paragraph that is much longer so it will wrap to multiple lines"),
-            TodoBlock(completed: false, content: "This is a new todo"),
+            TodoBlock(content: "This is a new todo"),
             TextBlock(content: "More text"),
-            TodoBlock(completed: true, content: "This is a completed todo that is also much longer so we can test how it wraps"),
+            TodoBlock(content: "This is a completed todo that is also much longer so we can test how it wraps", completed: true),
             TextBlock(content: "And a final paragraph"),
         ]
         

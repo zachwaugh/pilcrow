@@ -1,6 +1,6 @@
 import UIKit
 
-enum TextStyle {
+enum TextStyle: String, Codable {
     case paragraph, heading
     
     var font: UIFont {

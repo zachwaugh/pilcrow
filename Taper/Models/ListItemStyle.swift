@@ -1,5 +1,6 @@
 import Foundation
 
-enum ListItemStyle: Hashable {
-    case bullet, number(Int)
+enum ListItemStyle: String, Hashable, Codable {
+    case bulleted
+    case numbered
 }

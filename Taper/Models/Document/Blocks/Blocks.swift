@@ -5,15 +5,7 @@ enum Block: Hashable {
     case todo(TodoBlock)
     case listItem(ListItemBlock)
     
-    func empty() -> Block {
-        blockable.empty().asBlock()
-    }
-    
-    func next() -> Block {
-        blockable.next().asBlock()
-    }
-    
-    var blockable: Blockable {
+    var content: BlockContent {
         switch self {
         case .text(let block):
             return block
@@ -25,7 +17,7 @@ enum Block: Hashable {
     }
 }
 
-protocol Blockable {
+protocol BlockContent: Codable {
     var isEmpty: Bool { get }
 
     func asBlock() -> Block
@@ -33,17 +25,17 @@ protocol Blockable {
     func next() -> Self
 }
 
-extension Blockable {
+extension BlockContent {
     func next() -> Self {
         empty()
     }
 }
 
-protocol TextBlockable: Blockable {
+protocol TextBlockContent: BlockContent {
     var content: String { get set }
 }
 
-extension TextBlockable {
+extension TextBlockContent {
     var isEmpty: Bool {
         content.isEmpty
     }
