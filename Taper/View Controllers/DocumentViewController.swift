@@ -10,15 +10,14 @@ final class DocumentViewController: UIViewController {
     init(document: Document) {
         self.document = document
         super.init(nibName: nil, bundle: nil)
+        setup()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+
+    private func setup() {
         title = document.title
         
         setupViews()

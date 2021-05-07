@@ -1,5 +1,7 @@
 import Foundation
 
 enum TextEdit {
-    case update(String), deleteAtBeginning, insertNewline
+    case update(String)
+    case deleteAtBeginning
+    case insertNewline
 }
