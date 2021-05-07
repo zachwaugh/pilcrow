@@ -29,7 +29,20 @@ final class DocumentViewController: UIViewController {
     
     private func configureNavigationBar() {
         navigationItem.backButtonDisplayMode = .minimal
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(appendNewBlock))
+        
+        let menu = UIMenu(title: "", children: [
+            UIAction(title: "To Do", handler: { _ in
+                self.appendNewBlock(TodoBlock().asBlock())
+            }),
+            UIAction(title: "Paragraph", handler: { _ in
+                self.appendNewBlock(TextBlock().asBlock())
+            }),
+            UIAction(title: "Heading", handler: { _ in
+                self.appendNewBlock(TextBlock(style: .heading).asBlock())
+            }),
+        ])
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(systemItem: .add, menu: menu)
     }
     
     // MARK: - Data Source
@@ -56,6 +69,13 @@ final class DocumentViewController: UIViewController {
         dataSource.apply(snapshot, animatingDifferences: animated)
     }
 
+    // MARK: - Cells
+    
+    private func block(for cell: UICollectionViewCell) -> Block? {
+        guard let indexPath = collectionView.indexPath(for: cell) else { return nil }
+        return document.blocks[indexPath.row]
+    }
+    
     private func textBlockCell(for indexPath: IndexPath, block: TextBlock) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "text", for: indexPath) as! TextBlockCellView
         cell.configure(with: block)
@@ -78,18 +98,43 @@ final class DocumentViewController: UIViewController {
     }
     
     @objc private func handleTap(_ gesture: UITapGestureRecognizer) {
-        appendNewBlock()
+        appendNewBlock(Block.todo(TodoBlock(completed: false, content: "")))
     }
     
     // MARK: - Actions
     
-    @objc private func appendNewBlock() {
-        let newBlock = Block.todo(TodoBlock(completed: false, content: ""))
-        document.blocks.append(newBlock)
+    private func insertBlock(_ block: Block, after indexPath: IndexPath) {
+        if indexPath.row >= document.blocks.count - 1 {
+            appendNewBlock(block)
+        } else {
+            document.blocks.insert(block, at: indexPath.row + 1)
+            updateDataSource(animated: true)
+            focusBlock(block)
+        }
+    }
+    
+    private func appendNewBlock(_ block: Block) {
+        document.blocks.append(block)
+        updateDataSource(animated: true)
+        focusBlock(block)
+    }
+    
+    private func deleteBlock(_ block: Block) {
+        guard let indexPath = dataSource.indexPath(for: block) else { return }
+        document.blocks.remove(at: indexPath.row)
         updateDataSource(animated: true)
         
-        guard let indexPath = dataSource.indexPath(for: newBlock), let cell = collectionView.cellForItem(at: indexPath) as? TodoBlockCellView else { return }
-        cell.focus()
+        // TODO: focus previous block
+    }
+    
+    private func focusBlock(_ block: Block) {
+        guard let indexPath = dataSource.indexPath(for: block) else { return }
+        focusCell(at: indexPath)
+    }
+    
+    private func focusCell(at indexPath: IndexPath) {
+        guard let focusable = collectionView.cellForItem(at: indexPath) as? Focusable else { return }
+        focusable.focus()
     }
 
     // MARK: - Views
@@ -165,7 +210,7 @@ extension DocumentViewController: TodoCellDelegate {
 }
 
 extension DocumentViewController: TextCellDelegate {
-    func textCellDidUpdateContent(cell: TextBlockCellView, content: String) {
+    func textCellDidUpdateContent(cell: UICollectionViewCell, content: String) {
         guard let indexPath = collectionView.indexPath(for: cell),
               case var .text(text) = document.blocks[indexPath.row]
         else {
@@ -175,5 +220,17 @@ extension DocumentViewController: TextCellDelegate {
         text.content = content
         document.blocks[indexPath.row] = .text(text)
         collectionView.collectionViewLayout.invalidateLayout()
+    }
+    
+    func textCellDidEdit(cell: UICollectionViewCell, edit: TextEdit) {
+        guard let indexPath = collectionView.indexPath(for: cell), let block = block(for: cell) else { return }
+        
+        print("cell did edit: \(edit), block: \(block)")
+        switch edit {
+        case .enter:
+            insertBlock(block.empty(), after: indexPath)
+        case .delete:
+            deleteBlock(block)
+        }
     }
 }

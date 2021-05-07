@@ -1,10 +1,19 @@
 import UIKit
 
-protocol TextCellDelegate: AnyObject {
-    func textCellDidUpdateContent(cell: TextBlockCellView, content: String)
+protocol Focusable {
+    func focus()
 }
 
-final class TextBlockCellView: UICollectionViewCell {
+enum TextEdit {
+    case delete, enter
+}
+
+protocol TextCellDelegate: AnyObject {
+    func textCellDidUpdateContent(cell: UICollectionViewCell, content: String)
+    func textCellDidEdit(cell: UICollectionViewCell, edit: TextEdit)
+}
+
+final class TextBlockCellView: UICollectionViewCell, Focusable {
     weak var delegate: TextCellDelegate?
     
     override init(frame: CGRect) {
@@ -53,5 +62,19 @@ final class TextBlockCellView: UICollectionViewCell {
 extension TextBlockCellView: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         delegate?.textCellDidUpdateContent(cell: self, content: textView.text ?? "")
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        print("change - range: \(range), text: \(text)")
+        
+        if text == "\n" {
+            delegate?.textCellDidEdit(cell: self, edit: .enter)
+            return false
+        } else if text.isEmpty, range.location == 0, range.length == 0 {
+            delegate?.textCellDidEdit(cell: self, edit: .delete)
+            return false
+        } else {
+            return true
+        }
     }
 }

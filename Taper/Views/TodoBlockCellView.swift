@@ -1,11 +1,10 @@
 import UIKit
 
-protocol TodoCellDelegate: AnyObject {
+protocol TodoCellDelegate: TextCellDelegate {
     func todoCellDidToggleCheckBox(cell: TodoBlockCellView)
-    func todoCellDidUpdateContent(cell: TodoBlockCellView, content: String)
 }
 
-final class TodoBlockCellView: UICollectionViewCell {
+final class TodoBlockCellView: UICollectionViewCell, Focusable {
     weak var delegate: TodoCellDelegate?
     
     override init(frame: CGRect) {
@@ -93,6 +92,20 @@ final class TodoBlockCellView: UICollectionViewCell {
 
 extension TodoBlockCellView: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
-        delegate?.todoCellDidUpdateContent(cell: self, content: textView.text ?? "")
+        delegate?.textCellDidUpdateContent(cell: self, content: textView.text ?? "")
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        print("change - range: \(range), text: \(text)")
+        
+        if text == "\n" {
+            delegate?.textCellDidEdit(cell: self, edit: .enter)
+            return false
+        } else if text.isEmpty, range.location == 0, range.length == 0 {
+            delegate?.textCellDidEdit(cell: self, edit: .delete)
+            return false
+        } else {
+            return true
+        }
     }
 }
