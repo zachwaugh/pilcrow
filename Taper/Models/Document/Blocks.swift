@@ -9,6 +9,10 @@ enum Block: Hashable {
         blockable.empty().asBlock()
     }
     
+    func next() -> Block {
+        blockable.next().asBlock()
+    }
+    
     var blockable: Blockable {
         switch self {
         case .text(let block):
@@ -22,19 +26,34 @@ enum Block: Hashable {
 }
 
 protocol Blockable {
+    var isEmpty: Bool { get }
+
     func asBlock() -> Block
     func empty() -> Self
+    func next() -> Self
+}
+
+extension Blockable {
+    func next() -> Self {
+        empty()
+    }
 }
 
 protocol TextBlockable: Blockable {
     var content: String { get set }
 }
 
+extension TextBlockable {
+    var isEmpty: Bool {
+        content.isEmpty
+    }
+}
+
 struct TextBlock: Hashable, TextBlockable {
     let identifier = UUID()
     var content: String = ""
     var style: TextStyle = .paragraph
-    
+        
     func asBlock() -> Block {
         .text(self)
     }
@@ -78,5 +97,14 @@ struct ListItemBlock: Hashable, TextBlockable {
     
     func empty() -> ListItemBlock {
         ListItemBlock(style: style)
+    }
+    
+    func next() -> ListItemBlock {
+        switch style {
+        case .bullet:
+            return ListItemBlock(style: .bullet)
+        case .number(let number):
+            return ListItemBlock(style: .number(number + 1))
+        }
     }
 }

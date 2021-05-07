@@ -22,7 +22,7 @@ final class DocumentViewController: UIViewController {
         title = document.title
         setupViews()
         configureCollectionView()
-//        configureGestures()
+        configureGestures()
         configureNavigationBar()
         configureDataSource()
     }
@@ -67,13 +67,15 @@ final class DocumentViewController: UIViewController {
             }
         })
 
-        updateDataSource(animated: false)
+        updateDataSource()
     }
     
-    private func updateDataSource(animated: Bool) {
+    private func updateDataSource(animated: Bool = false) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Block>()
         snapshot.appendSections([.main])
         snapshot.appendItems(document.blocks)
+        
+        print("Updating data source with snapshot: \(snapshot.numberOfItems), animated? \(animated)")
         dataSource.apply(snapshot, animatingDifferences: animated)
     }
     
@@ -99,6 +101,7 @@ final class DocumentViewController: UIViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "todo", for: indexPath) as! TodoBlockCellView
         cell.configure(with: block)
         cell.delegate = self
+        cell.todoDelegate = self
         return cell
     }
     
@@ -117,7 +120,12 @@ final class DocumentViewController: UIViewController {
     }
     
     @objc private func handleTap(_ gesture: UITapGestureRecognizer) {
-        appendNewBlock(Block.todo(TodoBlock(completed: false, content: "")))
+        let location = gesture.location(in: collectionView)
+        let indexPath = collectionView.indexPathForItem(at: location)
+        
+        if indexPath == nil {
+            autoAppendNewBlock()
+        }
     }
     
     // MARK: - Actions
@@ -127,7 +135,21 @@ final class DocumentViewController: UIViewController {
             appendNewBlock(block)
         } else {
             document.blocks.insert(block, at: indexPath.row + 1)
-            updateDataSource(animated: true)
+            updateDataSource()
+            focusBlock(block)
+        }
+    }
+    
+    /// Appends a block at the end, ensuring it's the correct type based on the
+    private func autoAppendNewBlock() {
+        guard let block = document.blocks.last else {
+            appendNewBlock(TextBlock().asBlock())
+            return
+        }
+        
+        if !block.blockable.isEmpty {
+            appendNewBlock(block.empty())
+        } else {
             focusBlock(block)
         }
     }
@@ -135,6 +157,9 @@ final class DocumentViewController: UIViewController {
     private func updateBlockTextContent(_ content: String, block: Block, at indexPath: IndexPath) {
         guard var textBlock = block.blockable as? TextBlockable else { return }
 
+        // Update the underlying document, but the data source doesn't need to change
+        // just invalidate the layout so it has the correct height
+        // TODO: probably a better way than invalidating the whole layout when we know what row has changed
         textBlock.content = content
         document.blocks[indexPath.row] = textBlock.asBlock()
         collectionView.collectionViewLayout.invalidateLayout()
@@ -147,16 +172,27 @@ final class DocumentViewController: UIViewController {
     }
     
     private func deleteBlock(_ block: Block) {
-        guard let indexPath = dataSource.indexPath(for: block) else { return }
-        document.blocks.remove(at: indexPath.row)
-        updateDataSource(animated: true)
+        guard let index = document.blocks.firstIndex(of: block) else {
+            print("Error: block not found in document! \(block)")
+            return
+        }
         
-        // TODO: focus previous block
+        document.blocks.remove(at: index)
+        updateDataSource(animated: false)
+        
+        let previousIndex = index - 1
+        if previousIndex >= 0, !document.blocks.isEmpty {
+            focusBlock(document.blocks[previousIndex])
+        }
     }
     
     private func focusBlock(_ block: Block) {
-        guard let indexPath = dataSource.indexPath(for: block) else { return }
-        focusCell(at: indexPath)
+        guard let index = document.blocks.firstIndex(of: block) else { return }
+        focusCell(at: index)
+    }
+    
+    private func focusCell(at index: Int) {
+        focusCell(at: IndexPath(item: index, section: 0))
     }
     
     private func focusCell(at indexPath: IndexPath) {
@@ -224,10 +260,10 @@ extension DocumentViewController: TextCellDelegate {
     func textCellDidEdit(cell: UICollectionViewCell, edit: TextEdit) {
         guard let indexPath = collectionView.indexPath(for: cell), let block = block(for: cell) else { return }
         
-        print("cell did edit: \(edit), block: \(block)")
+        //print("cell did edit: \(edit), block: \(block)")
         switch edit {
         case .insertNewline:
-            insertBlock(block.empty(), after: indexPath)
+            insertBlock(block.next(), after: indexPath)
         case .deleteAtBeginning:
             deleteBlock(block)
         case .update(let content):
