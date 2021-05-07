@@ -20,6 +20,7 @@ final class DocumentViewController: UIViewController {
         super.viewDidLoad()
         
         title = document.title
+        
         setupViews()
         configureCollectionView()
         configureGestures()

@@ -16,6 +16,10 @@
 		92973A9A26458D4A00B836B5 /* TextEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92973A9926458D4A00B836B5 /* TextEdit.swift */; };
 		92973A9D26458E4200B836B5 /* FocusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92973A9C26458E4200B836B5 /* FocusableView.swift */; };
 		92973A9F2645908C00B836B5 /* TextBlockCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92973A9E2645908C00B836B5 /* TextBlockCellView.swift */; };
+		92973AA22645B1AD00B836B5 /* TextBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92973AA12645B1AD00B836B5 /* TextBlock.swift */; };
+		92973AA42645B1CA00B836B5 /* TodoBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92973AA32645B1CA00B836B5 /* TodoBlock.swift */; };
+		92973AA82645B1EB00B836B5 /* ListItemBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92973AA72645B1EB00B836B5 /* ListItemBlock.swift */; };
+		92973AAA2645B20300B836B5 /* ListItemStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92973AA92645B20300B836B5 /* ListItemStyle.swift */; };
 		92C581172644472800E062A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C581162644472800E062A0 /* AppDelegate.swift */; };
 		92C581192644472800E062A0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C581182644472800E062A0 /* SceneDelegate.swift */; };
 		92C5811B2644472800E062A0 /* DocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C5811A2644472800E062A0 /* DocumentViewController.swift */; };
@@ -54,6 +58,10 @@
 		92973A9926458D4A00B836B5 /* TextEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEdit.swift; sourceTree = "<group>"; };
 		92973A9C26458E4200B836B5 /* FocusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusableView.swift; sourceTree = "<group>"; };
 		92973A9E2645908C00B836B5 /* TextBlockCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBlockCellView.swift; sourceTree = "<group>"; };
+		92973AA12645B1AD00B836B5 /* TextBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBlock.swift; sourceTree = "<group>"; };
+		92973AA32645B1CA00B836B5 /* TodoBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoBlock.swift; sourceTree = "<group>"; };
+		92973AA72645B1EB00B836B5 /* ListItemBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemBlock.swift; sourceTree = "<group>"; };
+		92973AA92645B20300B836B5 /* ListItemStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemStyle.swift; sourceTree = "<group>"; };
 		92C581132644472800E062A0 /* Taper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Taper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92C581162644472800E062A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92C581182644472800E062A0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -118,10 +126,9 @@
 		928EF89E264460F700437680 /* Document */ = {
 			isa = PBXGroup;
 			children = (
+				92973AA02645B1A500B836B5 /* Blocks */,
 				92973A9826458D4000B836B5 /* Edit */,
 				928EF89626444AF000437680 /* Document.swift */,
-				928EF89F2644610400437680 /* Blocks.swift */,
-				92973A942644BBAB00B836B5 /* TextStyle.swift */,
 			);
 			path = Document;
 			sourceTree = "<group>";
@@ -157,6 +164,17 @@
 				92973A9C26458E4200B836B5 /* FocusableView.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		92973AA02645B1A500B836B5 /* Blocks */ = {
+			isa = PBXGroup;
+			children = (
+				928EF89F2644610400437680 /* Blocks.swift */,
+				92973AA12645B1AD00B836B5 /* TextBlock.swift */,
+				92973AA32645B1CA00B836B5 /* TodoBlock.swift */,
+				92973AA72645B1EB00B836B5 /* ListItemBlock.swift */,
+			);
+			path = Blocks;
 			sourceTree = "<group>";
 		};
 		92C5810A2644472700E062A0 = {
@@ -217,6 +235,8 @@
 			isa = PBXGroup;
 			children = (
 				928EF89E264460F700437680 /* Document */,
+				92973AA92645B20300B836B5 /* ListItemStyle.swift */,
+				92973A942644BBAB00B836B5 /* TextStyle.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -366,11 +386,15 @@
 				92C5811B2644472800E062A0 /* DocumentViewController.swift in Sources */,
 				92973A9A26458D4A00B836B5 /* TextEdit.swift in Sources */,
 				92C581172644472800E062A0 /* AppDelegate.swift in Sources */,
+				92973AAA2645B20300B836B5 /* ListItemStyle.swift in Sources */,
 				92973A9D26458E4200B836B5 /* FocusableView.swift in Sources */,
 				928EF89D26444F1D00437680 /* TodoBlockCellView.swift in Sources */,
 				928EF8A02644610400437680 /* Blocks.swift in Sources */,
 				92C581192644472800E062A0 /* SceneDelegate.swift in Sources */,
 				92973A97264589FE00B836B5 /* ListItemBlockCellView.swift in Sources */,
+				92973AA82645B1EB00B836B5 /* ListItemBlock.swift in Sources */,
+				92973AA22645B1AD00B836B5 /* TextBlock.swift in Sources */,
+				92973AA42645B1CA00B836B5 /* TodoBlock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
