@@ -9,6 +9,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let document = Document(
             title: "Test Document",
             blocks: [
+                .text(TextBlock(content: "This is a heading", style: .heading)),
                 .text(TextBlock(content: "This is a paragraph")),
                 .text(TextBlock(content: "This is another paragraph that is much longer so it will wrap to multiple lines")),
                 .todo(TodoBlock(completed: false, content: "This is a new todo")),

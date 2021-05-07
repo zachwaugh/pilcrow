@@ -17,6 +17,7 @@ final class TextBlockCellView: UICollectionViewCell {
     }
     
     func configure(with block: TextBlock) {
+        textView.font = block.style.font
         textView.text = block.content
     }
     
@@ -43,7 +44,6 @@ final class TextBlockCellView: UICollectionViewCell {
         view.isScrollEnabled = false
         view.textContainerInset = .zero
         view.textContainer.lineFragmentPadding = 0
-        view.font = UIFont.systemFont(ofSize: 17)
         view.delegate = self
         
         return view
