@@ -10,9 +10,9 @@ final class TextBlockCellView: BaseTextCellView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configure(with block: TextBlock) {
-        textView.font = block.style.font
-        textView.text = block.text
+    func configure(with viewModel: TextBlockViewModel) {
+        textView.font = viewModel.textFont
+        textView.text = viewModel.text
     }
 
     private func setup() {

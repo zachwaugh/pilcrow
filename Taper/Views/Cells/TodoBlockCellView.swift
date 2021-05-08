@@ -16,25 +16,10 @@ final class TodoBlockCellView: BaseTextCellView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(with todo: TodoBlock) {
-        var attributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont.systemFont(ofSize: 17, weight: .regular),
-            .foregroundColor: UIColor.label
-        ]
-        
-        let typingAttributes = attributes
-        
-        if todo.completed {
-            checkboxButton.setImage(UIImage(named: "checked"), for: .normal)
-            attributes[.foregroundColor] = UIColor.separator
-            attributes[.strikethroughColor] = UIColor.separator
-            attributes[.strikethroughStyle] = NSUnderlineStyle.single.rawValue
-        } else {
-            checkboxButton.setImage(UIImage(named: "unchecked"), for: .normal)
-        }
-        
-        textView.attributedText = NSAttributedString(string: todo.text, attributes: attributes)
-        textView.typingAttributes = typingAttributes
+    func configure(with viewModel: TodoBlockViewModel) {
+        checkboxButton.setImage(viewModel.checkboxImage, for: .normal)
+        textView.attributedText = viewModel.attributedText
+        textView.typingAttributes = viewModel.defaultTextAttributes
     }
     
     @objc private func toggleCheckbox(_ sender: Any) {

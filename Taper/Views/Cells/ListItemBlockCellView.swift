@@ -10,15 +10,10 @@ final class ListItemBlockCellView: BaseTextCellView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(with block: ListItemBlock) {
-        switch block.style {
-        case .bulleted:
-            listItemLabel.text = "•"
-        case .numbered:
-            listItemLabel.text = "\(block.number)."
-        }
-        textView.font = TextStyle.paragraph.font
-        textView.text = block.text
+    func configure(with viewModel: ListItemBlockViewModel) {
+        listItemLabel.text = viewModel.listItemLabelString
+        textView.font = viewModel.textFont
+        textView.text = viewModel.text
     }
     
     private func setup() {

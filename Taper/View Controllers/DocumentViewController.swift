@@ -139,14 +139,16 @@ final class DocumentViewController: UIViewController {
     
     private func textBlockCell(for indexPath: IndexPath, content: TextBlock) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(TextBlockCellView.self, for: indexPath)
-        cell.configure(with: content)
+        let viewModel = TextBlockViewModel(content: content)
+        cell.configure(with: viewModel)
         cell.delegate = self
         return cell
     }
 
     private func todoBlockCell(for indexPath: IndexPath, content: TodoBlock) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(TodoBlockCellView.self, for: indexPath)
-        cell.configure(with: content)
+        let viewModel = TodoBlockViewModel(content: content)
+        cell.configure(with: viewModel)
         cell.delegate = self
         cell.todoDelegate = self
         return cell
@@ -154,7 +156,8 @@ final class DocumentViewController: UIViewController {
     
     private func listItemBlockCell(for indexPath: IndexPath, content: ListItemBlock) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(ListItemBlockCellView.self, for: indexPath)
-        cell.configure(with: content)
+        let viewModel = ListItemBlockViewModel(content: content)
+        cell.configure(with: viewModel)
         cell.delegate = self
         return cell
     }
