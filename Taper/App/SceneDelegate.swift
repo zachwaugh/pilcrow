@@ -25,10 +25,8 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         )
         
         let documentController = DocumentViewController(document: document)
-        let navController = UINavigationController()
-        
         let listViewController = DocumentsViewController(documents: [document])
-
+        let navController = UINavigationController()
         navController.viewControllers = [listViewController, documentController]
         window?.rootViewController = navController
     }

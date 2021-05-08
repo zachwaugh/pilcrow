@@ -1,6 +1,6 @@
 import Foundation
 
-struct Document {
+struct Document: Codable, Equatable {
     var title: String = "Untitled"
     var blocks: [Block] = []
 }

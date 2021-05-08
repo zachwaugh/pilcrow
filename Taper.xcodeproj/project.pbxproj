@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		922590D5264718A5000113B3 /* DocumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922590D4264718A5000113B3 /* DocumentTests.swift */; };
 		928EF89726444AF000437680 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928EF89626444AF000437680 /* Document.swift */; };
 		928EF89B26444E7E00437680 /* BaseTextCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928EF89A26444E7E00437680 /* BaseTextCellView.swift */; };
 		928EF89D26444F1D00437680 /* TodoBlockCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928EF89C26444F1D00437680 /* TodoBlockCellView.swift */; };
@@ -30,7 +31,6 @@
 		92C5811E2644472800E062A0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92C5811C2644472800E062A0 /* Main.storyboard */; };
 		92C581202644472800E062A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92C5811F2644472800E062A0 /* Assets.xcassets */; };
 		92C581232644472800E062A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92C581212644472800E062A0 /* LaunchScreen.storyboard */; };
-		92C5812E2644472900E062A0 /* TaperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C5812D2644472900E062A0 /* TaperTests.swift */; };
 		92C581392644472900E062A0 /* TaperUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C581382644472900E062A0 /* TaperUITests.swift */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +52,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		922590D4264718A5000113B3 /* DocumentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentTests.swift; sourceTree = "<group>"; };
 		928EF89626444AF000437680 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
 		928EF89A26444E7E00437680 /* BaseTextCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTextCellView.swift; sourceTree = "<group>"; };
 		928EF89C26444F1D00437680 /* TodoBlockCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoBlockCellView.swift; sourceTree = "<group>"; };
@@ -78,10 +79,9 @@
 		92C5811F2644472800E062A0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		92C581222644472800E062A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		92C581242644472800E062A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		92C581292644472900E062A0 /* TaperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TaperTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		92C5812D2644472900E062A0 /* TaperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaperTests.swift; sourceTree = "<group>"; };
+		92C581292644472900E062A0 /* UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		92C5812F2644472900E062A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		92C581342644472900E062A0 /* TaperUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TaperUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		92C581342644472900E062A0 /* UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		92C581382644472900E062A0 /* TaperUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaperUITests.swift; sourceTree = "<group>"; };
 		92C5813A2644472900E062A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -207,7 +207,7 @@
 			isa = PBXGroup;
 			children = (
 				92C581152644472800E062A0 /* Taper */,
-				92C5812C2644472900E062A0 /* Tests */,
+				92C5812C2644472900E062A0 /* UnitTests */,
 				92C581372644472900E062A0 /* UITests */,
 				92C581142644472800E062A0 /* Products */,
 			);
@@ -217,8 +217,8 @@
 			isa = PBXGroup;
 			children = (
 				92C581132644472800E062A0 /* Taper.app */,
-				92C581292644472900E062A0 /* TaperTests.xctest */,
-				92C581342644472900E062A0 /* TaperUITests.xctest */,
+				92C581292644472900E062A0 /* UnitTests.xctest */,
+				92C581342644472900E062A0 /* UITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -240,13 +240,13 @@
 			path = Taper;
 			sourceTree = "<group>";
 		};
-		92C5812C2644472900E062A0 /* Tests */ = {
+		92C5812C2644472900E062A0 /* UnitTests */ = {
 			isa = PBXGroup;
 			children = (
-				92C5812D2644472900E062A0 /* TaperTests.swift */,
+				922590D4264718A5000113B3 /* DocumentTests.swift */,
 				92C5812F2644472900E062A0 /* Info.plist */,
 			);
-			path = Tests;
+			path = UnitTests;
 			sourceTree = "<group>";
 		};
 		92C581372644472900E062A0 /* UITests */ = {
@@ -297,9 +297,9 @@
 			productReference = 92C581132644472800E062A0 /* Taper.app */;
 			productType = "com.apple.product-type.application";
 		};
-		92C581282644472900E062A0 /* TaperTests */ = {
+		92C581282644472900E062A0 /* UnitTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 92C581402644472900E062A0 /* Build configuration list for PBXNativeTarget "TaperTests" */;
+			buildConfigurationList = 92C581402644472900E062A0 /* Build configuration list for PBXNativeTarget "UnitTests" */;
 			buildPhases = (
 				92C581252644472900E062A0 /* Sources */,
 				92C581262644472900E062A0 /* Frameworks */,
@@ -310,14 +310,14 @@
 			dependencies = (
 				92C5812B2644472900E062A0 /* PBXTargetDependency */,
 			);
-			name = TaperTests;
+			name = UnitTests;
 			productName = TaperTests;
-			productReference = 92C581292644472900E062A0 /* TaperTests.xctest */;
+			productReference = 92C581292644472900E062A0 /* UnitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		92C581332644472900E062A0 /* TaperUITests */ = {
+		92C581332644472900E062A0 /* UITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 92C581432644472900E062A0 /* Build configuration list for PBXNativeTarget "TaperUITests" */;
+			buildConfigurationList = 92C581432644472900E062A0 /* Build configuration list for PBXNativeTarget "UITests" */;
 			buildPhases = (
 				92C581302644472900E062A0 /* Sources */,
 				92C581312644472900E062A0 /* Frameworks */,
@@ -328,9 +328,9 @@
 			dependencies = (
 				92C581362644472900E062A0 /* PBXTargetDependency */,
 			);
-			name = TaperUITests;
+			name = UITests;
 			productName = TaperUITests;
-			productReference = 92C581342644472900E062A0 /* TaperUITests.xctest */;
+			productReference = 92C581342644472900E062A0 /* UITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -369,8 +369,8 @@
 			projectRoot = "";
 			targets = (
 				92C581122644472800E062A0 /* Taper */,
-				92C581282644472900E062A0 /* TaperTests */,
-				92C581332644472900E062A0 /* TaperUITests */,
+				92C581282644472900E062A0 /* UnitTests */,
+				92C581332644472900E062A0 /* UITests */,
 			);
 		};
 /* End PBXProject section */
@@ -434,7 +434,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				92C5812E2644472900E062A0 /* TaperTests.swift in Sources */,
+				922590D5264718A5000113B3 /* DocumentTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -646,7 +646,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8G73Z8AA5M;
-				INFOPLIST_FILE = TaperTests/Info.plist;
+				INFOPLIST_FILE = UnitTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -668,7 +668,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8G73Z8AA5M;
-				INFOPLIST_FILE = TaperTests/Info.plist;
+				INFOPLIST_FILE = UnitTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -689,7 +689,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8G73Z8AA5M;
-				INFOPLIST_FILE = TaperUITests/Info.plist;
+				INFOPLIST_FILE = UITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -709,7 +709,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8G73Z8AA5M;
-				INFOPLIST_FILE = TaperUITests/Info.plist;
+				INFOPLIST_FILE = UITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -744,7 +744,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		92C581402644472900E062A0 /* Build configuration list for PBXNativeTarget "TaperTests" */ = {
+		92C581402644472900E062A0 /* Build configuration list for PBXNativeTarget "UnitTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				92C581412644472900E062A0 /* Debug */,
@@ -753,7 +753,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		92C581432644472900E062A0 /* Build configuration list for PBXNativeTarget "TaperUITests" */ = {
+		92C581432644472900E062A0 /* Build configuration list for PBXNativeTarget "UITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				92C581442644472900E062A0 /* Debug */,

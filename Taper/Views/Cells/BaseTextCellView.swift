@@ -20,6 +20,7 @@ class BaseTextCellView: UICollectionViewCell, FocusableView {
         view.textContainerInset = .zero
         view.textContainer.lineFragmentPadding = 0
         view.delegate = self
+        view.keyboardDismissMode = .interactive
         
         return view
     }()
