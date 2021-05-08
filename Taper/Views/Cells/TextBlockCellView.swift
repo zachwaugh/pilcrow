@@ -16,13 +16,13 @@ final class TextBlockCellView: BaseTextCellView {
     }
 
     private func setup() {
-       contentView.addSubview(textView)
+        contentView.addSubview(textView)
        
-       NSLayoutConstraint.activate([
-           textView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-           textView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-           textView.topAnchor.constraint(equalTo: contentView.topAnchor),
-           textView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+        NSLayoutConstraint.activate([
+            textView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            textView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            textView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            textView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
        ])
    }
 }

@@ -33,7 +33,7 @@ final class DocumentViewController: UIViewController {
         
         let actions = BlockKind.allCases.map { kind in
             UIAction(title: kind.title, image: kind.image, handler: { [weak self] _ in
-                //self?.editor.insertNewBlock(for: kind)
+                self?.makeAndInsertNewBlock(for: kind)
             })
         }
         
@@ -67,8 +67,9 @@ final class DocumentViewController: UIViewController {
         guard let result = result else { return }
         
         switch result {
-        case .inserted:
+        case .inserted(let index):
             updateDataSource()
+            focusCell(at: index)
         case .invalidated:
             // For some operations (like updating text), we invalidate the layout so it has the correct height
             // but don't need to create a whole new snapshot
@@ -76,8 +77,45 @@ final class DocumentViewController: UIViewController {
             collectionView.collectionViewLayout.invalidateLayout()
         case .updated:
             updateDataSource()
-        case .deleted:
+        case .deleted(let index):
             updateDataSource()
+            focusCell(before: index)
+        }
+    }
+    
+    // MARK: - Blocks
+    
+    private func makeAndInsertNewBlock(for kind: BlockKind) {
+        let newBlock = makeBlock(for: kind)
+        let result: EditResult
+        
+        if let activeBlock = findActiveBlock() {
+            result = editor.insertBlock(newBlock, after: activeBlock)
+        } else {
+            result = editor.appendBlock(newBlock)
+        }
+        
+        applyEditResult(result)
+    }
+    
+    /// Return the block that has focus, or nil if none
+    private func findActiveBlock() -> Block? {
+        // TODO: find actual block, for now we'll return last
+        document.blocks.last
+    }
+    
+    private func makeBlock(for kind: BlockKind) -> Block {
+        switch kind {
+        case .heading:
+            return TextBlock(style: .heading).asBlock()
+        case .paragraph:
+            return TextBlock(style: .paragraph).asBlock()
+        case .todo:
+            return TodoBlock().asBlock()
+        case .bulletedListItem:
+            return ListItemBlock(style: .bulleted).asBlock()
+        case .numberedListItem:
+            return ListItemBlock(style: .numbered).asBlock()
         }
     }
 
@@ -135,7 +173,7 @@ final class DocumentViewController: UIViewController {
             focusCell(at: indexPath)
         } else {
             // Tapped empty zone, add a new block
-            //editor.autoAppendNewBlock()
+            applyEditResult(editor.appendNewBlock())
         }
     }
     
@@ -148,6 +186,20 @@ final class DocumentViewController: UIViewController {
     
     private func focusCell(at index: Int) {
         focusCell(at: IndexPath(item: index, section: 0))
+    }
+    
+    private func focusCell(before index: Int) {
+        let previousIndex = index - 1
+        if previousIndex >= 0, !document.blocks.isEmpty {
+            focusCell(at: previousIndex)
+        }
+    }
+    
+    private func focusCell(after index: Int) {
+        let nextIndex = index + 1
+        if nextIndex < document.blocks.count - 1 {
+            focusCell(at: nextIndex)
+        }
     }
     
     private func focusCell(at indexPath: IndexPath) {
@@ -179,6 +231,7 @@ final class DocumentViewController: UIViewController {
         let view = UICollectionView(frame: .zero, collectionViewLayout: makeCollectionViewLayout())
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .systemBackground
+        view.delegate = self
         return view
     }()
     
@@ -195,6 +248,9 @@ final class DocumentViewController: UIViewController {
         
         return UICollectionViewCompositionalLayout(section: section)
     }
+}
+
+extension DocumentViewController: UICollectionViewDelegate {
 }
 
 extension DocumentViewController: TodoCellDelegate {
