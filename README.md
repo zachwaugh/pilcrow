@@ -1,6 +1,6 @@
 # ¶ Pilcrow
 
-This is an work-in-progress experiment on building a document editor similar to Bear, Notion, Notes.app, Craft, Dropbox Paper, and others. I open-sourced it in case anyone is curious to follow along after my [initial tweets](https://twitter.com/zachwaugh/status/1390325967596527618?s=20). I'm not looking for contributions at this point, since the code is not production ready and I may make substantial changes before 1.0.
+This is an work-in-progress experiment on building a document editor similar to Bear, Notion, Notes.app, Craft, Dropbox Paper, and others. I open-sourced it in case anyone is curious to follow along after my [initial tweets](https://twitter.com/zachwaugh/status/1390325967596527618?s=20). I'm not looking for contributions at this point, since the code is not production ready and I may make substantial changes before 1.0. But would love to hear suggestions for improvement or feature requests, just open an issue.
 
 I have ideas for a few apps I'd like to build around this kind of document, so my main goal is to build the core editor first, and then extract it to a reusable framework to build on top.
 
