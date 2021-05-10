@@ -4,6 +4,7 @@ enum BlockKind: CaseIterable {
     case heading, paragraph
     case todo
     case bulletedListItem, numberedListItem
+    case quote
     
     var title: String {
         switch self {
@@ -17,21 +18,25 @@ enum BlockKind: CaseIterable {
             return "Bulleted List"
         case .numberedListItem:
             return "Numbered List"
+        case .quote:
+            return "Quote"
         }
     }
     
     var image: UIImage? {
         switch self {
         case .heading:
-            return UIImage(systemName: "textformat.size", withConfiguration: nil)
+            return UIImage(systemName: "textformat.size")
         case .paragraph:
-            return UIImage(systemName: "paragraphsign", withConfiguration: nil)
+            return UIImage(systemName: "paragraphsign")
         case .todo:
-            return UIImage(systemName: "checkmark.square", withConfiguration: nil)
+            return UIImage(systemName: "checkmark.square")
         case .bulletedListItem:
-            return UIImage(systemName: "list.bullet", withConfiguration: nil)
+            return UIImage(systemName: "list.bullet")
         case .numberedListItem:
-            return UIImage(systemName: "list.number", withConfiguration: nil)
+            return UIImage(systemName: "list.number")
+        case .quote:
+            return UIImage(systemName: "text.quote")
         }
     }
     
@@ -47,6 +52,8 @@ enum BlockKind: CaseIterable {
             return ListItemBlockCellView.self
         case .numberedListItem:
             return ListItemBlockCellView.self
+        case .quote:
+            return QuoteBlockCellView.self
         }
     }
 }

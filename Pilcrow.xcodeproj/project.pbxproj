@@ -15,6 +15,9 @@
 		922590E026471E7E000113B3 /* TextBlockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922590DF26471E7E000113B3 /* TextBlockViewModel.swift */; };
 		924A7C7826499200003C5073 /* DocumentStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924A7C7726499200003C5073 /* DocumentStore.swift */; };
 		924A7C7A2649C7AC003C5073 /* Metrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924A7C792649C7AC003C5073 /* Metrics.swift */; };
+		924A7C7C2649D259003C5073 /* QuoteBlockCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924A7C7B2649D259003C5073 /* QuoteBlockCellView.swift */; };
+		924A7C7E2649D2A7003C5073 /* QuoteBlockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924A7C7D2649D2A7003C5073 /* QuoteBlockViewModel.swift */; };
+		924A7C802649D3AD003C5073 /* QuoteBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924A7C7F2649D3AD003C5073 /* QuoteBlock.swift */; };
 		928EF89726444AF000437680 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928EF89626444AF000437680 /* Document.swift */; };
 		928EF89B26444E7E00437680 /* BaseTextCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928EF89A26444E7E00437680 /* BaseTextCellView.swift */; };
 		928EF89D26444F1D00437680 /* TodoBlockCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928EF89C26444F1D00437680 /* TodoBlockCellView.swift */; };
@@ -59,6 +62,9 @@
 		922590DF26471E7E000113B3 /* TextBlockViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBlockViewModel.swift; sourceTree = "<group>"; };
 		924A7C7726499200003C5073 /* DocumentStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentStore.swift; sourceTree = "<group>"; };
 		924A7C792649C7AC003C5073 /* Metrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metrics.swift; sourceTree = "<group>"; };
+		924A7C7B2649D259003C5073 /* QuoteBlockCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteBlockCellView.swift; sourceTree = "<group>"; };
+		924A7C7D2649D2A7003C5073 /* QuoteBlockViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteBlockViewModel.swift; sourceTree = "<group>"; };
+		924A7C7F2649D3AD003C5073 /* QuoteBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteBlock.swift; sourceTree = "<group>"; };
 		928EF89626444AF000437680 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
 		928EF89A26444E7E00437680 /* BaseTextCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTextCellView.swift; sourceTree = "<group>"; };
 		928EF89C26444F1D00437680 /* TodoBlockCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoBlockCellView.swift; sourceTree = "<group>"; };
@@ -113,6 +119,7 @@
 				922590DF26471E7E000113B3 /* TextBlockViewModel.swift */,
 				922590DB26471D0F000113B3 /* ListItemBlockViewModel.swift */,
 				922590DD26471DC1000113B3 /* TodoBlockViewModel.swift */,
+				924A7C7D2649D2A7003C5073 /* QuoteBlockViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -198,6 +205,7 @@
 				92973AA12645B1AD00B836B5 /* TextBlock.swift */,
 				92973AA32645B1CA00B836B5 /* TodoBlock.swift */,
 				92973AA72645B1EB00B836B5 /* ListItemBlock.swift */,
+				924A7C7F2649D3AD003C5073 /* QuoteBlock.swift */,
 			);
 			path = Blocks;
 			sourceTree = "<group>";
@@ -209,6 +217,7 @@
 				92973A9E2645908C00B836B5 /* TextBlockCellView.swift */,
 				928EF89C26444F1D00437680 /* TodoBlockCellView.swift */,
 				92973A96264589FE00B836B5 /* ListItemBlockCellView.swift */,
+				924A7C7B2649D259003C5073 /* QuoteBlockCellView.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -379,6 +388,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				92973A952644BBAB00B836B5 /* TextStyle.swift in Sources */,
+				924A7C7C2649D259003C5073 /* QuoteBlockCellView.swift in Sources */,
 				92973A9F2645908C00B836B5 /* TextBlockCellView.swift in Sources */,
 				928EF89B26444E7E00437680 /* BaseTextCellView.swift in Sources */,
 				922590DE26471DC1000113B3 /* TodoBlockViewModel.swift in Sources */,
@@ -398,9 +408,11 @@
 				92973AB12645BAB300B836B5 /* ReusableCell.swift in Sources */,
 				92973AB42645E3B500B836B5 /* DocumentEditor.swift in Sources */,
 				928EF8A02644610400437680 /* Block.swift in Sources */,
+				924A7C7E2649D2A7003C5073 /* QuoteBlockViewModel.swift in Sources */,
 				92C581192644472800E062A0 /* SceneDelegate.swift in Sources */,
 				92973A97264589FE00B836B5 /* ListItemBlockCellView.swift in Sources */,
 				92973AA82645B1EB00B836B5 /* ListItemBlock.swift in Sources */,
+				924A7C802649D3AD003C5073 /* QuoteBlock.swift in Sources */,
 				92973AA22645B1AD00B836B5 /* TextBlock.swift in Sources */,
 				92973AA42645B1CA00B836B5 /* TodoBlock.swift in Sources */,
 				924A7C7826499200003C5073 /* DocumentStore.swift in Sources */,

@@ -68,7 +68,7 @@ final class DocumentViewController: UIViewController {
     private func updateDataSource(animated: Bool = false) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Block>()
         snapshot.appendSections([.main])
-        snapshot.appendItems(document.blocks)        
+        snapshot.appendItems(document.blocks)
         dataSource.apply(snapshot, animatingDifferences: animated)
     }
     
@@ -127,9 +127,11 @@ final class DocumentViewController: UIViewController {
             return ListItemBlock(style: .bulleted).asBlock()
         case .numberedListItem:
             return ListItemBlock(style: .numbered).asBlock()
+        case .quote:
+            return QuoteBlock().asBlock()
         }
     }
-
+    
     // MARK: - Cells
     
     private func block(for cell: UICollectionViewCell) -> Block? {
@@ -145,6 +147,8 @@ final class DocumentViewController: UIViewController {
             return self.todoBlockCell(for: indexPath, content: content)
         case .listItem(let content):
             return self.listItemBlockCell(for: indexPath, content: content)
+        case .quote(let content):
+            return self.quoteBlockCell(for: indexPath, content: content)
         }
     }
     
@@ -168,6 +172,14 @@ final class DocumentViewController: UIViewController {
     private func listItemBlockCell(for indexPath: IndexPath, content: ListItemBlock) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(ListItemBlockCellView.self, for: indexPath)
         let viewModel = ListItemBlockViewModel(content: content)
+        cell.configure(with: viewModel)
+        cell.delegate = self
+        return cell
+    }
+    
+    private func quoteBlockCell(for indexPath: IndexPath, content: QuoteBlock) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(QuoteBlockCellView.self, for: indexPath)
+        let viewModel = QuoteBlockViewModel(content: content)
         cell.configure(with: viewModel)
         cell.delegate = self
         return cell

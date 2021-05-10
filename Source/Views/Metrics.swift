@@ -7,7 +7,7 @@ enum Metrics {
     static let blockSpacing: CGFloat = 12
     
     /// Leading/trailing padding of content blocks
-    static let blockContentVerticalPadding: CGFloat = 16
+    static let blockContentHorizontalPadding: CGFloat = 16
     
     static let estimatedBlockHeight: CGFloat = 40
     static let listItemLabelContentSpacing: CGFloat = 4
@@ -17,4 +17,8 @@ enum Metrics {
     
     /// Offset so text view visually lines up with checkbox
     static let checkboxTextContentVerticalOffset: CGFloat = 4
+    
+    static let quoteBorderWidth: CGFloat = 3
+    static let quoteBorderSpacing: CGFloat = 12
+    static let quoteContentVerticalPadding: CGFloat = 4
 }

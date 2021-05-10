@@ -28,6 +28,7 @@ extension Document {
             TextBlock(text: "Another paragraph"),
             TodoBlock(text: "Completed todo that is also much longer so we can test how it wraps", completed: true),
             TextBlock(text: "Final paragraph"),
+            QuoteBlock(text: "You miss 100% of the shots you don't take - Wayne Gretzky\n— Michael Scott")
         ]
         
         return Document(

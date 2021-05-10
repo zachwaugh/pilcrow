@@ -19,8 +19,8 @@ final class TextBlockCellView: BaseTextCellView {
         contentView.addSubview(textView)
        
         NSLayoutConstraint.activate([
-            textView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Metrics.blockContentVerticalPadding),
-            textView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -Metrics.blockContentVerticalPadding),
+            textView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Metrics.blockContentHorizontalPadding),
+            textView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -Metrics.blockContentHorizontalPadding),
             textView.topAnchor.constraint(equalTo: contentView.topAnchor),
             textView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
        ])

@@ -22,10 +22,10 @@ final class ListItemBlockCellView: BaseTextCellView {
         
         NSLayoutConstraint.activate([
             listItemLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
-            listItemLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Metrics.blockContentVerticalPadding),
+            listItemLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Metrics.blockContentHorizontalPadding),
             
             textView.leadingAnchor.constraint(equalTo: listItemLabel.trailingAnchor, constant: Metrics.listItemLabelContentSpacing),
-            textView.trailingAnchor.constraint(equalTo:  contentView.trailingAnchor, constant: -Metrics.blockContentVerticalPadding),
+            textView.trailingAnchor.constraint(equalTo:  contentView.trailingAnchor, constant: -Metrics.blockContentHorizontalPadding),
             textView.topAnchor.constraint(equalTo:  contentView.topAnchor),
             textView.bottomAnchor.constraint(equalTo:  contentView.bottomAnchor),
         ])

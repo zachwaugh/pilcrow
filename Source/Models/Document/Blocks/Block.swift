@@ -8,6 +8,7 @@ enum Block: Hashable {
     case text(TextBlock)
     case todo(TodoBlock)
     case listItem(ListItemBlock)
+    case quote(QuoteBlock)
     
     var content: BlockContent {
         switch self {
@@ -17,13 +18,15 @@ enum Block: Hashable {
             return content
         case .listItem(let content):
             return content
+        case .quote(let content):
+            return content
         }
     }
 }
 
 extension Block: Codable {
     private enum CodingKeys: CodingKey {
-        case text, todo, listItem
+        case text, todo, listItem, quote
     }
     
     init(from decoder: Decoder) throws {
@@ -35,6 +38,8 @@ extension Block: Codable {
             self = .todo(content)
         } else if let content = try container.decodeIfPresent(ListItemBlock.self, forKey: .listItem) {
             self = .listItem(content)
+        } else if let content = try container.decodeIfPresent(QuoteBlock.self, forKey: .quote) {
+            self = .quote(content)
         } else {
             throw BlockDecodingError.invalidData
         }
@@ -50,6 +55,8 @@ extension Block: Codable {
             try container.encode(content, forKey: .todo)
         case .listItem(let content):
             try container.encode(content, forKey: .listItem)
+        case .quote(let content):
+            try container.encode(content, forKey: .quote)
         }
     }
 }
