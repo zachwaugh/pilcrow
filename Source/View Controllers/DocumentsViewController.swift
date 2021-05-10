@@ -29,8 +29,6 @@ final class DocumentsViewController: UITableViewController {
     }
     
     private func observeStore() {
-        files = store.files
-        
         store.$files
             .sink { [weak self] files in
                 self?.files = files
@@ -46,8 +44,45 @@ final class DocumentsViewController: UITableViewController {
     // MARK: Actions
     
     @objc private func newDocument(_ sender: Any) {
-        let document = store.createNewDocument()
+        promptForDocumentName(currentName: "Untitled") { [weak self] name in
+            self?.createDocument(with: name)
+        }
+    }
+    
+    private func createDocument(with name: String) {
+        let document = store.createNewDocument(named: name)
         open(document: document)
+    }
+    
+    private func promptToRenameDocument(file: DocumentFile) {
+        promptForDocumentName(currentName: file.name) { [weak self] updatedName in
+            self?.renameDocument(file: file, name: updatedName)
+        }
+    }
+    
+    private func renameDocument(file: DocumentFile, name: String) {
+        do {
+            try store.renameDocument(at: file.url, to: name)
+        } catch {
+            print("Error renaming document: \(error)")
+        }
+    }
+    
+    private func promptForDocumentName(currentName: String, handler: @escaping (String) -> Void) {
+        let alert = UIAlertController(title: "Document Name", message: nil, preferredStyle: .alert)
+        
+        alert.addTextField { textField in
+            textField.text = currentName
+        }
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+            guard let name = alert.textFields?.first?.text, !name.isEmpty else { return }
+            handler(name)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        present(alert, animated: true)
     }
     
     // MARK: Navigation
@@ -94,10 +129,25 @@ final class DocumentsViewController: UITableViewController {
                 return
             }
             
-            self?.store.deleteDocument(at: file.url)
+            do {
+                try self?.store.deleteDocument(at: file.url)
+                handler(true)
+            } catch {
+                print("Error deleting document: \(error)")
+                handler(false)
+            }
+        }
+        
+        let renameAction = UIContextualAction(style: .normal, title: "Rename") { [weak self] _, _, handler in
+            guard let file = self?.files[indexPath.row] else {
+                handler(false)
+                return
+            }
+            
+            self?.promptToRenameDocument(file: file)
             handler(true)
         }
         
-        return UISwipeActionsConfiguration(actions: [deleteAction])
+        return UISwipeActionsConfiguration(actions: [deleteAction, renameAction])
     }
 }

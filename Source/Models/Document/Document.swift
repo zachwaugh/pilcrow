@@ -4,12 +4,12 @@ struct Document: Codable, Equatable {
     static let fileExtension = "pilcrow"
     
     let id: String
-    var title: String
+    var name: String
     var blocks: [Block]
     
-    init(title: String = "Untitled", blocks: [Block] = []) {
+    init(name: String = "Untitled", blocks: [Block] = []) {
         self.id = UUID().uuidString
-        self.title = title
+        self.name = name
         self.blocks = blocks
     }
 }
@@ -31,7 +31,7 @@ extension Document {
         ]
         
         return Document(
-            title: "Test Document",
+            name: "Test Document",
             blocks: blocks.map { $0.asBlock() }
         )
     }

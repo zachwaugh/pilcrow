@@ -19,7 +19,7 @@ final class DocumentViewController: UIViewController {
     }
 
     private func setup() {
-        title = document.title
+        title = document.name
         
         setupViews()
         configureCollectionView()
@@ -31,14 +31,25 @@ final class DocumentViewController: UIViewController {
     private func configureNavigationBar() {
         navigationItem.backButtonDisplayMode = .minimal
         
-        let actions = BlockKind.allCases.map { kind in
+        let addActions = BlockKind.allCases.map { kind in
             UIAction(title: kind.title, image: kind.image, handler: { [weak self] _ in
                 self?.makeAndInsertNewBlock(for: kind)
             })
         }
         
-        let menu = UIMenu(title: "", children: actions)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(systemItem: .add, menu: menu)
+        let menu = UIMenu(title: "", children: addActions)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "ellipsis"), menu: menu)
+    }
+    
+    // MARK: - Document
+    
+    private func save() {
+        // TODO: throttle/debounce saves
+        do {
+            try DocumentStore.shared.saveDocument(document)
+        } catch {
+            print("Error saving document! \(error)")
+        }
     }
     
     // MARK: - Data Source
@@ -82,7 +93,7 @@ final class DocumentViewController: UIViewController {
             focusCell(before: index)
         }
         
-        DocumentStore.shared.saveDocument(document)
+        save()
     }
     
     // MARK: - Blocks
