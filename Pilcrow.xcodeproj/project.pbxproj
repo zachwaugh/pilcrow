@@ -67,7 +67,7 @@
 		928EF89A26444E7E00437680 /* BaseTextCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTextCellView.swift; sourceTree = "<group>"; };
 		928EF89C26444F1D00437680 /* TodoBlockCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoBlockCellView.swift; sourceTree = "<group>"; };
 		928EF89F2644610400437680 /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
-		928EF8C32644816700437680 /* Taper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Taper.entitlements; sourceTree = "<group>"; };
+		928EF8C32644816700437680 /* Pilcrow.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pilcrow.entitlements; sourceTree = "<group>"; };
 		92973A942644BBAB00B836B5 /* TextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStyle.swift; sourceTree = "<group>"; };
 		92973A96264589FE00B836B5 /* ListItemBlockCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemBlockCellView.swift; sourceTree = "<group>"; };
 		92973A9926458D4A00B836B5 /* TextEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEdit.swift; sourceTree = "<group>"; };
@@ -81,7 +81,7 @@
 		92973AAD2645B9B200B836B5 /* BlockKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockKind.swift; sourceTree = "<group>"; };
 		92973AB02645BAB300B836B5 /* ReusableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableCell.swift; sourceTree = "<group>"; };
 		92973AB32645E3B500B836B5 /* DocumentEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentEditor.swift; sourceTree = "<group>"; };
-		92C581132644472800E062A0 /* Taper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Taper.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		92C581132644472800E062A0 /* Pilcrow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pilcrow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92C581162644472800E062A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92C581182644472800E062A0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		92C5811A2644472800E062A0 /* DocumentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentViewController.swift; sourceTree = "<group>"; };
@@ -227,7 +227,7 @@
 		92C5810A2644472700E062A0 = {
 			isa = PBXGroup;
 			children = (
-				92C581152644472800E062A0 /* Taper */,
+				92C581152644472800E062A0 /* Pilcrow */,
 				92C5812C2644472900E062A0 /* UnitTests */,
 				92C581372644472900E062A0 /* UITests */,
 				92C581142644472800E062A0 /* Products */,
@@ -237,14 +237,14 @@
 		92C581142644472800E062A0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				92C581132644472800E062A0 /* Taper.app */,
+				92C581132644472800E062A0 /* Pilcrow.app */,
 				92C581292644472900E062A0 /* UnitTests.xctest */,
 				92C581342644472900E062A0 /* UITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		92C581152644472800E062A0 /* Taper */ = {
+		92C581152644472800E062A0 /* Pilcrow */ = {
 			isa = PBXGroup;
 			children = (
 				928EF89826444CDF00437680 /* App */,
@@ -256,10 +256,10 @@
 				92973A9B26458E3400B836B5 /* Protocols */,
 				928EF8A22644619300437680 /* Storyboards */,
 				928EF8A12644618700437680 /* Assets */,
-				928EF8C32644816700437680 /* Taper.entitlements */,
+				928EF8C32644816700437680 /* Pilcrow.entitlements */,
 				92C581242644472800E062A0 /* Info.plist */,
 			);
-			path = Taper;
+			path = Pilcrow;
 			sourceTree = "<group>";
 		};
 		92C5812C2644472900E062A0 /* UnitTests */ = {
@@ -303,9 +303,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		92C581122644472800E062A0 /* Taper */ = {
+		92C581122644472800E062A0 /* Pilcrow */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 92C5813D2644472900E062A0 /* Build configuration list for PBXNativeTarget "Taper" */;
+			buildConfigurationList = 92C5813D2644472900E062A0 /* Build configuration list for PBXNativeTarget "Pilcrow" */;
 			buildPhases = (
 				92C5810F2644472800E062A0 /* Sources */,
 				92C581102644472800E062A0 /* Frameworks */,
@@ -315,9 +315,9 @@
 			);
 			dependencies = (
 			);
-			name = Taper;
+			name = Pilcrow;
 			productName = Taper;
-			productReference = 92C581132644472800E062A0 /* Taper.app */;
+			productReference = 92C581132644472800E062A0 /* Pilcrow.app */;
 			productType = "com.apple.product-type.application";
 		};
 		92C581282644472900E062A0 /* UnitTests */ = {
@@ -378,7 +378,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 92C5810E2644472700E062A0 /* Build configuration list for PBXProject "Taper" */;
+			buildConfigurationList = 92C5810E2644472700E062A0 /* Build configuration list for PBXProject "Pilcrow" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -391,7 +391,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				92C581122644472800E062A0 /* Taper */,
+				92C581122644472800E062A0 /* Pilcrow */,
 				92C581282644472900E062A0 /* UnitTests */,
 				92C581332644472900E062A0 /* UITests */,
 			);
@@ -479,12 +479,12 @@
 /* Begin PBXTargetDependency section */
 		92C5812B2644472900E062A0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 92C581122644472800E062A0 /* Taper */;
+			target = 92C581122644472800E062A0 /* Pilcrow */;
 			targetProxy = 92C5812A2644472900E062A0 /* PBXContainerItemProxy */;
 		};
 		92C581362644472900E062A0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 92C581122644472800E062A0 /* Taper */;
+			target = 92C581122644472800E062A0 /* Pilcrow */;
 			targetProxy = 92C581352644472900E062A0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -630,15 +630,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Taper/Taper.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Pilcrow/Pilcrow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8G73Z8AA5M;
-				INFOPLIST_FILE = Taper/Info.plist;
+				INFOPLIST_FILE = Pilcrow/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zachwaugh.Taper;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zachwaugh.pilcrow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
@@ -651,15 +651,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Taper/Taper.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Pilcrow/Pilcrow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8G73Z8AA5M;
-				INFOPLIST_FILE = Taper/Info.plist;
+				INFOPLIST_FILE = Pilcrow/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zachwaugh.Taper;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zachwaugh.pilcrow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
@@ -681,11 +681,11 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zachwaugh.TaperTests;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.zachwaugh.pilcrow.unit-tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Taper.app/Taper";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pilcrow.app/Pilcrow";
 			};
 			name = Debug;
 		};
@@ -703,11 +703,11 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zachwaugh.TaperTests;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.zachwaugh.pilcrow.unit-tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Taper.app/Taper";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pilcrow.app/Pilcrow";
 			};
 			name = Release;
 		};
@@ -723,11 +723,11 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zachwaugh.TaperUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.zachwaugh.pilcrow.ui-tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Taper;
+				TEST_TARGET_NAME = Pilcrow;
 			};
 			name = Debug;
 		};
@@ -743,18 +743,18 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zachwaugh.TaperUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.zachwaugh.pilcrow.ui-tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Taper;
+				TEST_TARGET_NAME = Pilcrow;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		92C5810E2644472700E062A0 /* Build configuration list for PBXProject "Taper" */ = {
+		92C5810E2644472700E062A0 /* Build configuration list for PBXProject "Pilcrow" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				92C5813B2644472900E062A0 /* Debug */,
@@ -763,7 +763,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		92C5813D2644472900E062A0 /* Build configuration list for PBXNativeTarget "Taper" */ = {
+		92C5813D2644472900E062A0 /* Build configuration list for PBXNativeTarget "Pilcrow" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				92C5813E2644472900E062A0 /* Debug */,

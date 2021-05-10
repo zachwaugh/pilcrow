@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:">
+      location = "self:/Users/zach/code/zw/Taper/Pilcrow.xcodeproj">
    </FileRef>
 </Workspace>

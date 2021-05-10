@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "92C581122644472800E062A0"
-               BuildableName = "Taper.app"
-               BlueprintName = "Taper"
-               ReferencedContainer = "container:Taper.xcodeproj">
+               BuildableName = "Pilcrow.app"
+               BlueprintName = "Pilcrow"
+               ReferencedContainer = "container:Pilcrow.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
                BlueprintIdentifier = "92C581282644472900E062A0"
                BuildableName = "UnitTests.xctest"
                BlueprintName = "UnitTests"
-               ReferencedContainer = "container:Taper.xcodeproj">
+               ReferencedContainer = "container:Pilcrow.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -45,7 +45,7 @@
                BlueprintIdentifier = "92C581332644472900E062A0"
                BuildableName = "UITests.xctest"
                BlueprintName = "UITests"
-               ReferencedContainer = "container:Taper.xcodeproj">
+               ReferencedContainer = "container:Pilcrow.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -65,9 +65,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "92C581122644472800E062A0"
-            BuildableName = "Taper.app"
-            BlueprintName = "Taper"
-            ReferencedContainer = "container:Taper.xcodeproj">
+            BuildableName = "Pilcrow.app"
+            BlueprintName = "Pilcrow"
+            ReferencedContainer = "container:Pilcrow.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -82,9 +82,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "92C581122644472800E062A0"
-            BuildableName = "Taper.app"
-            BlueprintName = "Taper"
-            ReferencedContainer = "container:Taper.xcodeproj">
+            BuildableName = "Pilcrow.app"
+            BlueprintName = "Pilcrow"
+            ReferencedContainer = "container:Pilcrow.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
