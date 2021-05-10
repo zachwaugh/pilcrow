@@ -4,21 +4,22 @@ struct TodoBlockViewModel {
     let content: TodoBlock
     
     var attributedText: NSAttributedString {
-        var attributes = defaultTextAttributes
-        
-        if content.completed {
-            attributes[.foregroundColor] = UIColor.separator
-            attributes[.strikethroughColor] = UIColor.separator
-            attributes[.strikethroughStyle] = NSUnderlineStyle.single.rawValue
-        }
-        
-        return NSAttributedString(string: content.text, attributes: attributes)
+        NSAttributedString(string: content.text, attributes: content.completed ? completedTextAttributes : defaultTextAttributes)
     }
     
     var defaultTextAttributes: [NSAttributedString.Key: Any] {
         [
-            .font: UIFont.systemFont(ofSize: 17, weight: .regular),
+            .font: TextStyle.paragraph.font,
             .foregroundColor: UIColor.label
+        ]
+    }
+    
+    var completedTextAttributes: [NSAttributedString.Key: Any] {
+        [
+            .font: TextStyle.paragraph.font,
+            .foregroundColor: UIColor.separator,
+            .strikethroughColor: UIColor.separator,
+            .strikethroughStyle: NSUnderlineStyle.single.rawValue
         ]
     }
     

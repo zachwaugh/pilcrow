@@ -8,7 +8,7 @@ enum TextStyle: String, Codable {
         case .paragraph:
             return UIFont.systemFont(ofSize: 17, weight: .regular)
         case .heading:
-            return UIFont.systemFont(ofSize: 24, weight: .semibold)
+            return UIFont.systemFont(ofSize: 28, weight: .semibold)
         }
     }
 }
