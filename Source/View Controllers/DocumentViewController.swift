@@ -81,6 +81,8 @@ final class DocumentViewController: UIViewController {
             updateDataSource()
             focusCell(before: index)
         }
+        
+        DocumentStore.shared.saveDocument(document)
     }
     
     // MARK: - Blocks

@@ -1,8 +1,17 @@
 import Foundation
 
 struct Document: Codable, Equatable {
-    var title: String = "Untitled"
-    var blocks: [Block] = []
+    static let fileExtension = "pilcrow"
+    
+    let id: String
+    var title: String
+    var blocks: [Block]
+    
+    init(title: String = "Untitled", blocks: [Block] = []) {
+        self.id = UUID().uuidString
+        self.title = title
+        self.blocks = blocks
+    }
 }
 
 extension Document {

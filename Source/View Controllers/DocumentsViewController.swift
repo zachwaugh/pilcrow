@@ -1,14 +1,18 @@
 import UIKit
+import Combine
 
 final class DocumentsViewController: UITableViewController {
-    private var documents: [Document] {
+    private let store: DocumentStore
+    private var subscriptions: Set<AnyCancellable> = []
+    
+    private var files: [DocumentFile] = [] {
         didSet {
             tableView.reloadData()
         }
     }
     
-    init(documents: [Document]) {
-        self.documents = documents
+    init(store: DocumentStore) {
+        self.store = store
         super.init(style: .plain)
         setup()
     }
@@ -21,6 +25,17 @@ final class DocumentsViewController: UITableViewController {
         title = "Documents"
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "document")
         configureNavigationBar()
+        observeStore()
+    }
+    
+    private func observeStore() {
+        files = store.files
+        
+        store.$files
+            .sink { [weak self] files in
+                self?.files = files
+            }
+            .store(in: &subscriptions)
     }
     
     private func configureNavigationBar() {
@@ -32,7 +47,7 @@ final class DocumentsViewController: UITableViewController {
     
     @objc private func newDocument(_ sender: Any) {
         let document = Document()
-        documents.append(document)
+        store.saveDocument(document)
         open(document: document)
     }
     
@@ -50,13 +65,12 @@ final class DocumentsViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        documents.count
+        files.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "document", for: indexPath)
-        let document = documents[indexPath.row]
-        cell.textLabel?.text = document.title
+        cell.textLabel?.text = files[indexPath.row].name
         
         return cell
     }
@@ -64,6 +78,27 @@ final class DocumentsViewController: UITableViewController {
     // MARK: UITableViewDelegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        open(document: documents[indexPath.row])
+        let file = files[indexPath.row]
+        
+        do {
+            let document = try store.loadDocument(at: file.url)
+            open(document: document)
+        } catch {
+            print("Error loading document at url: \(file.url), error: \(error)")
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] _, _, handler in
+            guard let file = self?.files[indexPath.row] else {
+                handler(false)
+                return
+            }
+            
+            self?.store.deleteDocument(at: file.url)
+            handler(true)
+        }
+        
+        return UISwipeActionsConfiguration(actions: [deleteAction])
     }
 }
