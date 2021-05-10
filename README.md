@@ -4,7 +4,7 @@ I have ideas for a few apps I'd like to build around this kind of document, so m
 
 ## Architecture
 
-The core of the app is a `Document` composed of an array of `Block`. Each `Block` can have a different content type and renders as its own cell/row in a `UICollectionView` or `UITableView`.
+The core of the app is a `Document` composed of an array of `Block`. Each `Block` can have a different content type and renders as its own cell/row in a `UICollectionView` or `UITableView`. See tweet above for discussion of the merits of this approach vs using a `UITextView` based approach. This seemed the most flexible long-term, at the cost of losing some text editing niceties.
 
 ### Block types
 
@@ -20,6 +20,7 @@ The core of the app is a `Document` composed of an array of `Block`. Each `Block
 
 
 ## Roadmap
+
 - [ ] Toolbar
 - [ ] Persistence
 - [ ] Inline text formatting (bold, italic, underline, strikethrough, link)
@@ -27,6 +28,9 @@ The core of the app is a `Document` composed of an array of `Block`. Each `Block
 - [ ] Improved keyboard navigation
 - [ ] Swipe actions on rows
 - [ ] Drag-and-drop
+- [ ] Finish block types
+- [ ] Import from Markdown
+- [ ] Export to Markdown
 
 ## License
 
