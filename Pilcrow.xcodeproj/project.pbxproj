@@ -239,7 +239,8 @@
 				928EF8C32644816700437680 /* Pilcrow.entitlements */,
 				92C581242644472800E062A0 /* Info.plist */,
 			);
-			path = Pilcrow;
+			name = Pilcrow;
+			path = Source;
 			sourceTree = "<group>";
 		};
 		92C5812C2644472900E062A0 /* Tests */ = {
@@ -558,10 +559,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Pilcrow/Pilcrow.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Source/Pilcrow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8G73Z8AA5M;
-				INFOPLIST_FILE = Pilcrow/Info.plist;
+				INFOPLIST_FILE = Source/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -579,10 +580,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Pilcrow/Pilcrow.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Source/Pilcrow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8G73Z8AA5M;
-				INFOPLIST_FILE = Pilcrow/Info.plist;
+				INFOPLIST_FILE = Source/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
