@@ -31,7 +31,7 @@ extension Document {
         ]
         
         return Document(
-            name: "Test Document",
+            name: "¶ Test Document",
             blocks: blocks.map { $0.asBlock() }
         )
     }

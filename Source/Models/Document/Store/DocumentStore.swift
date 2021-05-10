@@ -3,8 +3,14 @@ import Combine
 
 struct DocumentFile {
     let url: URL
+    
     var name: String {
         url.deletingPathExtension().lastPathComponent
+    }
+    
+    var updatedAt: Date {
+        let fileModificationDate = try? url.resourceValues(forKeys: [.contentModificationDateKey]).contentModificationDate
+        return fileModificationDate ?? .distantPast
     }
 }
 
@@ -95,8 +101,10 @@ final class DocumentStore {
     }
     
     private func listDocumentFiles() throws -> [DocumentFile] {
-        let urls = try FileManager.default.contentsOfDirectory(at: documentsDirectoryURL, includingPropertiesForKeys: [], options: [])
-        return urls.map { DocumentFile(url: $0) }
+        let urls = try FileManager.default.contentsOfDirectory(at: documentsDirectoryURL, includingPropertiesForKeys: [.contentModificationDateKey], options: [])
+        return urls
+            .map { DocumentFile(url: $0) }
+            .sorted(by: { $0.updatedAt > $1.updatedAt })
     }
     
     private func findUniqueDocumentName(baseName: String) -> String {
