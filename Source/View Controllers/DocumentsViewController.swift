@@ -26,6 +26,10 @@ final class DocumentsViewController: UITableViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "document")
         configureNavigationBar()
         observeStore()
+        
+        #if DEBUG
+        store.saveTestDocumentIfNeeded()
+        #endif
     }
     
     private func observeStore() {

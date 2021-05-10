@@ -102,15 +102,23 @@ final class DocumentStore {
     private func findUniqueDocumentName(baseName: String) -> String {
         var filename = "\(baseName)"
         var attempt = 0
-        
-        var newURL = documentsDirectoryURL.appendingPathComponent("\(filename).\(Document.fileExtension)")
+        var newURL = url(for: filename)
         
         while FileManager.default.fileExists(atPath: newURL.path) {
             attempt += 1
             filename = "\(baseName) - \(attempt)"
-            newURL = documentsDirectoryURL.appendingPathComponent("\(filename).\(Document.fileExtension)")
+            newURL = url(for: filename)
         }
         
         return filename
+    }
+}
+
+extension DocumentStore {
+    func saveTestDocumentIfNeeded() {
+        #if DEBUG
+        guard !files.map(\.name).contains(Document.test.name) else { return }
+        try? saveDocument(.test)
+        #endif
     }
 }
