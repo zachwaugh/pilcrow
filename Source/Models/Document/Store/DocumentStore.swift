@@ -25,6 +25,14 @@ final class DocumentStore {
         }
     }
     
+    func createNewDocument() -> Document {
+        let name = findUniqueDocumentName()
+        let document = Document(title: name)
+        saveDocument(document)
+        
+        return document
+    }
+    
     func loadDocument(at url: URL) throws -> Document {
         let decoder = JSONDecoder()
         let data = try Data(contentsOf: url)
@@ -75,5 +83,21 @@ final class DocumentStore {
     private func listDocumentFiles() throws -> [DocumentFile] {
         let urls = try FileManager.default.contentsOfDirectory(at: documentsDirectoryURL, includingPropertiesForKeys: [], options: [])
         return urls.map { DocumentFile(url: $0) }
+    }
+    
+    private func findUniqueDocumentName() -> String {
+        let baseName = "Untitled"
+        var filename = "\(baseName)"
+        var attempt = 0
+        
+        var newURL = documentsDirectoryURL.appendingPathComponent("\(filename).\(Document.fileExtension)")
+        
+        while FileManager.default.fileExists(atPath: newURL.path) {
+            attempt += 1
+            filename = "\(baseName) - \(attempt)"
+            newURL = documentsDirectoryURL.appendingPathComponent("\(filename).\(Document.fileExtension)")
+        }
+        
+        return filename
     }
 }

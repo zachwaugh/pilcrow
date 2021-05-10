@@ -46,8 +46,7 @@ final class DocumentsViewController: UITableViewController {
     // MARK: Actions
     
     @objc private func newDocument(_ sender: Any) {
-        let document = Document()
-        store.saveDocument(document)
+        let document = store.createNewDocument()
         open(document: document)
     }
     
