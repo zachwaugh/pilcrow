@@ -36,17 +36,17 @@ final class TodoBlockCellView: BaseTextCellView {
         contentView.addSubview(textView)
         
         NSLayoutConstraint.activate([
-            checkboxButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            checkboxButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Metrics.blockContentVerticalPadding),
             checkboxButton.topAnchor.constraint(equalTo: contentView.topAnchor),
-            checkboxButton.heightAnchor.constraint(equalToConstant: 30),
-            checkboxButton.widthAnchor.constraint(equalToConstant: 30),
+            checkboxButton.heightAnchor.constraint(equalToConstant: Metrics.checkboxSize.height),
+            checkboxButton.widthAnchor.constraint(equalToConstant: Metrics.checkboxSize.width),
 
-            textView.leadingAnchor.constraint(equalTo: checkboxButton.trailingAnchor, constant: 8),
-            textView.trailingAnchor.constraint(equalTo:  contentView.trailingAnchor),
-            textView.topAnchor.constraint(equalTo: checkboxButton.topAnchor, constant: 4),
+            textView.leadingAnchor.constraint(equalTo: checkboxButton.trailingAnchor, constant: Metrics.checkboxTextContentSpacing),
+            textView.trailingAnchor.constraint(equalTo:  contentView.trailingAnchor, constant: -Metrics.blockContentVerticalPadding),
+            textView.topAnchor.constraint(equalTo: checkboxButton.topAnchor, constant: Metrics.checkboxTextContentVerticalOffset),
             textView.bottomAnchor.constraint(equalTo:  contentView.bottomAnchor),
             
-            contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: 28)
+            contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: Metrics.checkboxSize.height)
         ])
     }
     

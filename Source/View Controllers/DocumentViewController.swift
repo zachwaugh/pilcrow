@@ -68,9 +68,7 @@ final class DocumentViewController: UIViewController {
     private func updateDataSource(animated: Bool = false) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Block>()
         snapshot.appendSections([.main])
-        snapshot.appendItems(document.blocks)
-        
-        print("Updating data source with snapshot: \(snapshot.numberOfItems), animated? \(animated)")
+        snapshot.appendItems(document.blocks)        
         dataSource.apply(snapshot, animatingDifferences: animated)
     }
     
@@ -252,15 +250,15 @@ final class DocumentViewController: UIViewController {
     }()
     
     private func makeCollectionViewLayout() -> UICollectionViewCompositionalLayout {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(50))
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(Metrics.estimatedBlockHeight))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
-        group.interItemSpacing = .fixed(12)
+        group.interItemSpacing = .fixed(Metrics.blockSpacing)
         
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16)
+        section.contentInsets = NSDirectionalEdgeInsets(top: Metrics.sectionTopPadding, leading: 0, bottom: 0, trailing: 0)
         
         return UICollectionViewCompositionalLayout(section: section)
     }
