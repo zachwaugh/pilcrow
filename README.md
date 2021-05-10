@@ -1,8 +1,10 @@
 # ¶ Pilcrow
 
-This is an work-in-progress experiment on building a document editor similar to Bear, Notion, Notes.app, Craft, Dropbox Paper, and others. I open-sourced it in case anyone is curious to follow along after my [initial tweets](https://twitter.com/zachwaugh/status/1390325967596527618?s=20). I'm not looking for contributions at this point, since I don't really know where this is going to go, if anywhere.
+This is an work-in-progress experiment on building a document editor similar to Bear, Notion, Notes.app, Craft, Dropbox Paper, and others. I open-sourced it in case anyone is curious to follow along after my [initial tweets](https://twitter.com/zachwaugh/status/1390325967596527618?s=20). I'm not looking for contributions at this point, since the code is not production ready and I may make substantial changes before 1.0.
 
 I have ideas for a few apps I'd like to build around this kind of document, so my main goal is to build the core editor first, and then extract it to a reusable framework to build on top.
+
+![Screenshot of Pilcrow demo on iOS](Docs/screenshots/screenshot.png)
 
 ## Architecture
 
@@ -27,7 +29,7 @@ The core of the app is a `Document` composed of an array of `Block`s. Each `Bloc
 An incomplete and unordered list of things I'm planning on adding.
 
 - [ ] Toolbar
-- [ ] Persistence
+- [ ] Persistence (rebuild on top of UIDocumentBrowserViewController/UIDocument)
 - [ ] Inline text formatting (bold, italic, underline, strikethrough, link)
 - [ ] Indent/dedent
 - [ ] Document consistency
@@ -40,7 +42,7 @@ An incomplete and unordered list of things I'm planning on adding.
 
 ## License
 
-- [MIT](/LICENSE)
+- [MIT](LICENSE)
 
 
 ## Author
