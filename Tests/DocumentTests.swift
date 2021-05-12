@@ -1,13 +1,16 @@
 import XCTest
-@testable import Taper
+@testable import Pilcrow
 
 class DocumentTests: XCTestCase {
     func testJSONEncodingAndDecoding() {
-        let document = Document(title: "Test document", blocks: [
-            .text(TextBlock(text: "Text Block")),
-            .todo(TodoBlock(text: "Text Block", completed: true)),
-            .listItem(ListItemBlock(text: "List Item Block", style: .bulleted)),
-        ])
+        let document = Document(
+            name: "Test document",
+            blocks: [
+                .paragraph(ParagraphContent(text: "Text Block")),
+                .todo(TodoContent(text: "Text Block", completed: true)),
+                .bulletedListItem(BulletedListItemContent(text: "List Item Block")),
+            ]
+        )
         
         do {
             let encoder = JSONEncoder()

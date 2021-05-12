@@ -1,22 +1,20 @@
 import UIKit
 
 struct ListItemBlockViewModel {
-    let content: ListItemBlock
-    
-    var listItemLabelString: String {
-        switch content.style {
-        case .bulleted:
-            return "•"
-        case .numbered:
-            return "\(content.number)."
-        }
-    }
-    
-    var text: String {
-        content.text
-    }
+    let text: String
+    let listItemLabelString: String
     
     var textFont: UIFont {
         TextStyle.paragraph.font
+    }
+}
+
+extension ListItemBlockViewModel {
+    init(content: BulletedListItemContent) {
+        self.init(text: content.text, listItemLabelString: "•")
+    }
+    
+    init(content: NumberedListItemContent) {
+        self.init(text: content.text, listItemLabelString: "\(content.number).")
     }
 }

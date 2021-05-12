@@ -18,17 +18,17 @@ extension Document {
     /// Test document contains a sample of all blocks
     static var test: Document {
         let blocks: [BlockContent] = [
-            TextBlock(text: "Heading", style: .heading),
-            TextBlock(text: "Paragraph"),
-            ListItemBlock(text: "Bullet list item", style: .bulleted),
-            ListItemBlock(text: "Ordered list item", style: .numbered),
+            HeadingContent(text: "Heading"),
+            ParagraphContent(text: "Paragraph"),
+            BulletedListItemContent(text: "Bullet list item"),
+            NumberedListItemContent(text: "Ordered list item"),
             
-            TextBlock(text: "Paragraph that is much longer so it will wrap to multiple lines"),
-            TodoBlock(text: "Todo"),
-            TextBlock(text: "Another paragraph"),
-            TodoBlock(text: "Completed todo that is also much longer so we can test how it wraps", completed: true),
-            TextBlock(text: "Final paragraph"),
-            QuoteBlock(text: "You miss 100% of the shots you don't take - Wayne Gretzky\n— Michael Scott")
+            ParagraphContent(text: "Paragraph that is much longer so it will wrap to multiple lines"),
+            TodoContent(text: "Todo"),
+            ParagraphContent(text: "Another paragraph"),
+            TodoContent(text: "Completed todo that is also much longer so we can test how it wraps", completed: true),
+            ParagraphContent(text: "Final paragraph"),
+            QuoteContent(text: "You miss 100% of the shots you don't take - Wayne Gretzky\n— Michael Scott")
         ]
         
         return Document(

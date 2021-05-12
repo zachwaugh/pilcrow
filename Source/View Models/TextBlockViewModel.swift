@@ -1,13 +1,24 @@
 import UIKit
 
 struct TextBlockViewModel {
-    let content: TextBlock
+    let content: TextBlockContent
+    let style: TextStyle
     
     var text: String {
         content.text
     }
     
     var textFont: UIFont {
-        content.style.font
+        style.font
+    }
+}
+
+extension TextBlockViewModel {
+    init(content: ParagraphContent) {
+        self.init(content: content, style: .paragraph)
+    }
+    
+    init(content: HeadingContent) {
+        self.init(content: content, style: .heading)
     }
 }

@@ -4,59 +4,97 @@ enum BlockDecodingError: Error {
     case invalidData
 }
 
+// TODO: there is a lot of redundancy here we should be able to refactor out
+// but for now it's simplest to keep everything 1:1 while I figure out how I want it all to work
 enum Block: Hashable {
-    case text(TextBlock)
-    case todo(TodoBlock)
-    case listItem(ListItemBlock)
-    case quote(QuoteBlock)
+    case heading(HeadingContent)
+    case paragraph(ParagraphContent)
+    case quote(QuoteContent)
+    
+    case todo(TodoContent)
+    
+    case bulletedListItem(BulletedListItemContent)
+    case numberedListItem(NumberedListItemContent)
     
     var content: BlockContent {
         switch self {
-        case .text(let content):
+        case .heading(let content):
             return content
-        case .todo(let content):
-            return content
-        case .listItem(let content):
+        case .paragraph(let content):
             return content
         case .quote(let content):
             return content
+        case .todo(let content):
+            return content
+        case .bulletedListItem(let content):
+            return content
+        case .numberedListItem(let content):
+            return content
+        }
+    }
+    
+    var kind: Kind {
+        switch self {
+        case .heading(_):
+            return .heading
+        case .paragraph(_):
+            return .paragraph
+        case .todo(_):
+            return .todo
+        case .bulletedListItem(_):
+            return .bulletedListItem
+        case .numberedListItem(_):
+            return .numberedListItem
+        case .quote(_):
+            return .quote
         }
     }
 }
 
-extension Block: Codable {
-    private enum CodingKeys: CodingKey {
-        case text, todo, listItem, quote
+extension Block {
+    enum Kind: CaseIterable, CodingKey {
+        case heading, paragraph, quote
+        case todo, bulletedListItem, numberedListItem
     }
-    
+}
+
+extension Block: Codable {
     init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        
-        if let content = try container.decodeIfPresent(TextBlock.self, forKey: .text) {
-            self = .text(content)
-        } else if let content = try container.decodeIfPresent(TodoBlock.self, forKey: .todo) {
-            self = .todo(content)
-        } else if let content = try container.decodeIfPresent(ListItemBlock.self, forKey: .listItem) {
-            self = .listItem(content)
-        } else if let content = try container.decodeIfPresent(QuoteBlock.self, forKey: .quote) {
+        let container = try decoder.container(keyedBy: Block.Kind.self)
+                
+        if let content = try container.decodeIfPresent(ParagraphContent.self, forKey: .paragraph) {
+            self = .paragraph(content)
+        } else if let content = try container.decodeIfPresent(HeadingContent.self, forKey: .heading) {
+            self = .heading(content)
+        } else if let content = try container.decodeIfPresent(QuoteContent.self, forKey: .quote) {
             self = .quote(content)
+        } else if let content = try container.decodeIfPresent(TodoContent.self, forKey: .todo) {
+            self = .todo(content)
+        } else if let content = try container.decodeIfPresent(BulletedListItemContent.self, forKey: .bulletedListItem) {
+            self = .bulletedListItem(content)
+        } else if let content = try container.decodeIfPresent(NumberedListItemContent.self, forKey: .numberedListItem) {
+            self = .numberedListItem(content)
         } else {
             throw BlockDecodingError.invalidData
         }
     }
     
     func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        
+        var container = encoder.container(keyedBy: Block.Kind.self)
+                
         switch self {
-        case .text(let content):
-            try container.encode(content, forKey: .text)
-        case .todo(let content):
-            try container.encode(content, forKey: .todo)
-        case .listItem(let content):
-            try container.encode(content, forKey: .listItem)
+        case .heading(let content):
+            try container.encode(content, forKey: kind)
+        case .paragraph(let content):
+            try container.encode(content, forKey: kind)
         case .quote(let content):
-            try container.encode(content, forKey: .quote)
+            try container.encode(content, forKey: kind)
+        case .todo(let content):
+            try container.encode(content, forKey: kind)
+        case .bulletedListItem(let content):
+            try container.encode(content, forKey: kind)
+        case .numberedListItem(let content):
+            try container.encode(content, forKey: kind)
         }
     }
 }

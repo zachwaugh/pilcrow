@@ -1,7 +1,7 @@
 import UIKit
 
 struct QuoteBlockViewModel {
-    let content: QuoteBlock
+    let content: QuoteContent
     
     var text: String {
         content.text

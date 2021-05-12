@@ -1,6 +1,6 @@
 import Foundation
 
-struct TodoBlock: Hashable, Identifiable, TextBlockContent {
+struct TodoContent: Hashable, Identifiable, TextBlockContent {
     let id: String
     var text: String
     var completed: Bool
@@ -19,7 +19,7 @@ struct TodoBlock: Hashable, Identifiable, TextBlockContent {
         .todo(self)
     }
     
-    func empty() -> TodoBlock {
-        TodoBlock()
+    func empty() -> TodoContent {
+        TodoContent()
     }
 }

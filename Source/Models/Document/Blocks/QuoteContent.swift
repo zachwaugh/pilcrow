@@ -1,6 +1,6 @@
 import Foundation
 
-struct QuoteBlock: Hashable, Identifiable, Codable, TextBlockContent {
+struct QuoteContent: Hashable, Identifiable, Codable, TextBlockContent {
     let id: String
     var text: String
     
@@ -13,7 +13,8 @@ struct QuoteBlock: Hashable, Identifiable, Codable, TextBlockContent {
         .quote(self)
     }
     
-    func empty() -> QuoteBlock {
-        QuoteBlock()
+    func empty() -> QuoteContent {
+        QuoteContent()
     }
 }
+

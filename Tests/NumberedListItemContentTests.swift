@@ -1,9 +1,9 @@
 import XCTest
-@testable import Taper
+@testable import Pilcrow
 
-class ListItemBlockTests: XCTestCase {
+class NumberedListItemContentTests: XCTestCase {
     func testNextForNumberedListIncreasesItemNumber() {
-        let item = ListItemBlock(text: "item", number: 123, style: .numbered)
+        let item = NumberedListItemContent(text: "item", number: 123)
         let next = item.next()
         
         XCTAssertEqual(next.number, 124)

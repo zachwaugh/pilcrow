@@ -1,11 +1,6 @@
 import UIKit
 
-enum BlockKind: CaseIterable {
-    case heading, paragraph
-    case todo
-    case bulletedListItem, numberedListItem
-    case quote
-    
+extension Block.Kind {
     var title: String {
         switch self {
         case .heading:
@@ -42,15 +37,11 @@ enum BlockKind: CaseIterable {
     
     var cellClass: UICollectionViewCell.Type {
         switch self {
-        case .heading:
-            return TextBlockCellView.self
-        case .paragraph:
+        case .heading, .paragraph:
             return TextBlockCellView.self
         case .todo:
             return TodoBlockCellView.self
-        case .bulletedListItem:
-            return ListItemBlockCellView.self
-        case .numberedListItem:
+        case .bulletedListItem, .numberedListItem:
             return ListItemBlockCellView.self
         case .quote:
             return QuoteBlockCellView.self

@@ -26,7 +26,7 @@ final class DocumentEditor {
     }
     
     func toggleCompletion(for block: Block) -> EditResult? {
-        guard var content = block.content as? TodoBlock else { return nil }
+        guard var content = block.content as? TodoContent else { return nil }
         
         content.toggleCompletion()
         updateBlockContent(block, content: content)
@@ -50,7 +50,7 @@ final class DocumentEditor {
         if let block = document.blocks.last {
             return appendBlock(block.content.empty().asBlock())
         } else {
-            return appendBlock(TextBlock().asBlock())
+            return appendBlock(ParagraphContent().asBlock())
         }
     }
     

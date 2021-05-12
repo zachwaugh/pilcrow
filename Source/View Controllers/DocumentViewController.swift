@@ -31,7 +31,7 @@ final class DocumentViewController: UIViewController {
     private func configureNavigationBar() {
         navigationItem.backButtonDisplayMode = .minimal
         
-        let addActions = BlockKind.allCases.map { kind in
+        let addActions = Block.Kind.allCases.map { kind in
             UIAction(title: kind.title, image: kind.image, handler: { [weak self] _ in
                 self?.makeAndInsertNewBlock(for: kind)
             })
@@ -96,7 +96,7 @@ final class DocumentViewController: UIViewController {
     
     // MARK: - Blocks
     
-    private func makeAndInsertNewBlock(for kind: BlockKind) {
+    private func makeAndInsertNewBlock(for kind: Block.Kind) {
         let newBlock = makeBlock(for: kind)
         let result: EditResult
         
@@ -115,20 +115,20 @@ final class DocumentViewController: UIViewController {
         document.blocks.last
     }
     
-    private func makeBlock(for kind: BlockKind) -> Block {
+    private func makeBlock(for kind: Block.Kind) -> Block {
         switch kind {
         case .heading:
-            return TextBlock(style: .heading).asBlock()
+            return HeadingContent().asBlock()
         case .paragraph:
-            return TextBlock(style: .paragraph).asBlock()
-        case .todo:
-            return TodoBlock().asBlock()
-        case .bulletedListItem:
-            return ListItemBlock(style: .bulleted).asBlock()
-        case .numberedListItem:
-            return ListItemBlock(style: .numbered).asBlock()
+            return ParagraphContent().asBlock()
         case .quote:
-            return QuoteBlock().asBlock()
+            return QuoteContent().asBlock()
+        case .todo:
+            return TodoContent().asBlock()
+        case .bulletedListItem:
+            return BulletedListItemContent().asBlock()
+        case .numberedListItem:
+            return NumberedListItemContent().asBlock()
         }
     }
     
@@ -141,26 +141,46 @@ final class DocumentViewController: UIViewController {
     
     private func cell(for indexPath: IndexPath, block: Block) -> UICollectionViewCell {
         switch block {
-        case .text(let content):
-            return self.textBlockCell(for: indexPath, content: content)
-        case .todo(let content):
-            return self.todoBlockCell(for: indexPath, content: content)
-        case .listItem(let content):
-            return self.listItemBlockCell(for: indexPath, content: content)
+        case .heading(let content):
+            return self.headingBlockCell(for: indexPath, content: content)
+        case .paragraph(let content):
+            return self.paragraphBlockCell(for: indexPath, content: content)
         case .quote(let content):
             return self.quoteBlockCell(for: indexPath, content: content)
+        case .todo(let content):
+            return self.todoBlockCell(for: indexPath, content: content)
+        case .bulletedListItem(let content):
+            return self.bulletedListItemBlockCell(for: indexPath, content: content)
+        case .numberedListItem(let content):
+            return self.numberedListItemBlockCell(for: indexPath, content: content)
         }
     }
     
-    private func textBlockCell(for indexPath: IndexPath, content: TextBlock) -> UICollectionViewCell {
+    private func paragraphBlockCell(for indexPath: IndexPath, content: ParagraphContent) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(TextBlockCellView.self, for: indexPath)
         let viewModel = TextBlockViewModel(content: content)
         cell.configure(with: viewModel)
         cell.delegate = self
         return cell
     }
+    
+    private func headingBlockCell(for indexPath: IndexPath, content: HeadingContent) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(TextBlockCellView.self, for: indexPath)
+        let viewModel = TextBlockViewModel(content: content)
+        cell.configure(with: viewModel)
+        cell.delegate = self
+        return cell
+    }
+    
+    private func quoteBlockCell(for indexPath: IndexPath, content: QuoteContent) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(QuoteBlockCellView.self, for: indexPath)
+        let viewModel = QuoteBlockViewModel(content: content)
+        cell.configure(with: viewModel)
+        cell.delegate = self
+        return cell
+    }
 
-    private func todoBlockCell(for indexPath: IndexPath, content: TodoBlock) -> UICollectionViewCell {
+    private func todoBlockCell(for indexPath: IndexPath, content: TodoContent) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(TodoBlockCellView.self, for: indexPath)
         let viewModel = TodoBlockViewModel(content: content)
         cell.configure(with: viewModel)
@@ -169,7 +189,7 @@ final class DocumentViewController: UIViewController {
         return cell
     }
     
-    private func listItemBlockCell(for indexPath: IndexPath, content: ListItemBlock) -> UICollectionViewCell {
+    private func bulletedListItemBlockCell(for indexPath: IndexPath, content: BulletedListItemContent) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(ListItemBlockCellView.self, for: indexPath)
         let viewModel = ListItemBlockViewModel(content: content)
         cell.configure(with: viewModel)
@@ -177,9 +197,9 @@ final class DocumentViewController: UIViewController {
         return cell
     }
     
-    private func quoteBlockCell(for indexPath: IndexPath, content: QuoteBlock) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(QuoteBlockCellView.self, for: indexPath)
-        let viewModel = QuoteBlockViewModel(content: content)
+    private func numberedListItemBlockCell(for indexPath: IndexPath, content: NumberedListItemContent) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(ListItemBlockCellView.self, for: indexPath)
+        let viewModel = ListItemBlockViewModel(content: content)
         cell.configure(with: viewModel)
         cell.delegate = self
         return cell
@@ -248,7 +268,7 @@ final class DocumentViewController: UIViewController {
     }
     
     private func configureCollectionView() {
-        BlockKind.allCases.forEach {
+        Block.Kind.allCases.forEach {
             collectionView.registerReusableCell($0.cellClass)
         }
     }

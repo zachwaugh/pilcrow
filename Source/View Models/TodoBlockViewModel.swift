@@ -1,7 +1,7 @@
 import UIKit
 
 struct TodoBlockViewModel {
-    let content: TodoBlock
+    let content: TodoContent
     
     var attributedText: NSAttributedString {
         NSAttributedString(string: content.text, attributes: content.completed ? completedTextAttributes : defaultTextAttributes)
