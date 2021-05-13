@@ -10,6 +10,10 @@ class BaseTextCellView: UICollectionViewCell, FocusableView {
     func focus() {
         textView.becomeFirstResponder()
     }
+    
+    var hasFocus: Bool {
+        textView.isFirstResponder
+    }
 
     // MARK: - Views
     

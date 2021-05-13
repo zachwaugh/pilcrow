@@ -107,8 +107,8 @@ final class DocumentViewController: UIViewController {
         let newBlock = makeBlock(for: kind)
         let result: EditResult
         
-        if let activeBlock = findActiveBlock() {
-            result = editor.insertBlock(newBlock, after: activeBlock)
+        if let block = editingBlock {
+            result = editor.insertBlock(newBlock, after: block)
         } else {
             result = editor.appendBlock(newBlock)
         }
@@ -116,10 +116,23 @@ final class DocumentViewController: UIViewController {
         applyEditResult(result)
     }
     
-    /// Return the block that has focus, or nil if none
-    private func findActiveBlock() -> Block? {
-        // TODO: find actual block, for now we'll return last
-        document.blocks.last
+    /// Find the cell currently being edited if any
+    private var editingCell: UICollectionViewCell? {
+        for cell in collectionView.visibleCells {
+            guard let focusableView = cell as? FocusableView else { continue }
+            
+            if focusableView.hasFocus {
+                return cell
+            }
+        }
+        
+        return nil
+    }
+    
+    /// Return the block being edited, or nil if none
+    private var editingBlock: Block? {
+        let editingBlock = editingCell.map { block(for: $0) }
+        return editingBlock ?? document.blocks.last
     }
     
     private func makeBlock(for kind: Block.Kind) -> Block {
@@ -307,6 +320,7 @@ final class DocumentViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .systemBackground
         view.delegate = self
+        
         return view
     }()
     
