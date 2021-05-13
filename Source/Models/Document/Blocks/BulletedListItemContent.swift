@@ -2,7 +2,7 @@ import Foundation
 
 struct BulletedListItemContent: Hashable, Identifiable, TextBlockContent {
     let id: String
-    var text: String = ""
+    var text: String
     
     init(text: String = "") {
         self.id = UUID().uuidString

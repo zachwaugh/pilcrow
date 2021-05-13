@@ -2,9 +2,8 @@ import Foundation
 
 struct NumberedListItemContent: Hashable, Identifiable, TextBlockContent {
     let id: String
-    
-    var text: String = ""
-    var number: Int = 1
+    var text: String
+    var number: Int
     
     init(text: String = "", number: Int = 1) {
         self.id = UUID().uuidString
@@ -24,4 +23,3 @@ struct NumberedListItemContent: Hashable, Identifiable, TextBlockContent {
         NumberedListItemContent(number: number + 1)
     }
 }
-
