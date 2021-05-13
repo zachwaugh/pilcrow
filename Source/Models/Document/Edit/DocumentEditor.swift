@@ -77,7 +77,8 @@ final class DocumentEditor {
     
     // MARK: - Deletions
     
-    private func deleteBlock(_ block: Block) -> EditResult {
+    @discardableResult
+    func deleteBlock(_ block: Block) -> EditResult {
         guard let index = index(of: block) else {
             fatalError("Block not found in document! \(block)")
         }

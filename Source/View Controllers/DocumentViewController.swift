@@ -72,6 +72,13 @@ final class DocumentViewController: UIViewController {
         dataSource.apply(snapshot, animatingDifferences: animated)
     }
     
+    // MARK: - Editing
+    
+    private func applyEdit(_ edit: TextEdit, to block: Block) {
+        let result = editor.apply(edit: edit, to: block)
+        applyEditResult(result)
+    }
+    
     private func applyEditResult(_ result: EditResult?) {
         guard let result = result else { return }
         
@@ -93,7 +100,7 @@ final class DocumentViewController: UIViewController {
         
         save()
     }
-    
+        
     // MARK: - Blocks
     
     private func makeAndInsertNewBlock(for kind: Block.Kind) {
@@ -130,6 +137,17 @@ final class DocumentViewController: UIViewController {
         case .numberedListItem:
             return NumberedListItemContent().asBlock()
         }
+    }
+    
+    private func deleteBlock(at indexPath: IndexPath) {
+       let block = document.blocks[indexPath.row]
+        deleteBlock(block)
+    }
+    
+    private func deleteBlock(_ block: Block) {
+        editor.deleteBlock(block)
+        updateDataSource()
+        save()
     }
     
     // MARK: - Cells
@@ -297,6 +315,15 @@ final class DocumentViewController: UIViewController {
 }
 
 extension DocumentViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        UIContextMenuConfiguration(identifier: nil, previewProvider: nil, actionProvider: { actions in
+            UIMenu(children: [
+                UIAction(title: "Delete", attributes: [.destructive], handler: { [weak self] _ in
+                    self?.deleteBlock(at: indexPath)
+                })
+            ])
+        })
+    }
 }
 
 extension DocumentViewController: TodoCellDelegate {
@@ -312,7 +339,6 @@ extension DocumentViewController: TextCellDelegate {
     func textCellDidEdit(cell: UICollectionViewCell, edit: TextEdit) {
         guard let block = block(for: cell) else { return }
         
-        let result = editor.apply(edit: edit, to: block)
-        applyEditResult(result)
+        applyEdit(edit, to: block)
     }
 }
