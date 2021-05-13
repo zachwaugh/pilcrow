@@ -16,6 +16,8 @@ enum Block: Hashable {
     case bulletedListItem(BulletedListItemContent)
     case numberedListItem(NumberedListItemContent)
     
+    case divider(DividerContent)
+    
     var content: BlockContent {
         switch self {
         case .heading(let content):
@@ -29,6 +31,8 @@ enum Block: Hashable {
         case .bulletedListItem(let content):
             return content
         case .numberedListItem(let content):
+            return content
+        case .divider(let content):
             return content
         }
     }
@@ -47,6 +51,8 @@ enum Block: Hashable {
             return .numberedListItem
         case .quote(_):
             return .quote
+        case .divider(_):
+            return .divider
         }
     }
 }
@@ -55,6 +61,7 @@ extension Block {
     enum Kind: CaseIterable, CodingKey {
         case heading, paragraph, quote
         case todo, bulletedListItem, numberedListItem
+        case divider
     }
 }
 
@@ -74,6 +81,8 @@ extension Block: Codable {
             self = .bulletedListItem(content)
         } else if let content = try container.decodeIfPresent(NumberedListItemContent.self, forKey: .numberedListItem) {
             self = .numberedListItem(content)
+        } else if let content = try container.decodeIfPresent(DividerContent.self, forKey: .divider) {
+            self = .divider(content)
         } else {
             throw BlockDecodingError.invalidData
         }
@@ -94,6 +103,8 @@ extension Block: Codable {
         case .bulletedListItem(let content):
             try container.encode(content, forKey: kind)
         case .numberedListItem(let content):
+            try container.encode(content, forKey: kind)
+        case .divider(let content):
             try container.encode(content, forKey: kind)
         }
     }

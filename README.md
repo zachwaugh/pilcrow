@@ -19,7 +19,7 @@ The core of the app is a `Document` composed of an array of `Block`s. Each `Bloc
 - [x] Bulleted list item
 - [x] Numbered listed item
 - [x] Blockquote
-- [ ] Divider
+- [x] Divider
 - [ ] Image
 - [ ] Attachment
 

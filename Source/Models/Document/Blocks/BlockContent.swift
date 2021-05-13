@@ -9,6 +9,10 @@ protocol BlockContent: Codable {
 }
 
 extension BlockContent {
+    var isEmpty: Bool {
+        true
+    }
+    
     func next() -> Self {
         empty()
     }

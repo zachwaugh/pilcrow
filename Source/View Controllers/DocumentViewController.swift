@@ -136,6 +136,8 @@ final class DocumentViewController: UIViewController {
             return BulletedListItemContent().asBlock()
         case .numberedListItem:
             return NumberedListItemContent().asBlock()
+        case .divider:
+            return DividerContent().asBlock()
         }
     }
     
@@ -146,7 +148,7 @@ final class DocumentViewController: UIViewController {
     
     private func deleteBlock(_ block: Block) {
         editor.deleteBlock(block)
-        updateDataSource()
+        updateDataSource(animated: true)
         save()
     }
     
@@ -171,6 +173,8 @@ final class DocumentViewController: UIViewController {
             return self.bulletedListItemBlockCell(for: indexPath, content: content)
         case .numberedListItem(let content):
             return self.numberedListItemBlockCell(for: indexPath, content: content)
+        case .divider(let content):
+            return self.dividerBlockCell(for: indexPath, content: content)
         }
     }
     
@@ -220,6 +224,13 @@ final class DocumentViewController: UIViewController {
         let viewModel = ListItemBlockViewModel(content: content)
         cell.configure(with: viewModel)
         cell.delegate = self
+        return cell
+    }
+    
+    private func dividerBlockCell(for indexPath: IndexPath, content: DividerContent) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(DividerBlockCellView.self, for: indexPath)
+        let viewModel = DividerBlockViewModel(content: content)
+        cell.configure(with: viewModel)
         return cell
     }
     

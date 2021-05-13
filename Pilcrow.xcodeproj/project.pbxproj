@@ -37,6 +37,9 @@
 		92973AAE2645B9B200B836B5 /* BlockKindExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92973AAD2645B9B200B836B5 /* BlockKindExtensions.swift */; };
 		92973AB12645BAB300B836B5 /* ReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92973AB02645BAB300B836B5 /* ReusableCell.swift */; };
 		92973AB42645E3B500B836B5 /* DocumentEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92973AB32645E3B500B836B5 /* DocumentEditor.swift */; };
+		92B1755F264D77020016C279 /* DividerContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B1755E264D77020016C279 /* DividerContent.swift */; };
+		92B17561264D77D10016C279 /* DividerBlockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B17560264D77D10016C279 /* DividerBlockViewModel.swift */; };
+		92B17563264D77F60016C279 /* DividerBlockCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B17562264D77F60016C279 /* DividerBlockCellView.swift */; };
 		92C581172644472800E062A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C581162644472800E062A0 /* AppDelegate.swift */; };
 		92C581192644472800E062A0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C581182644472800E062A0 /* SceneDelegate.swift */; };
 		92C5811B2644472800E062A0 /* DocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C5811A2644472800E062A0 /* DocumentViewController.swift */; };
@@ -87,6 +90,9 @@
 		92973AAD2645B9B200B836B5 /* BlockKindExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockKindExtensions.swift; sourceTree = "<group>"; };
 		92973AB02645BAB300B836B5 /* ReusableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableCell.swift; sourceTree = "<group>"; };
 		92973AB32645E3B500B836B5 /* DocumentEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentEditor.swift; sourceTree = "<group>"; };
+		92B1755E264D77020016C279 /* DividerContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerContent.swift; sourceTree = "<group>"; };
+		92B17560264D77D10016C279 /* DividerBlockViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerBlockViewModel.swift; sourceTree = "<group>"; };
+		92B17562264D77F60016C279 /* DividerBlockCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerBlockCellView.swift; sourceTree = "<group>"; };
 		92C581132644472800E062A0 /* Pilcrow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pilcrow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92C581162644472800E062A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92C581182644472800E062A0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -124,6 +130,7 @@
 				922590DB26471D0F000113B3 /* ListItemBlockViewModel.swift */,
 				922590DD26471DC1000113B3 /* TodoBlockViewModel.swift */,
 				924A7C7D2649D2A7003C5073 /* QuoteBlockViewModel.swift */,
+				92B17560264D77D10016C279 /* DividerBlockViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -212,6 +219,7 @@
 				92973AA32645B1CA00B836B5 /* TodoContent.swift */,
 				92973AA72645B1EB00B836B5 /* BulletedListItemContent.swift */,
 				9225FA83264B56F400B84D87 /* NumberedListItemContent.swift */,
+				92B1755E264D77020016C279 /* DividerContent.swift */,
 			);
 			path = Blocks;
 			sourceTree = "<group>";
@@ -224,6 +232,7 @@
 				928EF89C26444F1D00437680 /* TodoBlockCellView.swift */,
 				92973A96264589FE00B836B5 /* ListItemBlockCellView.swift */,
 				924A7C7B2649D259003C5073 /* QuoteBlockCellView.swift */,
+				92B17562264D77F60016C279 /* DividerBlockCellView.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -399,6 +408,7 @@
 				928EF89B26444E7E00437680 /* BaseTextCellView.swift in Sources */,
 				922590DE26471DC1000113B3 /* TodoBlockViewModel.swift in Sources */,
 				922590DC26471D0F000113B3 /* ListItemBlockViewModel.swift in Sources */,
+				92B17563264D77F60016C279 /* DividerBlockCellView.swift in Sources */,
 				9225FA82264B56EB00B84D87 /* QuoteContent.swift in Sources */,
 				92973AAE2645B9B200B836B5 /* BlockKindExtensions.swift in Sources */,
 				92973AAC2645B32D00B836B5 /* DocumentsViewController.swift in Sources */,
@@ -410,6 +420,7 @@
 				92973A9A26458D4A00B836B5 /* TextEdit.swift in Sources */,
 				9225FA80264B56E200B84D87 /* HeadingContent.swift in Sources */,
 				92C581172644472800E062A0 /* AppDelegate.swift in Sources */,
+				92B1755F264D77020016C279 /* DividerContent.swift in Sources */,
 				92973AAA2645B20300B836B5 /* ListItemStyle.swift in Sources */,
 				92973A9D26458E4200B836B5 /* FocusableView.swift in Sources */,
 				922590D726471C2A000113B3 /* BlockContent.swift in Sources */,
@@ -417,6 +428,7 @@
 				92973AB12645BAB300B836B5 /* ReusableCell.swift in Sources */,
 				92973AB42645E3B500B836B5 /* DocumentEditor.swift in Sources */,
 				928EF8A02644610400437680 /* Block.swift in Sources */,
+				92B17561264D77D10016C279 /* DividerBlockViewModel.swift in Sources */,
 				924A7C7E2649D2A7003C5073 /* QuoteBlockViewModel.swift in Sources */,
 				92C581192644472800E062A0 /* SceneDelegate.swift in Sources */,
 				92973A97264589FE00B836B5 /* ListItemBlockCellView.swift in Sources */,

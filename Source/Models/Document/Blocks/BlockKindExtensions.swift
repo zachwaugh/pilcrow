@@ -15,6 +15,8 @@ extension Block.Kind {
             return "Numbered List"
         case .quote:
             return "Quote"
+        case .divider:
+            return "Divider"
         }
     }
     
@@ -32,6 +34,8 @@ extension Block.Kind {
             return UIImage(systemName: "list.number")
         case .quote:
             return UIImage(systemName: "text.quote")
+        case .divider:
+            return UIImage(systemName: "divide")
         }
     }
     
@@ -45,6 +49,8 @@ extension Block.Kind {
             return ListItemBlockCellView.self
         case .quote:
             return QuoteBlockCellView.self
+        case .divider:
+            return DividerBlockCellView.self
         }
     }
 }

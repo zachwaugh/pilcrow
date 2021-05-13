@@ -22,7 +22,7 @@ extension Document {
             ParagraphContent(text: "Paragraph"),
             BulletedListItemContent(text: "Bullet list item"),
             NumberedListItemContent(text: "Ordered list item"),
-            
+            DividerContent(),
             ParagraphContent(text: "Paragraph that is much longer so it will wrap to multiple lines"),
             TodoContent(text: "Todo"),
             ParagraphContent(text: "Another paragraph"),
