@@ -13,23 +13,23 @@ final class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDo
     // MARK: UIDocumentBrowserViewControllerDelegate
     
     func documentBrowser(_ controller: UIDocumentBrowserViewController, didRequestDocumentCreationWithHandler importHandler: @escaping (URL?, UIDocumentBrowserViewController.ImportMode) -> Void) {
-        let document = PersistentDocument()
+        let file = DocumentFile()
         
-        document.save(to: document.fileURL, for: .forCreating) { success in
+        file.save(to: file.fileURL, for: .forCreating) { success in
             guard success else {
                 print("*** Error: creating new document")
                 importHandler(nil, .none)
                 return
             }
             
-            document.close { success in
+            file.close { success in
                 guard success else {
                     print("*** Error: closing newly created document")
                     importHandler(nil, .none)
                     return
                 }
                 
-                importHandler(document.fileURL, .move)
+                importHandler(file.fileURL, .move)
             }
         }
     }
@@ -51,7 +51,7 @@ final class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDo
     // MARK: Document Editing
     
     func editDocument(at documentURL: URL) {
-        let editor = DocumentViewController(persistentDocument: PersistentDocument(fileURL: documentURL))
+        let editor = DocumentViewController(file: DocumentFile(fileURL: documentURL))
 
         #if targetEnvironment(macCatalyst)
             present(editor, animated: true)

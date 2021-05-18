@@ -40,7 +40,7 @@
 		92B17563264D77F60016C279 /* DividerBlockCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B17562264D77F60016C279 /* DividerBlockCellView.swift */; };
 		92C2262A265421A200FB5D97 /* DocumentEditorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C22629265421A200FB5D97 /* DocumentEditorTests.swift */; };
 		92C2264E26542E8C00FB5D97 /* DocumentBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C2264D26542E8C00FB5D97 /* DocumentBrowserViewController.swift */; };
-		92C22651265431C200FB5D97 /* PersistentDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C22650265431C200FB5D97 /* PersistentDocument.swift */; };
+		92C22651265431C200FB5D97 /* DocumentFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C22650265431C200FB5D97 /* DocumentFile.swift */; };
 		92C581172644472800E062A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C581162644472800E062A0 /* AppDelegate.swift */; };
 		92C581192644472800E062A0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C581182644472800E062A0 /* SceneDelegate.swift */; };
 		92C5811B2644472800E062A0 /* DocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C5811A2644472800E062A0 /* DocumentViewController.swift */; };
@@ -94,7 +94,7 @@
 		92B17562264D77F60016C279 /* DividerBlockCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerBlockCellView.swift; sourceTree = "<group>"; };
 		92C22629265421A200FB5D97 /* DocumentEditorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentEditorTests.swift; sourceTree = "<group>"; };
 		92C2264D26542E8C00FB5D97 /* DocumentBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentBrowserViewController.swift; sourceTree = "<group>"; };
-		92C22650265431C200FB5D97 /* PersistentDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentDocument.swift; sourceTree = "<group>"; };
+		92C22650265431C200FB5D97 /* DocumentFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentFile.swift; sourceTree = "<group>"; };
 		92C581132644472800E062A0 /* Pilcrow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pilcrow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92C581162644472800E062A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92C581182644472800E062A0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -233,7 +233,7 @@
 		92C2264F265431B300FB5D97 /* UIDocument */ = {
 			isa = PBXGroup;
 			children = (
-				92C22650265431C200FB5D97 /* PersistentDocument.swift */,
+				92C22650265431C200FB5D97 /* DocumentFile.swift */,
 			);
 			path = UIDocument;
 			sourceTree = "<group>";
@@ -419,7 +419,7 @@
 				928EF89726444AF000437680 /* Document.swift in Sources */,
 				924A7C7A2649C7AC003C5073 /* Metrics.swift in Sources */,
 				92C5811B2644472800E062A0 /* DocumentViewController.swift in Sources */,
-				92C22651265431C200FB5D97 /* PersistentDocument.swift in Sources */,
+				92C22651265431C200FB5D97 /* DocumentFile.swift in Sources */,
 				92973A9A26458D4A00B836B5 /* TextEdit.swift in Sources */,
 				9225FA80264B56E200B84D87 /* HeadingContent.swift in Sources */,
 				92C581172644472800E062A0 /* AppDelegate.swift in Sources */,

@@ -5,7 +5,7 @@ enum DocumentError: Error {
     case invalidArchive
 }
 
-final class PersistentDocument: UIDocument {
+final class DocumentFile: UIDocument {
     static let fileExtension = "pilcrow"
 
     var document: Document?

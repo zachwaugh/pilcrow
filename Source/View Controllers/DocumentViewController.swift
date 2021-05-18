@@ -5,12 +5,12 @@ final class DocumentViewController: UIViewController {
         case main
     }
     
-    private var persistentDocument: PersistentDocument
+    private var file: DocumentFile
     private var editor: DocumentEditor!
     private var document: Document { editor.document }
     
-    init(persistentDocument: PersistentDocument) {
-        self.persistentDocument = persistentDocument
+    init(file: DocumentFile) {
+        self.file = file
         super.init(nibName: nil, bundle: nil)
         setup()
     }
@@ -28,7 +28,9 @@ final class DocumentViewController: UIViewController {
     }
     
     private func loadFile() {
-        persistentDocument.open { [weak self] success in
+        file.open { [weak self] success in
+            print("File opened, success? \(success)")
+
             if success {
                 self?.documentOpenedSuccessfully()
             } else {
@@ -38,10 +40,10 @@ final class DocumentViewController: UIViewController {
     }
     
     private func documentOpenedSuccessfully() {
-        guard let document = persistentDocument.document else { return }
+        guard let document = file.document else { return }
         
         editor = DocumentEditor(document: document)
-        title = persistentDocument.name
+        title = file.name
         configureDataSource()
     }
     
@@ -68,15 +70,16 @@ final class DocumentViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "ellipsis"), menu: menu)
     }
     
-    // MARK: - Document
+    // MARK: - File
     
     private func documentEdited() {
-        persistentDocument.document = document
-        persistentDocument.updateChangeCount(.done)
+        file.document = document
+        file.updateChangeCount(.done)
     }
     
     @objc private func closeDocument() {
-        persistentDocument.close { [weak self] success in
+        file.close { [weak self] success in
+            print("File closed, success? \(success)")
             if success {
                 self?.dismiss(animated: true)
             } else {
