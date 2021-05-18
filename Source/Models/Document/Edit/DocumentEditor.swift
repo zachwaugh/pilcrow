@@ -67,7 +67,7 @@ final class DocumentEditor {
         if let block = document.blocks.last {
             return appendBlock(block.content.empty().asBlock())
         } else {
-            return appendBlock(ParagraphContent().asBlock())
+            return appendBlock(HeadingContent().asBlock())
         }
     }
     
