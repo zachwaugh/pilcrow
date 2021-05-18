@@ -43,8 +43,12 @@ final class DocumentViewController: UIViewController {
     
     // MARK: - Document
     
-    private func save() {
+    private func scheduleSave() {
         // TODO: throttle/debounce saves
+        save()
+    }
+    
+    private func save() {
         do {
             try DocumentStore.shared.saveDocument(document)
         } catch {
@@ -169,6 +173,11 @@ final class DocumentViewController: UIViewController {
     
     private func block(for cell: UICollectionViewCell) -> Block? {
         guard let indexPath = collectionView.indexPath(for: cell) else { return nil }
+        return block(at: indexPath)
+    }
+    
+    private func block(at indexPath: IndexPath) -> Block? {
+        guard indexPath.row >= 0, indexPath.row < document.blocks.count else { return nil }
         return document.blocks[indexPath.row]
     }
     
@@ -320,6 +329,9 @@ final class DocumentViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .systemBackground
         view.delegate = self
+        view.dragDelegate = self
+        view.dropDelegate = self
+        view.dragInteractionEnabled = true
         
         return view
     }()
@@ -339,17 +351,7 @@ final class DocumentViewController: UIViewController {
     }
 }
 
-extension DocumentViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
-        UIContextMenuConfiguration(identifier: nil, previewProvider: nil, actionProvider: { actions in
-            UIMenu(children: [
-                UIAction(title: "Delete", attributes: [.destructive], handler: { [weak self] _ in
-                    self?.deleteBlock(at: indexPath)
-                })
-            ])
-        })
-    }
-}
+extension DocumentViewController: UICollectionViewDelegate {}
 
 extension DocumentViewController: TodoCellDelegate {
     func todoCellDidToggleCheckBox(cell: TodoBlockCellView) {
@@ -365,5 +367,42 @@ extension DocumentViewController: TextCellDelegate {
         guard let block = block(for: cell) else { return }
         
         applyEdit(edit, to: block)
+    }
+}
+
+extension DocumentViewController: UICollectionViewDragDelegate {
+    func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        // Use empty NSItemProvider since we'll rely on the sourceIndexPath when dropping to access block
+        [UIDragItem(itemProvider: NSItemProvider())]
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, dragSessionIsRestrictedToDraggingApplication session: UIDragSession) -> Bool {
+        true
+    }
+}
+
+extension DocumentViewController: UICollectionViewDropDelegate {
+    func collectionView(_ collectionView: UICollectionView, canHandle session: UIDropSession) -> Bool {
+        session.localDragSession != nil
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
+        UICollectionViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
+        guard let item = coordinator.items.first,
+              let sourceIndexPath = item.sourceIndexPath,
+              let block = block(at: sourceIndexPath),
+              let destinationIndexPath = coordinator.destinationIndexPath
+        else {
+            return
+        }
+        
+        editor.moveBlock(block, to: destinationIndexPath.row)
+        updateDataSource()
+        save()
+        
+        coordinator.drop(item.dragItem, toItemAt: destinationIndexPath)
     }
 }

@@ -25,6 +25,14 @@ final class DocumentEditor {
         }
     }
     
+    func moveBlock(_ block: Block, to row: Int) {
+        guard let sourceRow = index(of: block) else { return }
+        
+        let destinationRow = min(row, document.blocks.count - 1)
+        let block = document.blocks.remove(at: sourceRow)
+        document.blocks.insert(block, at: destinationRow)
+    }
+
     func toggleCompletion(for block: Block) -> EditResult? {
         guard var content = block.content as? TodoContent else { return nil }
         

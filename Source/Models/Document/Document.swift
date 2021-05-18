@@ -3,15 +3,8 @@ import Foundation
 struct Document: Codable, Equatable {
     static let fileExtension = "pilcrow"
     
-    let id: String
-    var name: String
-    var blocks: [Block]
-    
-    init(name: String = "Untitled", blocks: [Block] = []) {
-        self.id = UUID().uuidString
-        self.name = name
-        self.blocks = blocks
-    }
+    var name: String = "Untitled"
+    var blocks: [Block] = []
 }
 
 extension Document {

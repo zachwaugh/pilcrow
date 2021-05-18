@@ -40,6 +40,7 @@
 		92B1755F264D77020016C279 /* DividerContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B1755E264D77020016C279 /* DividerContent.swift */; };
 		92B17561264D77D10016C279 /* DividerBlockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B17560264D77D10016C279 /* DividerBlockViewModel.swift */; };
 		92B17563264D77F60016C279 /* DividerBlockCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B17562264D77F60016C279 /* DividerBlockCellView.swift */; };
+		92C2262A265421A200FB5D97 /* DocumentEditorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C22629265421A200FB5D97 /* DocumentEditorTests.swift */; };
 		92C581172644472800E062A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C581162644472800E062A0 /* AppDelegate.swift */; };
 		92C581192644472800E062A0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C581182644472800E062A0 /* SceneDelegate.swift */; };
 		92C5811B2644472800E062A0 /* DocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C5811A2644472800E062A0 /* DocumentViewController.swift */; };
@@ -93,6 +94,7 @@
 		92B1755E264D77020016C279 /* DividerContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerContent.swift; sourceTree = "<group>"; };
 		92B17560264D77D10016C279 /* DividerBlockViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerBlockViewModel.swift; sourceTree = "<group>"; };
 		92B17562264D77F60016C279 /* DividerBlockCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerBlockCellView.swift; sourceTree = "<group>"; };
+		92C22629265421A200FB5D97 /* DocumentEditorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentEditorTests.swift; sourceTree = "<group>"; };
 		92C581132644472800E062A0 /* Pilcrow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pilcrow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92C581162644472800E062A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92C581182644472800E062A0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -279,6 +281,7 @@
 				922590D4264718A5000113B3 /* DocumentTests.swift */,
 				922590D826471C8D000113B3 /* NumberedListItemContentTests.swift */,
 				92C5812F2644472900E062A0 /* Info.plist */,
+				92C22629265421A200FB5D97 /* DocumentEditorTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -445,6 +448,7 @@
 			files = (
 				922590D926471C8D000113B3 /* NumberedListItemContentTests.swift in Sources */,
 				922590D5264718A5000113B3 /* DocumentTests.swift in Sources */,
+				92C2262A265421A200FB5D97 /* DocumentEditorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
