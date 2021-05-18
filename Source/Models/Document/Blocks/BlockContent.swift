@@ -3,6 +3,8 @@ import Foundation
 protocol BlockContent: Codable {
     var isEmpty: Bool { get }
 
+    init()
+    
     func asBlock() -> Block
     func empty() -> Self
     func next() -> BlockContent
@@ -20,6 +22,7 @@ extension BlockContent {
 
 protocol TextBlockContent: BlockContent {
     var text: String { get set }
+    init(text: String)
 }
 
 extension TextBlockContent {

@@ -5,7 +5,15 @@ struct NumberedListItemContent: Hashable, Identifiable, TextBlockContent {
     var text: String
     var number: Int
     
-    init(text: String = "", number: Int = 1) {
+    init() {
+        self.init(text: "")
+    }
+    
+    init(text: String) {
+        self.init(text: text, number: 1)
+    }
+    
+    init(text: String, number: Int) {
         self.id = UUID().uuidString
         self.text = text
         self.number = number
@@ -20,6 +28,6 @@ struct NumberedListItemContent: Hashable, Identifiable, TextBlockContent {
     }
     
     func next() -> NumberedListItemContent {
-        NumberedListItemContent(number: number + 1)
+        NumberedListItemContent(text: "", number: number + 1)
     }
 }

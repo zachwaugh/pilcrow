@@ -57,37 +57,6 @@ enum Block: Hashable {
     }
 }
 
-extension Block {
-    enum Kind: CaseIterable, CodingKey {
-        case heading, paragraph, quote
-        case todo, bulletedListItem, numberedListItem
-        case divider
-        
-        func makeEmptyBlockContent() -> BlockContent {
-            switch self {
-            case .heading:
-                return HeadingContent()
-            case .paragraph:
-                return ParagraphContent()
-            case .quote:
-                return QuoteContent()
-            case .todo:
-                return TodoContent()
-            case .bulletedListItem:
-                return BulletedListItemContent()
-            case .numberedListItem:
-                return NumberedListItemContent()
-            case .divider:
-                return DividerContent()
-            }
-        }
-        
-        func makeEmptyBlock() -> Block {
-            makeEmptyBlockContent().asBlock()
-        }
-    }
-}
-
 extension Block: Codable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: Block.Kind.self)

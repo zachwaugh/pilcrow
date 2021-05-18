@@ -5,7 +5,15 @@ struct TodoContent: Hashable, Identifiable, TextBlockContent {
     var text: String
     var completed: Bool
     
-    init(text: String = "", completed: Bool = false) {
+    init() {
+        self.init(text: "")
+    }
+    
+    init(text: String) {
+        self.init(text: text, completed: false)
+    }
+    
+    init(text: String, completed: Bool) {
         self.id = UUID().uuidString
         self.text = text
         self.completed = completed

@@ -85,6 +85,18 @@ final class DocumentEditor {
     
     // MARK: - Updates
     
+    func updateBlockKind(for block: Block, to kind: Block.Kind) -> EditResult? {
+        guard let index = index(of: block) else { return nil }
+        
+        if let textBlockContent = block.content as? TextBlockContent, let contentType = kind.textBlockContentType {
+            document.blocks[index] = contentType.init(text: textBlockContent.text).asBlock()
+        } else {
+            document.blocks[index] = kind.makeEmptyBlock()
+        }
+        
+        return .updated
+    }
+    
     private func updateBlockTextContent(_ text: String, block: Block) {
         guard var content = block.content as? TextBlockContent else { return }
 

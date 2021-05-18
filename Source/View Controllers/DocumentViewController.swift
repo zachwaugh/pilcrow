@@ -37,7 +37,7 @@ final class DocumentViewController: UIViewController {
         
         let addActions = Block.Kind.allCases.map { kind in
             UIAction(title: kind.title, image: kind.image, handler: { [weak self] _ in
-                self?.makeAndInsertNewBlock(for: kind)
+                self?.insertOrModifyBlock(for: kind)
             })
         }
         
@@ -152,14 +152,13 @@ final class DocumentViewController: UIViewController {
         
     // MARK: - Blocks
     
-    private func makeAndInsertNewBlock(for kind: Block.Kind) {
-        let newBlock = kind.makeEmptyBlock()
-        let result: EditResult
+    private func insertOrModifyBlock(for kind: Block.Kind) {
+        let result: EditResult?
         
         if let block = editingBlock {
-            result = editor.insertBlock(newBlock, after: block)
+            result = editor.updateBlockKind(for: block, to: kind)
         } else {
-            result = editor.appendBlock(newBlock)
+            result = editor.appendBlock(kind.makeEmptyBlock())
         }
         
         applyEditResult(result)
