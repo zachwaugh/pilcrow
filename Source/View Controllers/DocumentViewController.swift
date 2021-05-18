@@ -374,6 +374,10 @@ extension DocumentViewController: UICollectionViewDragDelegate {
         
         return [dragItem]
     }
+    
+    func collectionView(_ collectionView: UICollectionView, dragSessionIsRestrictedToDraggingApplication session: UIDragSession) -> Bool {
+        true
+    }
 }
 
 extension DocumentViewController: UICollectionViewDropDelegate {
