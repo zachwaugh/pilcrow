@@ -33,7 +33,6 @@
 		92973AA42645B1CA00B836B5 /* TodoContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92973AA32645B1CA00B836B5 /* TodoContent.swift */; };
 		92973AA82645B1EB00B836B5 /* BulletedListItemContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92973AA72645B1EB00B836B5 /* BulletedListItemContent.swift */; };
 		92973AAA2645B20300B836B5 /* ListItemStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92973AA92645B20300B836B5 /* ListItemStyle.swift */; };
-		92973AAC2645B32D00B836B5 /* DocumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92973AAB2645B32D00B836B5 /* DocumentsViewController.swift */; };
 		92973AAE2645B9B200B836B5 /* BlockKindExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92973AAD2645B9B200B836B5 /* BlockKindExtensions.swift */; };
 		92973AB12645BAB300B836B5 /* ReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92973AB02645BAB300B836B5 /* ReusableCell.swift */; };
 		92973AB42645E3B500B836B5 /* DocumentEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92973AB32645E3B500B836B5 /* DocumentEditor.swift */; };
@@ -42,6 +41,7 @@
 		92B17563264D77F60016C279 /* DividerBlockCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B17562264D77F60016C279 /* DividerBlockCellView.swift */; };
 		92C2262A265421A200FB5D97 /* DocumentEditorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C22629265421A200FB5D97 /* DocumentEditorTests.swift */; };
 		92C2264E26542E8C00FB5D97 /* DocumentBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C2264D26542E8C00FB5D97 /* DocumentBrowserViewController.swift */; };
+		92C22651265431C200FB5D97 /* PersistentDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C22650265431C200FB5D97 /* PersistentDocument.swift */; };
 		92C581172644472800E062A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C581162644472800E062A0 /* AppDelegate.swift */; };
 		92C581192644472800E062A0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C581182644472800E062A0 /* SceneDelegate.swift */; };
 		92C5811B2644472800E062A0 /* DocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C5811A2644472800E062A0 /* DocumentViewController.swift */; };
@@ -88,7 +88,6 @@
 		92973AA32645B1CA00B836B5 /* TodoContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoContent.swift; sourceTree = "<group>"; };
 		92973AA72645B1EB00B836B5 /* BulletedListItemContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletedListItemContent.swift; sourceTree = "<group>"; };
 		92973AA92645B20300B836B5 /* ListItemStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemStyle.swift; sourceTree = "<group>"; };
-		92973AAB2645B32D00B836B5 /* DocumentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsViewController.swift; sourceTree = "<group>"; };
 		92973AAD2645B9B200B836B5 /* BlockKindExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockKindExtensions.swift; sourceTree = "<group>"; };
 		92973AB02645BAB300B836B5 /* ReusableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableCell.swift; sourceTree = "<group>"; };
 		92973AB32645E3B500B836B5 /* DocumentEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentEditor.swift; sourceTree = "<group>"; };
@@ -97,6 +96,7 @@
 		92B17562264D77F60016C279 /* DividerBlockCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerBlockCellView.swift; sourceTree = "<group>"; };
 		92C22629265421A200FB5D97 /* DocumentEditorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentEditorTests.swift; sourceTree = "<group>"; };
 		92C2264D26542E8C00FB5D97 /* DocumentBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentBrowserViewController.swift; sourceTree = "<group>"; };
+		92C22650265431C200FB5D97 /* PersistentDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentDocument.swift; sourceTree = "<group>"; };
 		92C581132644472800E062A0 /* Pilcrow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pilcrow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92C581162644472800E062A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92C581182644472800E062A0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -241,6 +241,14 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		92C2264F265431B300FB5D97 /* UIDocument */ = {
+			isa = PBXGroup;
+			children = (
+				92C22650265431C200FB5D97 /* PersistentDocument.swift */,
+			);
+			path = UIDocument;
+			sourceTree = "<group>";
+		};
 		92C5810A2644472700E062A0 = {
 			isa = PBXGroup;
 			children = (
@@ -291,6 +299,7 @@
 		92C581462644472F00E062A0 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				92C2264F265431B300FB5D97 /* UIDocument */,
 				928EF89E264460F700437680 /* Document */,
 				92973AA92645B20300B836B5 /* ListItemStyle.swift */,
 				92973A942644BBAB00B836B5 /* TextStyle.swift */,
@@ -302,7 +311,6 @@
 			isa = PBXGroup;
 			children = (
 				92C5811A2644472800E062A0 /* DocumentViewController.swift */,
-				92973AAB2645B32D00B836B5 /* DocumentsViewController.swift */,
 				92C2264D26542E8C00FB5D97 /* DocumentBrowserViewController.swift */,
 			);
 			path = "View Controllers";
@@ -417,12 +425,12 @@
 				92B17563264D77F60016C279 /* DividerBlockCellView.swift in Sources */,
 				9225FA82264B56EB00B84D87 /* QuoteContent.swift in Sources */,
 				92973AAE2645B9B200B836B5 /* BlockKindExtensions.swift in Sources */,
-				92973AAC2645B32D00B836B5 /* DocumentsViewController.swift in Sources */,
 				922590E026471E7E000113B3 /* TextBlockViewModel.swift in Sources */,
 				9225FA84264B56F400B84D87 /* NumberedListItemContent.swift in Sources */,
 				928EF89726444AF000437680 /* Document.swift in Sources */,
 				924A7C7A2649C7AC003C5073 /* Metrics.swift in Sources */,
 				92C5811B2644472800E062A0 /* DocumentViewController.swift in Sources */,
+				92C22651265431C200FB5D97 /* PersistentDocument.swift in Sources */,
 				92973A9A26458D4A00B836B5 /* TextEdit.swift in Sources */,
 				9225FA80264B56E200B84D87 /* HeadingContent.swift in Sources */,
 				92C581172644472800E062A0 /* AppDelegate.swift in Sources */,

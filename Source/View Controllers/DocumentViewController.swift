@@ -5,11 +5,12 @@ final class DocumentViewController: UIViewController {
         case main
     }
     
-    private let editor: DocumentEditor
+    private var persistentDocument: PersistentDocument
+    private var editor: DocumentEditor!
     private var document: Document { editor.document }
     
-    init(document: Document) {
-        self.editor = DocumentEditor(document: document)
+    init(persistentDocument: PersistentDocument) {
+        self.persistentDocument = persistentDocument
         super.init(nibName: nil, bundle: nil)
         setup()
     }
@@ -19,17 +20,34 @@ final class DocumentViewController: UIViewController {
     }
 
     private func setup() {
-        title = document.name
-        
+        loadFile()
         setupViews()
         configureCollectionView()
         configureGestures()
         configureNavigationBar()
+    }
+    
+    private func loadFile() {
+        persistentDocument.open { [weak self] success in
+            if success {
+                self?.documentOpenedSuccessfully()
+            } else {
+                // TODO: handle error
+            }
+        }
+    }
+    
+    private func documentOpenedSuccessfully() {
+        guard let document = persistentDocument.document else { return }
+        
+        editor = DocumentEditor(document: document)
+        title = document.name
         configureDataSource()
     }
     
     private func configureNavigationBar() {
         navigationItem.backButtonDisplayMode = .minimal
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(closeDocument))
         
         let addActions = Block.Kind.allCases.map { kind in
             UIAction(title: kind.title, image: kind.image, handler: { [weak self] _ in
@@ -53,6 +71,16 @@ final class DocumentViewController: UIViewController {
             try DocumentStore.shared.saveDocument(document)
         } catch {
             print("Error saving document! \(error)")
+        }
+    }
+    
+    @objc private func closeDocument() {
+        persistentDocument.close { [weak self] success in
+            if success {
+                self?.dismiss(animated: true)
+            } else {
+                // TODO: handle save error
+            }
         }
     }
     

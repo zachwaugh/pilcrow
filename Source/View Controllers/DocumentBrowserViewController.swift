@@ -54,6 +54,10 @@ final class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDo
     // MARK: Document Presentation
     
     func presentDocument(at documentURL: URL) {
-        //let editor = DocumentViewController(document: <#T##Document#>)
+        let editor = DocumentViewController(persistentDocument: PersistentDocument(fileURL: documentURL))
+        let navController = UINavigationController(rootViewController: editor)
+        navController.modalPresentationStyle = .fullScreen
+        
+        present(navController, animated: true)
     }
 }
