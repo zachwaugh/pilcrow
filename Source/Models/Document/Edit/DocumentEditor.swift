@@ -68,6 +68,12 @@ final class DocumentEditor {
         return .inserted(document.blocks.endIndex - 1)
     }
     
+    @discardableResult
+    func appendBlocks(_ blocks: [Block]) -> EditResult {
+        document.blocks += blocks
+        return .inserted(document.blocks.endIndex - 1)
+    }
+    
     // MARK: - Updates
     
     private func updateBlockTextContent(_ text: String, block: Block) {

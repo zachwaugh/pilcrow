@@ -55,7 +55,16 @@ final class DocumentViewController: UIViewController {
             })
         }
         
+        #if DEBUG
+        let testDocument = UIAction(title: "Populate Test Blocks", image: UIImage(systemName: "bug")) { [weak self] _ in
+            self?.editor.appendBlocks(Document.test.blocks)
+            self?.updateDataSource()
+        }
+        let menu = UIMenu(title: "", children: addActions + [testDocument])
+        #else
         let menu = UIMenu(title: "", children: addActions)
+        #endif
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "ellipsis"), menu: menu)
     }
     
