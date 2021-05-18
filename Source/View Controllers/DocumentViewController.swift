@@ -169,6 +169,11 @@ final class DocumentViewController: UIViewController {
     
     private func block(for cell: UICollectionViewCell) -> Block? {
         guard let indexPath = collectionView.indexPath(for: cell) else { return nil }
+        return block(at: indexPath)
+    }
+    
+    private func block(at indexPath: IndexPath) -> Block? {
+        guard indexPath.row >= 0, indexPath.row < document.blocks.count else { return nil }
         return document.blocks[indexPath.row]
     }
     
@@ -320,6 +325,9 @@ final class DocumentViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .systemBackground
         view.delegate = self
+        view.dragDelegate = self
+        view.dropDelegate = self
+        view.dragInteractionEnabled = true
         
         return view
     }()
@@ -365,5 +373,40 @@ extension DocumentViewController: TextCellDelegate {
         guard let block = block(for: cell) else { return }
         
         applyEdit(edit, to: block)
+    }
+}
+
+extension DocumentViewController: UICollectionViewDragDelegate {
+    func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        let block = document.blocks[indexPath.row]
+        let dragItem = UIDragItem(itemProvider: NSItemProvider())
+        dragItem.localObject = block
+        
+        return [dragItem]
+    }
+}
+
+extension DocumentViewController: UICollectionViewDropDelegate {
+    func collectionView(_ collectionView: UICollectionView, canHandle session: UIDropSession) -> Bool {
+        true
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
+        UICollectionViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
+        guard let item = coordinator.items.first,
+              let sourceIndexPath = item.sourceIndexPath,
+              let block = block(at: sourceIndexPath),
+              let destinationIndexPath = coordinator.destinationIndexPath
+        else {
+            return
+        }
+        
+        editor.moveBlock(block, to: destinationIndexPath.row)
+        updateDataSource()
+        
+        coordinator.drop(item.dragItem, toItemAt: destinationIndexPath)
     }
 }
