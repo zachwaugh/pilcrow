@@ -347,17 +347,7 @@ final class DocumentViewController: UIViewController {
     }
 }
 
-extension DocumentViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
-        UIContextMenuConfiguration(identifier: nil, previewProvider: nil, actionProvider: { actions in
-            UIMenu(children: [
-                UIAction(title: "Delete", attributes: [.destructive], handler: { [weak self] _ in
-                    self?.deleteBlock(at: indexPath)
-                })
-            ])
-        })
-    }
-}
+extension DocumentViewController: UICollectionViewDelegate {}
 
 extension DocumentViewController: TodoCellDelegate {
     func todoCellDidToggleCheckBox(cell: TodoBlockCellView) {
