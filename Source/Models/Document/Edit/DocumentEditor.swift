@@ -23,7 +23,14 @@ final class DocumentEditor {
     // MARK: - Editing
     
     func apply(edit: TextEdit, to block: Block) -> EditResult? {
+        let isEmpty = block.content.isEmpty
+        let isDecoratedTextContent = block.kind.isDecoratedTextContent
+        let isEmptyAndDecoratedTextContent = isEmpty && isDecoratedTextContent
+        
         switch edit {
+        case .insertNewline where isEmptyAndDecoratedTextContent,
+             .deleteAtBeginning where isEmptyAndDecoratedTextContent:
+            return updateBlockKind(for: block, to: .paragraph)
         case .insertNewline:
             return insertBlock(block.content.next().asBlock(), after: block)
         case .deleteAtBeginning:

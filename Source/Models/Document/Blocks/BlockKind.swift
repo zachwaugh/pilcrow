@@ -6,6 +6,17 @@ extension Block {
         case todo, bulletedListItem, numberedListItem
         case divider
         
+        /// True for list items and other types of text content that can be converted
+        /// to a plain paragraph
+        var isDecoratedTextContent: Bool {
+            switch self {
+            case .bulletedListItem, .numberedListItem, .todo, .quote:
+                return true
+            default:
+                return false
+            }
+        }
+        
         func makeEmptyBlockContent() -> BlockContent {
             blockContentType.init()
         }
