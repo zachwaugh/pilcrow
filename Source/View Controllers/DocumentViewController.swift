@@ -1,5 +1,7 @@
 import UIKit
+import Combine
 
+// TODO: this is a beast, will refactor
 final class DocumentViewController: UIViewController {
     private enum Section {
         case main
@@ -8,6 +10,7 @@ final class DocumentViewController: UIViewController {
     private var file: DocumentFile
     private var editor: DocumentEditor!
     private var document: Document { editor.document }
+    private var subscriptions: Set<AnyCancellable> = []
     
     init(file: DocumentFile) {
         self.file = file
@@ -20,31 +23,12 @@ final class DocumentViewController: UIViewController {
     }
 
     private func setup() {
-        loadFile()
         setupViews()
         configureCollectionView()
         configureGestures()
         configureNavigationBar()
-    }
-    
-    private func loadFile() {
-        file.open { [weak self] success in
-            print("File opened, success? \(success)")
-
-            if success {
-                self?.documentOpenedSuccessfully()
-            } else {
-                // TODO: handle error
-            }
-        }
-    }
-    
-    private func documentOpenedSuccessfully() {
-        guard let document = file.document else { return }
         
-        editor = DocumentEditor(document: document)
-        title = file.name
-        configureDataSource()
+        loadDocument()
     }
     
     private func configureNavigationBar() {
@@ -70,7 +54,38 @@ final class DocumentViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "ellipsis"), menu: menu)
     }
     
-    // MARK: - File
+    private func observeEditor() {
+        editor.$edits
+            .dropFirst()
+            .sink { [weak self] _ in
+                self?.documentEdited()
+            }
+            .store(in: &subscriptions)
+    }
+    
+    // MARK: - Document
+    
+    private func loadDocument() {
+        file.open { [weak self] success in
+            print("File opened, success? \(success)")
+
+            if success {
+                self?.documentOpened()
+            } else {
+                // TODO: handle error
+            }
+        }
+    }
+    
+    private func documentOpened() {
+        guard let document = file.document else { return }
+        
+        title = file.name
+
+        editor = DocumentEditor(document: document)
+        observeEditor()
+        setupDataSource()
+    }
     
     private func documentEdited() {
         file.document = document
@@ -92,7 +107,7 @@ final class DocumentViewController: UIViewController {
     
     private var dataSource: UICollectionViewDiffableDataSource<Section, Block>!
 
-    private func configureDataSource() {
+    private func setupDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section, Block>(collectionView: collectionView) { [weak self] _, indexPath, block in
             self?.cell(for: indexPath, block: block)
         }
@@ -133,8 +148,6 @@ final class DocumentViewController: UIViewController {
             updateDataSource()
             focusCell(before: index)
         }
-        
-        documentEdited()
     }
         
     // MARK: - Blocks
@@ -198,7 +211,6 @@ final class DocumentViewController: UIViewController {
     private func deleteBlock(_ block: Block) {
         editor.deleteBlock(block)
         updateDataSource(animated: true)
-        documentEdited()
     }
     
     // MARK: - Cells
@@ -433,7 +445,6 @@ extension DocumentViewController: UICollectionViewDropDelegate {
         
         editor.moveBlock(block, to: destinationIndexPath.row)
         updateDataSource()
-        documentEdited()
         
         coordinator.drop(item.dragItem, toItemAt: destinationIndexPath)
     }

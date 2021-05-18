@@ -9,15 +9,17 @@ final class DocumentFile: UIDocument {
     static let fileExtension = "pilcrow"
 
     var document: Document?
-    var name: String {
-        let fileAttributes = try? fileURL.resourceValues(forKeys: [URLResourceKey.localizedNameKey])
-        return fileAttributes?.localizedName ?? fileURL.deletingPathExtension().lastPathComponent
-    }
+    var name: String { localizedName }
     
     convenience init() {
         let tempDir = FileManager.default.temporaryDirectory
         let url = tempDir.appendingPathComponent("Untitled.\(Self.fileExtension)")
         self.init(fileURL: url)
+    }
+    
+    override func save(to url: URL, for saveOperation: UIDocument.SaveOperation, completionHandler: ((Bool) -> Void)? = nil) {
+        print("File save to \(url)")
+        super.save(to: url, for: saveOperation, completionHandler: completionHandler)
     }
     
     override func contents(forType typeName: String) throws -> Any {
