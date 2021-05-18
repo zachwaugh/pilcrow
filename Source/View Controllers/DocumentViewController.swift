@@ -61,17 +61,9 @@ final class DocumentViewController: UIViewController {
     
     // MARK: - Document
     
-    private func scheduleSave() {
-        // TODO: throttle/debounce saves
-        save()
-    }
-    
-    private func save() {
-        do {
-            try DocumentStore.shared.saveDocument(document)
-        } catch {
-            print("Error saving document! \(error)")
-        }
+    private func documentEdited() {
+        persistentDocument.document = document
+        persistentDocument.updateChangeCount(.done)
     }
     
     @objc private func closeDocument() {
@@ -130,7 +122,7 @@ final class DocumentViewController: UIViewController {
             focusCell(before: index)
         }
         
-        save()
+        documentEdited()
     }
         
     // MARK: - Blocks
@@ -194,7 +186,7 @@ final class DocumentViewController: UIViewController {
     private func deleteBlock(_ block: Block) {
         editor.deleteBlock(block)
         updateDataSource(animated: true)
-        save()
+        documentEdited()
     }
     
     // MARK: - Cells
@@ -429,7 +421,7 @@ extension DocumentViewController: UICollectionViewDropDelegate {
         
         editor.moveBlock(block, to: destinationIndexPath.row)
         updateDataSource()
-        save()
+        documentEdited()
         
         coordinator.drop(item.dragItem, toItemAt: destinationIndexPath)
     }
