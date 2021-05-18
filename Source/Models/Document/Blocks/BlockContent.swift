@@ -5,7 +5,7 @@ protocol BlockContent: Codable {
 
     func asBlock() -> Block
     func empty() -> Self
-    func next() -> Self
+    func next() -> BlockContent
 }
 
 extension BlockContent {
@@ -13,7 +13,7 @@ extension BlockContent {
         true
     }
     
-    func next() -> Self {
+    func next() -> BlockContent {
         empty()
     }
 }

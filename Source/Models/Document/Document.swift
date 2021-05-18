@@ -2,6 +2,10 @@ import Foundation
 
 struct Document: Codable, Equatable {
     var blocks: [Block] = []
+    
+    var isEmpty: Bool {
+        blocks.isEmpty
+    }
 }
 
 extension Document {

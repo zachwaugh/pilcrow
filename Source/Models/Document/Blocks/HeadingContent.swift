@@ -16,4 +16,8 @@ struct HeadingContent: Hashable, Identifiable, Codable, TextBlockContent {
     func empty() -> HeadingContent {
         HeadingContent()
     }
+    
+    func next() -> BlockContent {
+        ParagraphContent()
+    }
 }

@@ -153,7 +153,7 @@ final class DocumentViewController: UIViewController {
     // MARK: - Blocks
     
     private func makeAndInsertNewBlock(for kind: Block.Kind) {
-        let newBlock = makeBlock(for: kind)
+        let newBlock = kind.makeEmptyBlock()
         let result: EditResult
         
         if let block = editingBlock {
@@ -184,27 +184,8 @@ final class DocumentViewController: UIViewController {
         return editingBlock ?? document.blocks.last
     }
     
-    private func makeBlock(for kind: Block.Kind) -> Block {
-        switch kind {
-        case .heading:
-            return HeadingContent().asBlock()
-        case .paragraph:
-            return ParagraphContent().asBlock()
-        case .quote:
-            return QuoteContent().asBlock()
-        case .todo:
-            return TodoContent().asBlock()
-        case .bulletedListItem:
-            return BulletedListItemContent().asBlock()
-        case .numberedListItem:
-            return NumberedListItemContent().asBlock()
-        case .divider:
-            return DividerContent().asBlock()
-        }
-    }
-    
     private func deleteBlock(at indexPath: IndexPath) {
-       let block = document.blocks[indexPath.row]
+        let block = document.blocks[indexPath.row]
         deleteBlock(block)
     }
     
