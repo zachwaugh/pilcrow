@@ -1,15 +1,19 @@
 import UIKit
+import Combine
 
+// TODO: this is a beast, will refactor
 final class DocumentViewController: UIViewController {
     private enum Section {
         case main
     }
     
-    private let editor: DocumentEditor
+    private var file: DocumentFile
+    private var editor: DocumentEditor!
     private var document: Document { editor.document }
+    private var subscriptions: Set<AnyCancellable> = []
     
-    init(document: Document) {
-        self.editor = DocumentEditor(document: document)
+    init(file: DocumentFile) {
+        self.file = file
         super.init(nibName: nil, bundle: nil)
         setup()
     }
@@ -19,17 +23,17 @@ final class DocumentViewController: UIViewController {
     }
 
     private func setup() {
-        title = document.name
-        
         setupViews()
         configureCollectionView()
         configureGestures()
         configureNavigationBar()
-        configureDataSource()
+        
+        loadDocument()
     }
     
     private func configureNavigationBar() {
         navigationItem.backButtonDisplayMode = .minimal
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(closeDocument))
         
         let addActions = Block.Kind.allCases.map { kind in
             UIAction(title: kind.title, image: kind.image, handler: { [weak self] _ in
@@ -37,22 +41,65 @@ final class DocumentViewController: UIViewController {
             })
         }
         
+        #if DEBUG
+        let testDocument = UIAction(title: "Insert Test Blocks", image: UIImage(systemName: "rectangle.stack.badge.plus")) { [weak self] _ in
+            self?.editor.appendBlocks(Document.test.blocks)
+            self?.updateDataSource()
+        }
+        let menu = UIMenu(title: "", children: addActions + [testDocument])
+        #else
         let menu = UIMenu(title: "", children: addActions)
+        #endif
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "ellipsis"), menu: menu)
+    }
+    
+    private func observeEditor() {
+        editor.$edits
+            .dropFirst()
+            .sink { [weak self] _ in
+                self?.documentEdited()
+            }
+            .store(in: &subscriptions)
     }
     
     // MARK: - Document
     
-    private func scheduleSave() {
-        // TODO: throttle/debounce saves
-        save()
+    private func loadDocument() {
+        file.open { [weak self] success in
+            print("File opened, success? \(success)")
+
+            if success {
+                self?.documentOpened()
+            } else {
+                // TODO: handle error
+            }
+        }
     }
     
-    private func save() {
-        do {
-            try DocumentStore.shared.saveDocument(document)
-        } catch {
-            print("Error saving document! \(error)")
+    private func documentOpened() {
+        guard let document = file.document else { return }
+        
+        title = file.name
+
+        editor = DocumentEditor(document: document)
+        observeEditor()
+        setupDataSource()
+    }
+    
+    private func documentEdited() {
+        file.document = document
+        file.updateChangeCount(.done)
+    }
+    
+    @objc private func closeDocument() {
+        file.close { [weak self] success in
+            print("File closed, success? \(success)")
+            if success {
+                self?.dismiss(animated: true)
+            } else {
+                // TODO: handle save error
+            }
         }
     }
     
@@ -60,7 +107,7 @@ final class DocumentViewController: UIViewController {
     
     private var dataSource: UICollectionViewDiffableDataSource<Section, Block>!
 
-    private func configureDataSource() {
+    private func setupDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section, Block>(collectionView: collectionView) { [weak self] _, indexPath, block in
             self?.cell(for: indexPath, block: block)
         }
@@ -101,8 +148,6 @@ final class DocumentViewController: UIViewController {
             updateDataSource()
             focusCell(before: index)
         }
-        
-        save()
     }
         
     // MARK: - Blocks
@@ -166,7 +211,6 @@ final class DocumentViewController: UIViewController {
     private func deleteBlock(_ block: Block) {
         editor.deleteBlock(block)
         updateDataSource(animated: true)
-        save()
     }
     
     // MARK: - Cells
@@ -401,7 +445,6 @@ extension DocumentViewController: UICollectionViewDropDelegate {
         
         editor.moveBlock(block, to: destinationIndexPath.row)
         updateDataSource()
-        save()
         
         coordinator.drop(item.dragItem, toItemAt: destinationIndexPath)
     }

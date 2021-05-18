@@ -1,11 +1,20 @@
 import Foundation
+import Combine
 
 enum EditResult {
     case inserted(Int), invalidated, updated, deleted(Int)
 }
 
+/// Editor manages all edits to the document
+/// ensuring a consistent state
 final class DocumentEditor {
-    private(set) var document: Document
+    private(set) var document: Document {
+        didSet {
+            edits += 1
+        }
+    }
+    
+    @Published var edits: Int = 0
     
     init(document: Document) {
         self.document = document
@@ -65,6 +74,12 @@ final class DocumentEditor {
     @discardableResult
     func appendBlock(_ block: Block) -> EditResult {
         document.blocks.append(block)
+        return .inserted(document.blocks.endIndex - 1)
+    }
+    
+    @discardableResult
+    func appendBlocks(_ blocks: [Block]) -> EditResult {
+        document.blocks += blocks
         return .inserted(document.blocks.endIndex - 1)
     }
     

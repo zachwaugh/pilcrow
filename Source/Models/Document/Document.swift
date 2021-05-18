@@ -1,9 +1,6 @@
 import Foundation
 
 struct Document: Codable, Equatable {
-    static let fileExtension = "pilcrow"
-    
-    var name: String = "Untitled"
     var blocks: [Block] = []
 }
 
@@ -25,7 +22,6 @@ extension Document {
         ]
         
         return Document(
-            name: "¶ Test Document",
             blocks: blocks.map { $0.asBlock() }
         )
     }
