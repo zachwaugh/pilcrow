@@ -43,8 +43,12 @@ final class DocumentViewController: UIViewController {
     
     // MARK: - Document
     
-    private func save() {
+    private func scheduleSave() {
         // TODO: throttle/debounce saves
+        save()
+    }
+    
+    private func save() {
         do {
             try DocumentStore.shared.saveDocument(document)
         } catch {
@@ -397,6 +401,7 @@ extension DocumentViewController: UICollectionViewDropDelegate {
         
         editor.moveBlock(block, to: destinationIndexPath.row)
         updateDataSource()
+        save()
         
         coordinator.drop(item.dragItem, toItemAt: destinationIndexPath)
     }
