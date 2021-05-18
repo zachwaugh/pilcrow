@@ -1,6 +1,6 @@
 import UIKit
 
-final class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocumentBrowserViewControllerDelegate {
+final class DocumentBrowserViewController: UIDocumentBrowserViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -10,8 +10,27 @@ final class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDo
         allowsPickingMultipleItems = false
     }
     
-    // MARK: UIDocumentBrowserViewControllerDelegate
+    func openExternalDocument(at documentURL: URL) {
+        revealDocument(at: documentURL, importIfNeeded: false) { [weak self] url, _ in
+            self?.editDocument(at: url ?? documentURL)
+        }
+    }
     
+    func editDocument(at documentURL: URL) {
+        let editor = DocumentViewController(file: DocumentFile(fileURL: documentURL))
+
+        #if targetEnvironment(macCatalyst)
+            present(editor, animated: true)
+        #else
+            let navController = UINavigationController(rootViewController: editor)
+            navController.modalPresentationStyle = .fullScreen
+            present(navController, animated: true)
+        #endif
+    }
+}
+
+
+extension DocumentBrowserViewController: UIDocumentBrowserViewControllerDelegate {
     func documentBrowser(_ controller: UIDocumentBrowserViewController, didRequestDocumentCreationWithHandler importHandler: @escaping (URL?, UIDocumentBrowserViewController.ImportMode) -> Void) {
         let file = DocumentFile()
         
@@ -48,17 +67,4 @@ final class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDo
         print("failedToImportDocumentAt: \(documentURL), error: \(String(describing: error))")
     }
     
-    // MARK: Document Editing
-    
-    func editDocument(at documentURL: URL) {
-        let editor = DocumentViewController(file: DocumentFile(fileURL: documentURL))
-
-        #if targetEnvironment(macCatalyst)
-            present(editor, animated: true)
-        #else
-            let navController = UINavigationController(rootViewController: editor)
-            navController.modalPresentationStyle = .fullScreen
-            present(navController, animated: true)
-        #endif
-    }
 }
