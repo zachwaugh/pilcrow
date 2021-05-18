@@ -56,7 +56,7 @@ final class DocumentViewController: UIViewController {
         }
         
         #if DEBUG
-        let testDocument = UIAction(title: "Populate Test Blocks", image: UIImage(systemName: "bug")) { [weak self] _ in
+        let testDocument = UIAction(title: "Insert Test Blocks", image: UIImage(systemName: "rectangle.stack.badge.plus")) { [weak self] _ in
             self?.editor.appendBlocks(Document.test.blocks)
             self?.updateDataSource()
         }
