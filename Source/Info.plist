@@ -11,8 +11,6 @@
 			<string>Pilcrow</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
-			<key>LSHandlerRank</key>
-			<string>Default</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>com.zachwaugh.pilcrow</string>

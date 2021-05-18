@@ -1,7 +1,6 @@
 import UIKit
 
 final class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocumentBrowserViewControllerDelegate {
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -9,55 +8,57 @@ final class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDo
         
         allowsDocumentCreation = true
         allowsPickingMultipleItems = false
-        
-        // Update the style of the UIDocumentBrowserViewController
-        // browserUserInterfaceStyle = .dark
-        // view.tintColor = .white
-        
-        // Specify the allowed content types of your application via the Info.plist.
-        
-        // Do any additional setup after loading the view.
     }
-    
     
     // MARK: UIDocumentBrowserViewControllerDelegate
     
     func documentBrowser(_ controller: UIDocumentBrowserViewController, didRequestDocumentCreationWithHandler importHandler: @escaping (URL?, UIDocumentBrowserViewController.ImportMode) -> Void) {
-        let newDocumentURL: URL? = nil
+        let document = PersistentDocument()
         
-        // Set the URL for the new document here. Optionally, you can present a template chooser before calling the importHandler.
-        // Make sure the importHandler is always called, even if the user cancels the creation request.
-        if newDocumentURL != nil {
-            importHandler(newDocumentURL, .move)
-        } else {
-            importHandler(nil, .none)
+        document.save(to: document.fileURL, for: .forCreating) { success in
+            guard success else {
+                print("*** Error: creating new document")
+                importHandler(nil, .none)
+                return
+            }
+            
+            document.close { success in
+                guard success else {
+                    print("*** Error: closing newly created document")
+                    importHandler(nil, .none)
+                    return
+                }
+                
+                importHandler(document.fileURL, .move)
+            }
         }
     }
     
     func documentBrowser(_ controller: UIDocumentBrowserViewController, didPickDocumentsAt documentURLs: [URL]) {
         guard let sourceURL = documentURLs.first else { return }
-        
-        // Present the Document View Controller for the first document that was picked.
-        // If you support picking multiple items, make sure you handle them all.
-        presentDocument(at: sourceURL)
+        editDocument(at: sourceURL)
     }
     
     func documentBrowser(_ controller: UIDocumentBrowserViewController, didImportDocumentAt sourceURL: URL, toDestinationURL destinationURL: URL) {
-        // Present the Document View Controller for the new newly created document
-        presentDocument(at: destinationURL)
+        editDocument(at: destinationURL)
     }
     
     func documentBrowser(_ controller: UIDocumentBrowserViewController, failedToImportDocumentAt documentURL: URL, error: Error?) {
-        // Make sure to handle the failed import appropriately, e.g., by presenting an error message to the user.
+        // TODO: present error
+        print("failedToImportDocumentAt: \(documentURL), error: \(String(describing: error))")
     }
     
-    // MARK: Document Presentation
+    // MARK: Document Editing
     
-    func presentDocument(at documentURL: URL) {
+    func editDocument(at documentURL: URL) {
         let editor = DocumentViewController(persistentDocument: PersistentDocument(fileURL: documentURL))
-        let navController = UINavigationController(rootViewController: editor)
-        navController.modalPresentationStyle = .fullScreen
-        
-        present(navController, animated: true)
+
+        #if targetEnvironment(macCatalyst)
+            present(editor, animated: true)
+        #else
+            let navController = UINavigationController(rootViewController: editor)
+            navController.modalPresentationStyle = .fullScreen
+            present(navController, animated: true)
+        #endif
     }
 }

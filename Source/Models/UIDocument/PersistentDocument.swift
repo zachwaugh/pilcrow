@@ -8,19 +8,20 @@ enum DocumentError: Error {
 final class PersistentDocument: UIDocument {
     var document: Document?
     
+    convenience init() {
+        let tempDir = FileManager.default.temporaryDirectory
+        let url = tempDir.appendingPathComponent("Untitled.\(Document.fileExtension)")
+        self.init(fileURL: url)
+    }
+    
     override func contents(forType typeName: String) throws -> Any {
-        print("contents(forType: \(typeName)")
-        guard let document = document else {
-            throw DocumentError.missingDocument
-        }
-        
+        let doc = document ?? Document()
         let encoder = JSONEncoder()
-        let data = try encoder.encode(document)
+        let data = try encoder.encode(doc)
         return data
     }
     
     override func load(fromContents contents: Any, ofType typeName: String?) throws {
-        print("load(fromContents: ofType: \(typeName)")
         guard let data = contents as? Data else {
             throw DocumentError.invalidArchive
         }
