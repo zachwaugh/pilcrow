@@ -368,11 +368,8 @@ extension DocumentViewController: TextCellDelegate {
 
 extension DocumentViewController: UICollectionViewDragDelegate {
     func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-        let block = document.blocks[indexPath.row]
-        let dragItem = UIDragItem(itemProvider: NSItemProvider())
-        dragItem.localObject = block
-        
-        return [dragItem]
+        // Use empty NSItemProvider since we'll rely on the sourceIndexPath when dropping to access block
+        [UIDragItem(itemProvider: NSItemProvider())]
     }
     
     func collectionView(_ collectionView: UICollectionView, dragSessionIsRestrictedToDraggingApplication session: UIDragSession) -> Bool {
@@ -382,7 +379,7 @@ extension DocumentViewController: UICollectionViewDragDelegate {
 
 extension DocumentViewController: UICollectionViewDropDelegate {
     func collectionView(_ collectionView: UICollectionView, canHandle session: UIDropSession) -> Bool {
-        true
+        session.localDragSession != nil
     }
     
     func collectionView(_ collectionView: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {

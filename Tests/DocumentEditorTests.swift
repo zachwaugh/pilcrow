@@ -17,6 +17,8 @@ class DocumentEditorTests: XCTestCase {
         )
     }
     
+    // MARK: - Moves
+    
     func testMoveBlockToBeginning() {
         let editor = DocumentEditor(document: simpleDocument)
         editor.moveBlock(paragraphBlock, to: 0)
