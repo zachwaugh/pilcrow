@@ -16,7 +16,6 @@
 		9225FA80264B56E200B84D87 /* HeadingContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9225FA7F264B56E200B84D87 /* HeadingContent.swift */; };
 		9225FA82264B56EB00B84D87 /* QuoteContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9225FA81264B56EB00B84D87 /* QuoteContent.swift */; };
 		9225FA84264B56F400B84D87 /* NumberedListItemContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9225FA83264B56F400B84D87 /* NumberedListItemContent.swift */; };
-		924A7C7826499200003C5073 /* DocumentStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924A7C7726499200003C5073 /* DocumentStore.swift */; };
 		924A7C7A2649C7AC003C5073 /* Metrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924A7C792649C7AC003C5073 /* Metrics.swift */; };
 		924A7C7C2649D259003C5073 /* QuoteBlockCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924A7C7B2649D259003C5073 /* QuoteBlockCellView.swift */; };
 		924A7C7E2649D2A7003C5073 /* QuoteBlockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924A7C7D2649D2A7003C5073 /* QuoteBlockViewModel.swift */; };
@@ -70,7 +69,6 @@
 		9225FA7F264B56E200B84D87 /* HeadingContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadingContent.swift; sourceTree = "<group>"; };
 		9225FA81264B56EB00B84D87 /* QuoteContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteContent.swift; sourceTree = "<group>"; };
 		9225FA83264B56F400B84D87 /* NumberedListItemContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberedListItemContent.swift; sourceTree = "<group>"; };
-		924A7C7726499200003C5073 /* DocumentStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentStore.swift; sourceTree = "<group>"; };
 		924A7C792649C7AC003C5073 /* Metrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metrics.swift; sourceTree = "<group>"; };
 		924A7C7B2649D259003C5073 /* QuoteBlockCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteBlockCellView.swift; sourceTree = "<group>"; };
 		924A7C7D2649D2A7003C5073 /* QuoteBlockViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteBlockViewModel.swift; sourceTree = "<group>"; };
@@ -139,14 +137,6 @@
 			path = "View Models";
 			sourceTree = "<group>";
 		};
-		924A7C76264991F5003C5073 /* Store */ = {
-			isa = PBXGroup;
-			children = (
-				924A7C7726499200003C5073 /* DocumentStore.swift */,
-			);
-			path = Store;
-			sourceTree = "<group>";
-		};
 		928EF89826444CDF00437680 /* App */ = {
 			isa = PBXGroup;
 			children = (
@@ -168,7 +158,6 @@
 		928EF89E264460F700437680 /* Document */ = {
 			isa = PBXGroup;
 			children = (
-				924A7C76264991F5003C5073 /* Store */,
 				92973AA02645B1A500B836B5 /* Blocks */,
 				92973A9826458D4000B836B5 /* Edit */,
 				928EF89626444AF000437680 /* Document.swift */,
@@ -450,7 +439,6 @@
 				92973AA82645B1EB00B836B5 /* BulletedListItemContent.swift in Sources */,
 				92973AA22645B1AD00B836B5 /* ParagraphContent.swift in Sources */,
 				92973AA42645B1CA00B836B5 /* TodoContent.swift in Sources */,
-				924A7C7826499200003C5073 /* DocumentStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

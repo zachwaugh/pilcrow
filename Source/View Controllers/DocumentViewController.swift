@@ -41,7 +41,7 @@ final class DocumentViewController: UIViewController {
         guard let document = persistentDocument.document else { return }
         
         editor = DocumentEditor(document: document)
-        title = document.name
+        title = persistentDocument.name
         configureDataSource()
     }
     

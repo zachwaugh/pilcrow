@@ -6,11 +6,17 @@ enum DocumentError: Error {
 }
 
 final class PersistentDocument: UIDocument {
+    static let fileExtension = "pilcrow"
+
     var document: Document?
+    var name: String {
+        let fileAttributes = try? fileURL.resourceValues(forKeys: [URLResourceKey.localizedNameKey])
+        return fileAttributes?.localizedName ?? fileURL.deletingPathExtension().lastPathComponent
+    }
     
     convenience init() {
         let tempDir = FileManager.default.temporaryDirectory
-        let url = tempDir.appendingPathComponent("Untitled.\(Document.fileExtension)")
+        let url = tempDir.appendingPathComponent("Untitled.\(Self.fileExtension)")
         self.init(fileURL: url)
     }
     
