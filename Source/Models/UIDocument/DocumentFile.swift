@@ -18,7 +18,7 @@ final class DocumentFile: UIDocument {
     }
     
     override func save(to url: URL, for saveOperation: UIDocument.SaveOperation, completionHandler: ((Bool) -> Void)? = nil) {
-        print("File save to \(url)")
+        print("[DocumentFile] save to \(url)")
         super.save(to: url, for: saveOperation, completionHandler: completionHandler)
     }
     

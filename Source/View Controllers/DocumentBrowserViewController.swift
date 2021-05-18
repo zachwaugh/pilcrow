@@ -29,7 +29,6 @@ final class DocumentBrowserViewController: UIDocumentBrowserViewController {
     }
 }
 
-
 extension DocumentBrowserViewController: UIDocumentBrowserViewControllerDelegate {
     func documentBrowser(_ controller: UIDocumentBrowserViewController, didRequestDocumentCreationWithHandler importHandler: @escaping (URL?, UIDocumentBrowserViewController.ImportMode) -> Void) {
         let file = DocumentFile()
@@ -66,5 +65,4 @@ extension DocumentBrowserViewController: UIDocumentBrowserViewControllerDelegate
         // TODO: present error
         print("failedToImportDocumentAt: \(documentURL), error: \(String(describing: error))")
     }
-    
 }
