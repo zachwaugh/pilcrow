@@ -1,7 +1,6 @@
 import UIKit
 
 final class ToolbarView: UIInputView {
-    
     init(frame: CGRect) {
         super.init(frame: frame, inputViewStyle: .keyboard)
         setup()

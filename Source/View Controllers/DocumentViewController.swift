@@ -35,20 +35,14 @@ final class DocumentViewController: UIViewController {
         navigationItem.backButtonDisplayMode = .minimal
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(closeDocument))
         
-        let addActions = Block.Kind.allCases.map { kind in
-            UIAction(title: kind.title, image: kind.image, handler: { [weak self] _ in
-                self?.insertOrModifyBlock(for: kind)
-            })
-        }
-        
         #if DEBUG
         let testDocument = UIAction(title: "Insert Test Blocks", image: UIImage(systemName: "rectangle.stack.badge.plus")) { [weak self] _ in
             self?.editor.appendBlocks(Document.test.blocks)
             self?.updateDataSource()
         }
-        let menu = UIMenu(title: "", children: addActions + [testDocument])
+        let menu = UIMenu(title: "", children: [testDocument])
         #else
-        let menu = UIMenu(title: "", children: addActions)
+        let menu = UIMenu(title: "", children: [])
         #endif
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "ellipsis"), menu: menu)
