@@ -25,6 +25,7 @@ class BaseTextCellView: UICollectionViewCell, FocusableView {
         view.textContainer.lineFragmentPadding = 0
         view.delegate = self
         view.keyboardDismissMode = .interactive
+        view.inputAccessoryView = ToolbarView(frame: CGRect(x: 0, y: 0, width: 0, height: 44))
         
         return view
     }()
