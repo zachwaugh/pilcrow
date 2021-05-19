@@ -27,7 +27,7 @@ struct NumberedListItemContent: Hashable, Identifiable, TextBlockContent {
         NumberedListItemContent()
     }
     
-    func next() -> NumberedListItemContent {
+    func next() -> BlockContent {
         NumberedListItemContent(text: "", number: number + 1)
     }
 }
