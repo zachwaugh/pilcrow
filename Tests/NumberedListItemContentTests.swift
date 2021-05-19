@@ -4,7 +4,11 @@ import XCTest
 class NumberedListItemContentTests: XCTestCase {
     func testNextForNumberedListIncreasesItemNumber() {
         let item = NumberedListItemContent(text: "item", number: 123)
-        let next = item.next()
+        
+        guard let next = item.next() as? NumberedListItemContent else {
+            XCTFail("Wrong content type returned")
+            return
+        }
         
         XCTAssertEqual(next.number, 124)
     }
