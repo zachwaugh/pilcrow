@@ -3,14 +3,11 @@ import XCTest
 
 class DocumentTests: XCTestCase {
     func testJSONEncodingAndDecoding() {
-        let document = Document(
-            name: "Test document",
-            blocks: [
-                .paragraph(ParagraphContent(text: "Text Block")),
-                .todo(TodoContent(text: "Text Block", completed: true)),
-                .bulletedListItem(BulletedListItemContent(text: "List Item Block")),
-            ]
-        )
+        let document = Document(blocks: [
+            .paragraph(ParagraphContent(text: "Text Block")),
+            .todo(TodoContent(text: "Text Block", completed: true)),
+            .bulletedListItem(BulletedListItemContent(text: "List Item Block")),
+        ])
         
         do {
             let encoder = JSONEncoder()

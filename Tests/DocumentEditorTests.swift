@@ -7,14 +7,11 @@ class DocumentEditorTests: XCTestCase {
     private let headingBlock = HeadingContent(text: "heading").asBlock()
     
     private var simpleDocument: Document {
-        Document(
-            name: "Test",
-            blocks: [
-                paragraphBlock,
-                dividerBlock,
-                headingBlock
-            ]
-        )
+        Document(blocks: [
+            paragraphBlock,
+            dividerBlock,
+            headingBlock
+        ])
     }
     
     // MARK: - Moves
@@ -23,7 +20,7 @@ class DocumentEditorTests: XCTestCase {
         let editor = DocumentEditor(document: simpleDocument)
         editor.moveBlock(paragraphBlock, to: 0)
         
-        let expectedDocument = Document(name: "Test", blocks: [
+        let expectedDocument = Document(blocks: [
             paragraphBlock,
             dividerBlock,
             headingBlock
@@ -37,7 +34,7 @@ class DocumentEditorTests: XCTestCase {
         let editor = DocumentEditor(document: document)
         editor.moveBlock(paragraphBlock, to: document.blocks.count - 1)
         
-        let expectedDocument = Document(name: "Test", blocks: [
+        let expectedDocument = Document(blocks: [
             dividerBlock,
             headingBlock,
             paragraphBlock
@@ -51,7 +48,7 @@ class DocumentEditorTests: XCTestCase {
         let editor = DocumentEditor(document: document)
         editor.moveBlock(paragraphBlock, to: 100)
         
-        let expectedDocument = Document(name: "Test", blocks: [
+        let expectedDocument = Document(blocks: [
             dividerBlock,
             headingBlock,
             paragraphBlock
