@@ -200,29 +200,37 @@ final class DocumentViewController: UIViewController {
     }
     
     private func cell(for indexPath: IndexPath, block: Block) -> UICollectionViewCell {
+        let cell: UICollectionViewCell
+        
         switch block {
         case .heading(let content):
-            return self.headingBlockCell(for: indexPath, content: content)
+            cell = self.headingBlockCell(for: indexPath, content: content)
         case .paragraph(let content):
-            return self.paragraphBlockCell(for: indexPath, content: content)
+            cell = self.paragraphBlockCell(for: indexPath, content: content)
         case .quote(let content):
-            return self.quoteBlockCell(for: indexPath, content: content)
+            cell = self.quoteBlockCell(for: indexPath, content: content)
         case .todo(let content):
-            return self.todoBlockCell(for: indexPath, content: content)
+            cell = self.todoBlockCell(for: indexPath, content: content)
         case .bulletedListItem(let content):
-            return self.bulletedListItemBlockCell(for: indexPath, content: content)
+            cell = self.bulletedListItemBlockCell(for: indexPath, content: content)
         case .numberedListItem(let content):
-            return self.numberedListItemBlockCell(for: indexPath, content: content)
+            cell = self.numberedListItemBlockCell(for: indexPath, content: content)
         case .divider(let content):
-            return self.dividerBlockCell(for: indexPath, content: content)
+            cell = self.dividerBlockCell(for: indexPath, content: content)
         }
+        
+        if let textCell = cell as? BaseTextCellView {
+            textCell.delegate = self
+            textCell.toolbarController.delegate = self
+        }
+        
+        return cell
     }
     
     private func paragraphBlockCell(for indexPath: IndexPath, content: ParagraphContent) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(TextBlockCellView.self, for: indexPath)
         let viewModel = TextBlockViewModel(content: content)
         cell.configure(with: viewModel)
-        cell.delegate = self
         return cell
     }
     
@@ -230,7 +238,6 @@ final class DocumentViewController: UIViewController {
         let cell = collectionView.dequeueReusableCell(TextBlockCellView.self, for: indexPath)
         let viewModel = TextBlockViewModel(content: content)
         cell.configure(with: viewModel)
-        cell.delegate = self
         return cell
     }
     
@@ -238,7 +245,6 @@ final class DocumentViewController: UIViewController {
         let cell = collectionView.dequeueReusableCell(QuoteBlockCellView.self, for: indexPath)
         let viewModel = QuoteBlockViewModel(content: content)
         cell.configure(with: viewModel)
-        cell.delegate = self
         return cell
     }
 
@@ -246,7 +252,6 @@ final class DocumentViewController: UIViewController {
         let cell = collectionView.dequeueReusableCell(TodoBlockCellView.self, for: indexPath)
         let viewModel = TodoBlockViewModel(content: content)
         cell.configure(with: viewModel)
-        cell.delegate = self
         cell.todoDelegate = self
         return cell
     }
@@ -255,7 +260,6 @@ final class DocumentViewController: UIViewController {
         let cell = collectionView.dequeueReusableCell(ListItemBlockCellView.self, for: indexPath)
         let viewModel = ListItemBlockViewModel(content: content)
         cell.configure(with: viewModel)
-        cell.delegate = self
         return cell
     }
     
@@ -263,7 +267,6 @@ final class DocumentViewController: UIViewController {
         let cell = collectionView.dequeueReusableCell(ListItemBlockCellView.self, for: indexPath)
         let viewModel = ListItemBlockViewModel(content: content)
         cell.configure(with: viewModel)
-        cell.delegate = self
         return cell
     }
     
@@ -421,5 +424,14 @@ extension DocumentViewController: UICollectionViewDropDelegate {
         updateDataSource()
         
         coordinator.drop(item.dragItem, toItemAt: destinationIndexPath)
+    }
+}
+
+extension DocumentViewController: ToolbarDelegate {
+    func toolbarDidTapButtonOfKind(_ kind: Block.Kind) {
+        guard let block = editingBlock else { return }
+        
+        let result = editor.updateBlockKind(for: block, to: kind)
+        applyEditResult(result)
     }
 }

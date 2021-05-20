@@ -27,4 +27,7 @@ enum Metrics {
     // Divider
     static let dividerVerticalSpacing: CGFloat = 16
     static let dividerMaxWidth: CGFloat = 200
+    
+    // Toolbar
+    static let toolbarHeight: CGFloat = 44
 }
