@@ -30,4 +30,5 @@ enum Metrics {
     
     // Toolbar
     static let toolbarHeight: CGFloat = 44
+    static let toolbarButtonSize = CGSize(width: 40, height: 40)
 }

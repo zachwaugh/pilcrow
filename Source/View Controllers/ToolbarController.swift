@@ -1,7 +1,12 @@
 import UIKit
 
+enum ToolbarAction {
+    case updateBlockKind(Block.Kind)
+    case dismissKeyboard
+}
+
 protocol ToolbarDelegate: AnyObject {
-    func toolbarDidTapButtonOfKind(_ kind: Block.Kind)
+    func toolbarDidTapButton(action: ToolbarAction)
 }
 
 final class ToolbarController {
@@ -16,7 +21,6 @@ final class ToolbarController {
     }
 
     private func setup() {
-        //view.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(hStack)
         
         NSLayoutConstraint.activate([
@@ -26,25 +30,47 @@ final class ToolbarController {
             hStack.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
         
-        addButtons()
+        addBlockKindButtons()
+        addDismissKeyboardButton()
     }
     
-    private func addButtons() {
+    private func addBlockKindButtons() {
         for (index, kind) in Block.Kind.allCases.enumerated() {
             let button = UIButton(type: .system)
             button.translatesAutoresizingMaskIntoConstraints = false
             button.tag = index
             button.setImage(kind.image, for: .normal)
             button.tintColor = .black
-            button.addTarget(self, action: #selector(handleTap(_:)), for: .touchUpInside)
-            hStack.addArrangedSubview(button)
-            button.heightAnchor.constraint(equalToConstant: 44).isActive = true
-            button.widthAnchor.constraint(equalToConstant: 44).isActive = true
+            button.addTarget(self, action: #selector(handleBlockKindTap(_:)), for: .touchUpInside)
+            addButtonToToolbar(button)
         }
     }
     
-    @objc private func handleTap(_ button: UIButton) {
-        delegate?.toolbarDidTapButtonOfKind(Block.Kind.allCases[button.tag])
+    private func addDismissKeyboardButton() {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(systemName: "keyboard.chevron.compact.down"), for: .normal)
+        button.tintColor = .black
+        button.addTarget(self, action: #selector(handleDismissKeyboardButton), for: .touchUpInside)
+        addButtonToToolbar(button)
+    }
+    
+    private func addButtonToToolbar(_ button: UIButton) {
+        hStack.addArrangedSubview(button)
+        
+        NSLayoutConstraint.activate([
+            button.heightAnchor.constraint(equalToConstant: Metrics.toolbarButtonSize.height),
+            button.widthAnchor.constraint(equalToConstant: Metrics.toolbarButtonSize.width)
+        ])
+    }
+    
+    @objc private func handleBlockKindTap(_ button: UIButton) {
+        let kind = Block.Kind.allCases[button.tag]
+        delegate?.toolbarDidTapButton(action: .updateBlockKind(kind))
+    }
+    
+    @objc private func handleDismissKeyboardButton() {
+        delegate?.toolbarDidTapButton(action: .dismissKeyboard)
     }
     
     // MARK: - Views
@@ -55,6 +81,7 @@ final class ToolbarController {
         let view = UIStackView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.spacing = 4
+        view.alignment = .center
         return view
     }()
 }

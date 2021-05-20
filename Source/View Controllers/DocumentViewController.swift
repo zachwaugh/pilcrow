@@ -429,7 +429,16 @@ extension DocumentViewController: UICollectionViewDropDelegate {
 }
 
 extension DocumentViewController: ToolbarDelegate {
-    func toolbarDidTapButtonOfKind(_ kind: Block.Kind) {
+    func toolbarDidTapButton(action: ToolbarAction) {
+        switch action {
+        case .updateBlockKind(let kind):
+            updateEditingBlockKind(to: kind)
+        case .dismissKeyboard:
+            view.endEditing(true)
+        }
+    }
+    
+    private func updateEditingBlockKind(to kind: Block.Kind) {
         guard let block = editingBlock, block.kind != kind else { return }
         
         let result = editor.updateBlockKind(for: block, to: kind)
