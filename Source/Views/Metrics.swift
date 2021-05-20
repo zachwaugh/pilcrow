@@ -3,12 +3,12 @@ import UIKit
 enum Metrics {
     static let sectionTopPadding: CGFloat = 16
     
-    /// Spacing in-between adjacent blocks
-    static let blockSpacing: CGFloat = 12
-    
     /// Leading/trailing padding of content blocks
     static let blockContentHorizontalPadding: CGFloat = 16
     
+    /// Top/Bottom padding added to each cell that controls block spacing in list
+    static let blockContentVerticalPadding: CGFloat = 6
+
     static let estimatedBlockHeight: CGFloat = 40
     static let listItemLabelContentSpacing: CGFloat = 4
     
