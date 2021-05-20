@@ -2,7 +2,14 @@ import Foundation
 import Combine
 
 enum EditResult {
-    case inserted(Int), invalidated, updated, deleted(Int)
+    case inserted(Int), invalidated(Int), updated(Int), deleted(Int)
+    
+    var index: Int {
+        switch self {
+        case .inserted(let index), .invalidated(let index), .updated(let index), .deleted(let index):
+            return index
+        }
+    }
 }
 
 /// Editor manages all edits to the document
@@ -36,8 +43,8 @@ final class DocumentEditor {
         case .deleteAtBeginning:
             return deleteBlock(block)
         case .update(let content):
-            updateBlockTextContent(content, block: block)
-            return .invalidated
+            let result = updateBlockTextContent(content, block: block)
+            return result.map { .invalidated($0.index) }
         }
     }
     
@@ -53,8 +60,7 @@ final class DocumentEditor {
         guard var content = block.content as? TodoContent else { return nil }
         
         content.toggleCompletion()
-        updateBlockContent(block, content: content)
-        return .updated
+        return updateBlockContent(block, content: content)
     }
     
     // MARK: - Inserts
@@ -101,20 +107,23 @@ final class DocumentEditor {
             document.blocks[index] = kind.makeEmptyBlock()
         }
         
-        return .updated
+        return .updated(index)
     }
     
-    private func updateBlockTextContent(_ text: String, block: Block) {
-        guard var content = block.content as? TextBlockContent else { return }
+    @discardableResult
+    private func updateBlockTextContent(_ text: String, block: Block) -> EditResult? {
+        guard var content = block.content as? TextBlockContent else { return nil }
 
         content.text = text
-        updateBlockContent(block, content: content)
+        return updateBlockContent(block, content: content)
     }
     
-    private func updateBlockContent(_ block: Block, content: BlockContent) {
-        guard let index = index(of: block) else { return }
+    @discardableResult
+    private func updateBlockContent(_ block: Block, content: BlockContent) -> EditResult? {
+        guard let index = index(of: block) else { return nil }
 
         document.blocks[index] = content.asBlock()
+        return .updated(index)
     }
     
     // MARK: - Deletions

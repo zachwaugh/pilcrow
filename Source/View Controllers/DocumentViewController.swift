@@ -136,8 +136,9 @@ final class DocumentViewController: UIViewController {
             // but don't need to create a whole new snapshot
             // TODO: find a better way than invalidating the whole layout when we know what row has changed
             collectionView.collectionViewLayout.invalidateLayout()
-        case .updated:
+        case .updated(let index):
             updateDataSource()
+            focusCell(at: index)
         case .deleted(let index):
             updateDataSource()
             focusCell(before: index)
@@ -429,7 +430,7 @@ extension DocumentViewController: UICollectionViewDropDelegate {
 
 extension DocumentViewController: ToolbarDelegate {
     func toolbarDidTapButtonOfKind(_ kind: Block.Kind) {
-        guard let block = editingBlock else { return }
+        guard let block = editingBlock, block.kind != kind else { return }
         
         let result = editor.updateBlockKind(for: block, to: kind)
         applyEditResult(result)
