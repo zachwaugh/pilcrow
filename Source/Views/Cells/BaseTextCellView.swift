@@ -14,6 +14,8 @@ class BaseTextCellView: UICollectionViewCell, FocusableView {
     var hasFocus: Bool {
         textView.isFirstResponder
     }
+    
+    lazy var toolbarController = ToolbarController()
 
     // MARK: - Views
     
@@ -25,6 +27,7 @@ class BaseTextCellView: UICollectionViewCell, FocusableView {
         view.textContainer.lineFragmentPadding = 0
         view.delegate = self
         view.keyboardDismissMode = .interactive
+        view.inputAccessoryView = toolbarController.view
         
         return view
     }()
