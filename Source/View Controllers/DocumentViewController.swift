@@ -359,17 +359,20 @@ final class DocumentViewController: UIViewController {
     }()
     
     private func makeCollectionViewLayout() -> UICollectionViewCompositionalLayout {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(Metrics.estimatedBlockHeight))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        var config = UICollectionLayoutListConfiguration(appearance: .plain)
+        config.backgroundColor = .white
+        config.showsSeparators = false
+
+        config.trailingSwipeActionsConfigurationProvider = { indexPath in
+            UISwipeActionsConfiguration(actions: [
+                UIContextualAction(style: .destructive, title: "Delete", handler: { _, _, handler in
+                    self.deleteBlock(at: indexPath)
+                    handler(true)
+                })
+            ])
+        }
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
-        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
-        group.interItemSpacing = .fixed(Metrics.blockSpacing)
-        
-        let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = NSDirectionalEdgeInsets(top: Metrics.sectionTopPadding, leading: 0, bottom: 0, trailing: 0)
-        
-        return UICollectionViewCompositionalLayout(section: section)
+        return UICollectionViewCompositionalLayout.list(using: config)
     }
 }
 

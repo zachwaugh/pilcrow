@@ -23,14 +23,14 @@ final class QuoteBlockCellView: BaseTextCellView {
         
         NSLayoutConstraint.activate([
             quoteBorderView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Metrics.blockContentHorizontalPadding),
-            quoteBorderView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            quoteBorderView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            quoteBorderView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Metrics.blockContentVerticalPadding),
+            quoteBorderView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Metrics.blockContentVerticalPadding),
             quoteBorderView.widthAnchor.constraint(equalToConstant: Metrics.quoteBorderWidth),
             
             textView.leadingAnchor.constraint(equalTo: quoteBorderView.trailingAnchor, constant: Metrics.quoteBorderSpacing),
             textView.trailingAnchor.constraint(equalTo:  contentView.trailingAnchor, constant: -Metrics.blockContentHorizontalPadding),
-            textView.topAnchor.constraint(equalTo:  contentView.topAnchor, constant: Metrics.quoteContentVerticalPadding),
-            textView.bottomAnchor.constraint(equalTo:  contentView.bottomAnchor, constant: -Metrics.quoteContentVerticalPadding),
+            textView.topAnchor.constraint(equalTo:  quoteBorderView.topAnchor, constant: Metrics.quoteContentVerticalPadding),
+            textView.bottomAnchor.constraint(equalTo:  quoteBorderView.bottomAnchor, constant: -Metrics.quoteContentVerticalPadding),
         ])
     }
     

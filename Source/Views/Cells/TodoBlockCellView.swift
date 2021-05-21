@@ -37,14 +37,14 @@ final class TodoBlockCellView: BaseTextCellView {
         
         NSLayoutConstraint.activate([
             checkboxButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Metrics.blockContentHorizontalPadding),
-            checkboxButton.topAnchor.constraint(equalTo: contentView.topAnchor),
+            checkboxButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Metrics.blockContentVerticalPadding),
             checkboxButton.heightAnchor.constraint(equalToConstant: Metrics.checkboxSize.height),
             checkboxButton.widthAnchor.constraint(equalToConstant: Metrics.checkboxSize.width),
 
             textView.leadingAnchor.constraint(equalTo: checkboxButton.trailingAnchor, constant: Metrics.checkboxTextContentSpacing),
             textView.trailingAnchor.constraint(equalTo:  contentView.trailingAnchor, constant: -Metrics.blockContentHorizontalPadding),
             textView.topAnchor.constraint(equalTo: checkboxButton.topAnchor, constant: Metrics.checkboxTextContentVerticalOffset),
-            textView.bottomAnchor.constraint(equalTo:  contentView.bottomAnchor),
+            textView.bottomAnchor.constraint(equalTo:  contentView.bottomAnchor, constant: -Metrics.blockContentVerticalPadding),
             
             contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: Metrics.checkboxSize.height)
         ])
