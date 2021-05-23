@@ -1,0 +1,8 @@
+name: Tests
+on: [push]
+jobs:
+  Run-Tests:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@master
+      - run: xcodebuild test -project Pilcrow.xcodeproj -scheme Pilcrow -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 12'
