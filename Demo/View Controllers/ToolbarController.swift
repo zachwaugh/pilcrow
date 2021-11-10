@@ -1,4 +1,5 @@
 import UIKit
+import Pilcrow
 
 enum ToolbarAction {
     case updateBlockKind(Block.Kind)
@@ -35,7 +36,7 @@ final class ToolbarController {
     }
     
     private func addBlockKindButtons() {
-        for (index, kind) in Block.Kind.allCases.enumerated() {
+        for (index, kind) in Block.Kind.all.enumerated() {
             let button = UIButton(type: .system)
             button.translatesAutoresizingMaskIntoConstraints = false
             button.tag = index
@@ -65,7 +66,7 @@ final class ToolbarController {
     }
     
     @objc private func handleBlockKindTap(_ button: UIButton) {
-        let kind = Block.Kind.allCases[button.tag]
+        let kind = Block.Kind.all[button.tag]
         delegate?.toolbarDidTapButton(action: .updateBlockKind(kind))
     }
     

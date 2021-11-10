@@ -1,10 +1,11 @@
 import UIKit
+import Pilcrow
 
 struct QuoteBlockViewModel {
-    let content: QuoteContent
+    let block: Block
     
     var text: String {
-        content.text
+        block.content
     }
     
     var textColor: UIColor {

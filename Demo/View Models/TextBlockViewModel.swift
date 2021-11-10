@@ -1,24 +1,15 @@
 import UIKit
+import Pilcrow
 
 struct TextBlockViewModel {
-    let content: TextBlockContent
+    let block: Block
     let style: TextStyle
     
     var text: String {
-        content.text
+        block.content
     }
     
     var textFont: UIFont {
         style.font
-    }
-}
-
-extension TextBlockViewModel {
-    init(content: ParagraphContent) {
-        self.init(content: content, style: .paragraph)
-    }
-    
-    init(content: HeadingContent) {
-        self.init(content: content, style: .heading)
     }
 }

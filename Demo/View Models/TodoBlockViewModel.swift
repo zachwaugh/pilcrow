@@ -1,10 +1,15 @@
 import UIKit
+import Pilcrow
 
 struct TodoBlockViewModel {
-    let content: TodoContent
+    let block: Block
+    
+    var isCompleted: Bool {
+        block["completed"] == "true"
+    }
     
     var attributedText: NSAttributedString {
-        NSAttributedString(string: content.text, attributes: content.completed ? completedTextAttributes : defaultTextAttributes)
+        NSAttributedString(string: block.content, attributes: isCompleted ? completedTextAttributes : defaultTextAttributes)
     }
     
     var defaultTextAttributes: [NSAttributedString.Key: Any] {
@@ -24,6 +29,6 @@ struct TodoBlockViewModel {
     }
     
     var checkboxImage: UIImage? {
-        content.completed ? UIImage(named: "checked") : UIImage(named: "unchecked")
+        isCompleted ? UIImage(named: "checked") : UIImage(named: "unchecked")
     }
 }

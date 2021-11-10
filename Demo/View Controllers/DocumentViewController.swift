@@ -1,5 +1,6 @@
 import UIKit
 import Combine
+import Pilcrow
 
 // TODO: this is a beast, will refactor
 final class DocumentViewController: UIViewController {
@@ -153,7 +154,7 @@ final class DocumentViewController: UIViewController {
         if let block = editingBlock {
             result = editor.updateBlockKind(for: block, to: kind)
         } else {
-            result = editor.appendBlock(kind.makeEmptyBlock())
+            result = editor.appendBlock(Block(kind: kind))
         }
         
         applyEditResult(result)
@@ -203,21 +204,22 @@ final class DocumentViewController: UIViewController {
     private func cell(for indexPath: IndexPath, block: Block) -> UICollectionViewCell {
         let cell: UICollectionViewCell
         
-        switch block {
-        case .heading(let content):
-            cell = self.headingBlockCell(for: indexPath, content: content)
-        case .paragraph(let content):
-            cell = self.paragraphBlockCell(for: indexPath, content: content)
-        case .quote(let content):
-            cell = self.quoteBlockCell(for: indexPath, content: content)
-        case .todo(let content):
-            cell = self.todoBlockCell(for: indexPath, content: content)
-        case .bulletedListItem(let content):
-            cell = self.bulletedListItemBlockCell(for: indexPath, content: content)
-        case .numberedListItem(let content):
-            cell = self.numberedListItemBlockCell(for: indexPath, content: content)
-        case .divider(let content):
-            cell = self.dividerBlockCell(for: indexPath, content: content)
+        switch block.kind {
+        case .heading:
+            cell = self.headingBlockCell(for: indexPath, block: block)
+        case .paragraph:
+            cell = self.paragraphBlockCell(for: indexPath, block: block)
+        case .quote:
+            cell = self.quoteBlockCell(for: indexPath, block: block)
+        case .todo:
+            cell = self.todoBlockCell(for: indexPath, block: block)
+        case .listItem:
+            cell = self.bulletedListItemBlockCell(for: indexPath, block: block)
+            //cell = self.numberedListItemBlockCell(for: indexPath, block: block)
+        case .divider:
+            cell = self.dividerBlockCell(for: indexPath, block: block)
+        default:
+            fatalError("No cell for kind: \(block.kind)")
         }
         
         if let textCell = cell as? BaseTextCellView {
@@ -228,52 +230,52 @@ final class DocumentViewController: UIViewController {
         return cell
     }
     
-    private func paragraphBlockCell(for indexPath: IndexPath, content: ParagraphContent) -> UICollectionViewCell {
+    private func paragraphBlockCell(for indexPath: IndexPath, block: Block) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(TextBlockCellView.self, for: indexPath)
-        let viewModel = TextBlockViewModel(content: content)
+        let viewModel = TextBlockViewModel(block: block, style: .paragraph)
         cell.configure(with: viewModel)
         return cell
     }
     
-    private func headingBlockCell(for indexPath: IndexPath, content: HeadingContent) -> UICollectionViewCell {
+    private func headingBlockCell(for indexPath: IndexPath, block: Block) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(TextBlockCellView.self, for: indexPath)
-        let viewModel = TextBlockViewModel(content: content)
+        let viewModel = TextBlockViewModel(block: block, style: .heading)
         cell.configure(with: viewModel)
         return cell
     }
     
-    private func quoteBlockCell(for indexPath: IndexPath, content: QuoteContent) -> UICollectionViewCell {
+    private func quoteBlockCell(for indexPath: IndexPath, block: Block) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(QuoteBlockCellView.self, for: indexPath)
-        let viewModel = QuoteBlockViewModel(content: content)
+        let viewModel = QuoteBlockViewModel(block: block)
         cell.configure(with: viewModel)
         return cell
     }
 
-    private func todoBlockCell(for indexPath: IndexPath, content: TodoContent) -> UICollectionViewCell {
+    private func todoBlockCell(for indexPath: IndexPath, block: Block) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(TodoBlockCellView.self, for: indexPath)
-        let viewModel = TodoBlockViewModel(content: content)
+        let viewModel = TodoBlockViewModel(block: block)
         cell.configure(with: viewModel)
         cell.todoDelegate = self
         return cell
     }
     
-    private func bulletedListItemBlockCell(for indexPath: IndexPath, content: BulletedListItemContent) -> UICollectionViewCell {
+    private func bulletedListItemBlockCell(for indexPath: IndexPath, block: Block) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(ListItemBlockCellView.self, for: indexPath)
-        let viewModel = ListItemBlockViewModel(content: content)
+        let viewModel = ListItemBlockViewModel(block: block, listItemLabelString: "-")
         cell.configure(with: viewModel)
         return cell
     }
     
-    private func numberedListItemBlockCell(for indexPath: IndexPath, content: NumberedListItemContent) -> UICollectionViewCell {
+    private func numberedListItemBlockCell(for indexPath: IndexPath, block: Block) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(ListItemBlockCellView.self, for: indexPath)
-        let viewModel = ListItemBlockViewModel(content: content)
+        let viewModel = ListItemBlockViewModel(block: block, listItemLabelString: "1.")
         cell.configure(with: viewModel)
         return cell
     }
     
-    private func dividerBlockCell(for indexPath: IndexPath, content: DividerContent) -> UICollectionViewCell {
+    private func dividerBlockCell(for indexPath: IndexPath, block: Block) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(DividerBlockCellView.self, for: indexPath)
-        let viewModel = DividerBlockViewModel(content: content)
+        let viewModel = DividerBlockViewModel(block: block)
         cell.configure(with: viewModel)
         return cell
     }
@@ -341,7 +343,7 @@ final class DocumentViewController: UIViewController {
     }
     
     private func configureCollectionView() {
-        Block.Kind.allCases.forEach {
+        Block.Kind.all.forEach {
             collectionView.registerReusableCell($0.cellClass)
         }
     }

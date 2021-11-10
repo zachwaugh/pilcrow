@@ -1,5 +1,6 @@
 import Foundation
 import Combine
+import Pilcrow
 
 enum EditResult {
     case inserted(Int), invalidated(Int), updated(Int), deleted(Int)
@@ -31,7 +32,7 @@ final class DocumentEditor {
     
     func apply(edit: TextEdit, to block: Block) -> EditResult? {
         let isEmpty = block.content.isEmpty
-        let isDecoratedTextContent = block.kind.isDecoratedTextContent
+        let isDecoratedTextContent = false // block.kind.isDecoratedTextContent
         let isEmptyAndDecoratedTextContent = isEmpty && isDecoratedTextContent
         
         switch edit {
@@ -39,7 +40,7 @@ final class DocumentEditor {
              .deleteAtBeginning where isEmptyAndDecoratedTextContent:
             return updateBlockKind(for: block, to: .paragraph)
         case .insertNewline:
-            return insertBlock(block.content.next().asBlock(), after: block)
+            return insertBlock(block.next(), after: block)
         case .deleteAtBeginning:
             return deleteBlock(block)
         case .update(let content):
@@ -57,10 +58,12 @@ final class DocumentEditor {
     }
 
     func toggleCompletion(for block: Block) -> EditResult? {
-        guard var content = block.content as? TodoContent else { return nil }
+        guard block.kind == .todo else { return nil }
         
-        content.toggleCompletion()
-        return updateBlockContent(block, content: content)
+        var updated = block
+        updated.properties["completed"] = block["completed"] == "true" ? "false" : "true"
+        //content.toggleCompletion()
+        return updateBlock(block, with: updated)
     }
     
     // MARK: - Inserts
@@ -78,9 +81,9 @@ final class DocumentEditor {
     @discardableResult
     func appendNewBlock() -> EditResult {
         if let block = document.blocks.last {
-            return appendBlock(block.content.empty().asBlock())
+            return appendBlock(block.next())
         } else {
-            return appendBlock(HeadingContent().asBlock())
+            return appendBlock(Block(kind: .heading))
         }
     }
     
@@ -101,28 +104,27 @@ final class DocumentEditor {
     func updateBlockKind(for block: Block, to kind: Block.Kind) -> EditResult? {
         guard let index = index(of: block) else { return nil }
         
-        if let textBlockContent = block.content as? TextBlockContent, let contentType = kind.textBlockContentType {
-            document.blocks[index] = contentType.init(text: textBlockContent.text).asBlock()
-        } else {
-            document.blocks[index] = kind.makeEmptyBlock()
-        }
+//        if let textBlockContent = block.content as? TextBlockContent, let contentType = kind.textBlockContentType {
+//            document.blocks[index] = contentType.init(text: textBlockContent.text).asBlock()
+//        } else {
+//            document.blocks[index] = kind.makeEmptyBlock()
+//        }
         
         return .updated(index)
     }
     
     @discardableResult
     private func updateBlockTextContent(_ text: String, block: Block) -> EditResult? {
-        guard var content = block.content as? TextBlockContent else { return nil }
-
-        content.text = text
-        return updateBlockContent(block, content: content)
+        var updated = block
+        updated.content = text
+        return updateBlock(block, with: updated)
     }
     
     @discardableResult
-    private func updateBlockContent(_ block: Block, content: BlockContent) -> EditResult? {
+    private func updateBlock(_ block: Block, with updatedBlock: Block) -> EditResult? {
         guard let index = index(of: block) else { return nil }
 
-        document.blocks[index] = content.asBlock()
+        document.blocks[index] = updatedBlock
         return .updated(index)
     }
     

@@ -1,7 +1,8 @@
 import UIKit
+import Pilcrow
 
 struct DividerBlockViewModel {
-    let content: DividerContent
+    let block: Block
     
     var backgroundColor: UIColor {
         .systemGray2
