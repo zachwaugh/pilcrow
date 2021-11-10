@@ -41,6 +41,7 @@
 		92B32779273BFDE40071B0C4 /* Pilcrow.h in Headers */ = {isa = PBXBuildFile; fileRef = 92B3276B273BFDE30071B0C4 /* Pilcrow.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		92B32784273BFE4F0071B0C4 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B32783273BFE4F0071B0C4 /* Block.swift */; };
 		92B32786273BFF510071B0C4 /* BlockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B32785273BFF500071B0C4 /* BlockTests.swift */; };
+		92B32788273C00710071B0C4 /* BlockKindTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B32787273C00710071B0C4 /* BlockKindTests.swift */; };
 		92C2264E26542E8C00FB5D97 /* DocumentBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C2264D26542E8C00FB5D97 /* DocumentBrowserViewController.swift */; };
 		92C22651265431C200FB5D97 /* DocumentFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C22650265431C200FB5D97 /* DocumentFile.swift */; };
 		92C336152654608600AF6F4F /* BlockKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C336142654608600AF6F4F /* BlockKind.swift */; };
@@ -102,6 +103,7 @@
 		92B32772273BFDE40071B0C4 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		92B32783273BFE4F0071B0C4 /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		92B32785273BFF500071B0C4 /* BlockTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockTests.swift; sourceTree = "<group>"; };
+		92B32787273C00710071B0C4 /* BlockKindTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockKindTests.swift; sourceTree = "<group>"; };
 		92C22629265421A200FB5D97 /* DocumentEditorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentEditorTests.swift; sourceTree = "<group>"; };
 		92C2264D26542E8C00FB5D97 /* DocumentBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentBrowserViewController.swift; sourceTree = "<group>"; };
 		92C22650265431C200FB5D97 /* DocumentFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentFile.swift; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 				922590D826471C8D000113B3 /* NumberedListItemContentTests.swift */,
 				92C22629265421A200FB5D97 /* DocumentEditorTests.swift */,
 				92B32785273BFF500071B0C4 /* BlockTests.swift */,
+				92B32787273C00710071B0C4 /* BlockKindTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -486,6 +489,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				92B32786273BFF510071B0C4 /* BlockTests.swift in Sources */,
+				92B32788273C00710071B0C4 /* BlockKindTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
