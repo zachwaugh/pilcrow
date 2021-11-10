@@ -99,7 +99,7 @@
 		92C22650265431C200FB5D97 /* DocumentFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentFile.swift; sourceTree = "<group>"; };
 		92C336142654608600AF6F4F /* BlockKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockKind.swift; sourceTree = "<group>"; };
 		92C336182655DA8800AF6F4F /* ToolbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarController.swift; sourceTree = "<group>"; };
-		92C581132644472800E062A0 /* Pilcrow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pilcrow.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		92C581132644472800E062A0 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92C581162644472800E062A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92C581182644472800E062A0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		92C5811A2644472800E062A0 /* DocumentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentViewController.swift; sourceTree = "<group>"; };
@@ -246,7 +246,7 @@
 		92C5810A2644472700E062A0 = {
 			isa = PBXGroup;
 			children = (
-				92C581152644472800E062A0 /* Pilcrow */,
+				92C581152644472800E062A0 /* Demo */,
 				92C5812C2644472900E062A0 /* Tests */,
 				92C581142644472800E062A0 /* Products */,
 			);
@@ -255,13 +255,13 @@
 		92C581142644472800E062A0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				92C581132644472800E062A0 /* Pilcrow.app */,
+				92C581132644472800E062A0 /* Demo.app */,
 				92C581292644472900E062A0 /* Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		92C581152644472800E062A0 /* Pilcrow */ = {
+		92C581152644472800E062A0 /* Demo */ = {
 			isa = PBXGroup;
 			children = (
 				928EF89826444CDF00437680 /* App */,
@@ -275,8 +275,7 @@
 				928EF8C32644816700437680 /* Pilcrow.entitlements */,
 				92C581242644472800E062A0 /* Info.plist */,
 			);
-			name = Pilcrow;
-			path = Source;
+			path = Demo;
 			sourceTree = "<group>";
 		};
 		92C5812C2644472900E062A0 /* Tests */ = {
@@ -314,9 +313,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		92C581122644472800E062A0 /* Pilcrow */ = {
+		92C581122644472800E062A0 /* Demo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 92C5813D2644472900E062A0 /* Build configuration list for PBXNativeTarget "Pilcrow" */;
+			buildConfigurationList = 92C5813D2644472900E062A0 /* Build configuration list for PBXNativeTarget "Demo" */;
 			buildPhases = (
 				92C5810F2644472800E062A0 /* Sources */,
 				92C581102644472800E062A0 /* Frameworks */,
@@ -326,9 +325,9 @@
 			);
 			dependencies = (
 			);
-			name = Pilcrow;
+			name = Demo;
 			productName = Taper;
-			productReference = 92C581132644472800E062A0 /* Pilcrow.app */;
+			productReference = 92C581132644472800E062A0 /* Demo.app */;
 			productType = "com.apple.product-type.application";
 		};
 		92C581282644472900E062A0 /* Tests */ = {
@@ -380,7 +379,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				92C581122644472800E062A0 /* Pilcrow */,
+				92C581122644472800E062A0 /* Demo */,
 				92C581282644472900E062A0 /* Tests */,
 			);
 		};
@@ -465,7 +464,7 @@
 /* Begin PBXTargetDependency section */
 		92C5812B2644472900E062A0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 92C581122644472800E062A0 /* Pilcrow */;
+			target = 92C581122644472800E062A0 /* Demo */;
 			targetProxy = 92C5812A2644472900E062A0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -611,15 +610,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Source/Pilcrow.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Demo/Pilcrow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8G73Z8AA5M;
-				INFOPLIST_FILE = Source/Info.plist;
+				INFOPLIST_FILE = Demo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zachwaugh.pilcrow;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.zachwaugh.pilcrow-demo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
@@ -632,15 +631,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Source/Pilcrow.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Demo/Pilcrow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8G73Z8AA5M;
-				INFOPLIST_FILE = Source/Info.plist;
+				INFOPLIST_FILE = Demo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zachwaugh.pilcrow;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.zachwaugh.pilcrow-demo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
@@ -656,7 +655,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8G73Z8AA5M;
 				INFOPLIST_FILE = Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -666,7 +664,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pilcrow.app/Pilcrow";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Demo.app/Demo";
 			};
 			name = Debug;
 		};
@@ -678,7 +676,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8G73Z8AA5M;
 				INFOPLIST_FILE = Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -688,7 +685,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pilcrow.app/Pilcrow";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Demo.app/Demo";
 			};
 			name = Release;
 		};
@@ -704,7 +701,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		92C5813D2644472900E062A0 /* Build configuration list for PBXNativeTarget "Pilcrow" */ = {
+		92C5813D2644472900E062A0 /* Build configuration list for PBXNativeTarget "Demo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				92C5813E2644472900E062A0 /* Debug */,

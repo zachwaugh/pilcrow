@@ -1,5 +1,5 @@
 import XCTest
-@testable import Pilcrow
+@testable import Demo
 
 class DocumentTests: XCTestCase {
     func testJSONEncodingAndDecoding() {

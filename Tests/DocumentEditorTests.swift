@@ -1,5 +1,5 @@
 import XCTest
-@testable import Pilcrow
+@testable import Demo
 
 class DocumentEditorTests: XCTestCase {
     private let paragraphBlock = ParagraphContent(text: "paragraph").asBlock()

@@ -1,5 +1,5 @@
 import XCTest
-@testable import Pilcrow
+@testable import Demo
 
 class NumberedListItemContentTests: XCTestCase {
     func testNextForNumberedListIncreasesItemNumber() {
