@@ -38,11 +38,9 @@
 		92B17563264D77F60016C279 /* DividerBlockCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B17562264D77F60016C279 /* DividerBlockCellView.swift */; };
 		92B3276D273BFDE30071B0C4 /* Pilcrow.docc in Sources */ = {isa = PBXBuildFile; fileRef = 92B3276C273BFDE30071B0C4 /* Pilcrow.docc */; };
 		92B32773273BFDE40071B0C4 /* Pilcrow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B32769273BFDE30071B0C4 /* Pilcrow.framework */; };
-		92B32778273BFDE40071B0C4 /* PilcrowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B32777273BFDE40071B0C4 /* PilcrowTests.swift */; };
 		92B32779273BFDE40071B0C4 /* Pilcrow.h in Headers */ = {isa = PBXBuildFile; fileRef = 92B3276B273BFDE30071B0C4 /* Pilcrow.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		92B32780273BFDEA0071B0C4 /* DocumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922590D4264718A5000113B3 /* DocumentTests.swift */; };
-		92B32781273BFDEA0071B0C4 /* NumberedListItemContentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922590D826471C8D000113B3 /* NumberedListItemContentTests.swift */; };
-		92B32782273BFDEA0071B0C4 /* DocumentEditorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C22629265421A200FB5D97 /* DocumentEditorTests.swift */; };
+		92B32784273BFE4F0071B0C4 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B32783273BFE4F0071B0C4 /* Block.swift */; };
+		92B32786273BFF510071B0C4 /* BlockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B32785273BFF500071B0C4 /* BlockTests.swift */; };
 		92C2264E26542E8C00FB5D97 /* DocumentBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C2264D26542E8C00FB5D97 /* DocumentBrowserViewController.swift */; };
 		92C22651265431C200FB5D97 /* DocumentFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C22650265431C200FB5D97 /* DocumentFile.swift */; };
 		92C336152654608600AF6F4F /* BlockKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C336142654608600AF6F4F /* BlockKind.swift */; };
@@ -101,8 +99,9 @@
 		92B32769273BFDE30071B0C4 /* Pilcrow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pilcrow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		92B3276B273BFDE30071B0C4 /* Pilcrow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Pilcrow.h; sourceTree = "<group>"; };
 		92B3276C273BFDE30071B0C4 /* Pilcrow.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = Pilcrow.docc; sourceTree = "<group>"; };
-		92B32772273BFDE40071B0C4 /* PilcrowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PilcrowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		92B32777273BFDE40071B0C4 /* PilcrowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilcrowTests.swift; sourceTree = "<group>"; };
+		92B32772273BFDE40071B0C4 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		92B32783273BFE4F0071B0C4 /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
+		92B32785273BFF500071B0C4 /* BlockTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockTests.swift; sourceTree = "<group>"; };
 		92C22629265421A200FB5D97 /* DocumentEditorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentEditorTests.swift; sourceTree = "<group>"; };
 		92C2264D26542E8C00FB5D97 /* DocumentBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentBrowserViewController.swift; sourceTree = "<group>"; };
 		92C22650265431C200FB5D97 /* DocumentFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentFile.swift; sourceTree = "<group>"; };
@@ -253,21 +252,22 @@
 		92B3276A273BFDE30071B0C4 /* Pilcrow */ = {
 			isa = PBXGroup;
 			children = (
+				92B32783273BFE4F0071B0C4 /* Block.swift */,
 				92B3276B273BFDE30071B0C4 /* Pilcrow.h */,
 				92B3276C273BFDE30071B0C4 /* Pilcrow.docc */,
 			);
 			path = Pilcrow;
 			sourceTree = "<group>";
 		};
-		92B32776273BFDE40071B0C4 /* PilcrowTests */ = {
+		92B32776273BFDE40071B0C4 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
 				922590D4264718A5000113B3 /* DocumentTests.swift */,
 				922590D826471C8D000113B3 /* NumberedListItemContentTests.swift */,
 				92C22629265421A200FB5D97 /* DocumentEditorTests.swift */,
-				92B32777273BFDE40071B0C4 /* PilcrowTests.swift */,
+				92B32785273BFF500071B0C4 /* BlockTests.swift */,
 			);
-			path = PilcrowTests;
+			path = Tests;
 			sourceTree = "<group>";
 		};
 		92C2264F265431B300FB5D97 /* UIDocument */ = {
@@ -283,7 +283,7 @@
 			children = (
 				92C581152644472800E062A0 /* Demo */,
 				92B3276A273BFDE30071B0C4 /* Pilcrow */,
-				92B32776273BFDE40071B0C4 /* PilcrowTests */,
+				92B32776273BFDE40071B0C4 /* Tests */,
 				92C581142644472800E062A0 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -293,7 +293,7 @@
 			children = (
 				92C581132644472800E062A0 /* Demo.app */,
 				92B32769273BFDE30071B0C4 /* Pilcrow.framework */,
-				92B32772273BFDE40071B0C4 /* PilcrowTests.xctest */,
+				92B32772273BFDE40071B0C4 /* Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -368,9 +368,9 @@
 			productReference = 92B32769273BFDE30071B0C4 /* Pilcrow.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		92B32771273BFDE40071B0C4 /* PilcrowTests */ = {
+		92B32771273BFDE40071B0C4 /* Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 92B3277D273BFDE40071B0C4 /* Build configuration list for PBXNativeTarget "PilcrowTests" */;
+			buildConfigurationList = 92B3277D273BFDE40071B0C4 /* Build configuration list for PBXNativeTarget "Tests" */;
 			buildPhases = (
 				92B3276E273BFDE40071B0C4 /* Sources */,
 				92B3276F273BFDE40071B0C4 /* Frameworks */,
@@ -381,9 +381,9 @@
 			dependencies = (
 				92B32775273BFDE40071B0C4 /* PBXTargetDependency */,
 			);
-			name = PilcrowTests;
+			name = Tests;
 			productName = PilcrowTests;
-			productReference = 92B32772273BFDE40071B0C4 /* PilcrowTests.xctest */;
+			productReference = 92B32772273BFDE40071B0C4 /* Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		92C581122644472800E062A0 /* Demo */ = {
@@ -417,6 +417,7 @@
 					};
 					92B32771273BFDE40071B0C4 = {
 						CreatedOnToolsVersion = 13.1;
+						LastSwiftMigration = 1310;
 					};
 					92C581122644472800E062A0 = {
 						CreatedOnToolsVersion = 12.5;
@@ -438,7 +439,7 @@
 			targets = (
 				92C581122644472800E062A0 /* Demo */,
 				92B32768273BFDE30071B0C4 /* Pilcrow */,
-				92B32771273BFDE40071B0C4 /* PilcrowTests */,
+				92B32771273BFDE40071B0C4 /* Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -476,6 +477,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				92B3276D273BFDE30071B0C4 /* Pilcrow.docc in Sources */,
+				92B32784273BFE4F0071B0C4 /* Block.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -483,10 +485,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				92B32780273BFDEA0071B0C4 /* DocumentTests.swift in Sources */,
-				92B32782273BFDEA0071B0C4 /* DocumentEditorTests.swift in Sources */,
-				92B32778273BFDE40071B0C4 /* PilcrowTests.swift in Sources */,
-				92B32781273BFDEA0071B0C4 /* NumberedListItemContentTests.swift in Sources */,
+				92B32786273BFF510071B0C4 /* BlockTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -628,7 +627,9 @@
 		92B3277E273BFDE40071B0C4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8G73Z8AA5M;
@@ -639,9 +640,10 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.zachwaugh.PilcrowTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zachwaugh.pilcrow.tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -650,7 +652,9 @@
 		92B3277F273BFDE40071B0C4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8G73Z8AA5M;
@@ -661,7 +665,7 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.zachwaugh.PilcrowTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zachwaugh.pilcrow.tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -839,7 +843,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		92B3277D273BFDE40071B0C4 /* Build configuration list for PBXNativeTarget "PilcrowTests" */ = {
+		92B3277D273BFDE40071B0C4 /* Build configuration list for PBXNativeTarget "Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				92B3277E273BFDE40071B0C4 /* Debug */,
