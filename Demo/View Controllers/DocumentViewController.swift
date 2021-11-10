@@ -62,12 +62,13 @@ final class DocumentViewController: UIViewController {
     
     private func loadDocument() {
         file.open { [weak self] success in
-            print("File opened, success? \(success)")
+            print("[Demo] File opened, success? \(success)")
 
             if success {
                 self?.documentOpened()
             } else {
                 // TODO: handle error
+                print("[Demo] *** error opening document!")
             }
         }
     }
@@ -76,6 +77,7 @@ final class DocumentViewController: UIViewController {
         guard let document = file.document else { return }
         
         title = file.name
+        print("[Demo] documentOpened(), creating editor")
 
         editor = DocumentEditor(document: document)
         observeEditor()
@@ -89,7 +91,8 @@ final class DocumentViewController: UIViewController {
     
     @objc private func closeDocument() {
         file.close { [weak self] success in
-            print("File closed, success? \(success)")
+            print("[Demo] File closed, success? \(success)")
+            
             if success {
                 self?.dismiss(animated: true)
             } else {

@@ -32,12 +32,13 @@ final class DocumentEditor {
     
     func apply(edit: TextEdit, to block: Block) -> EditResult? {
         let isEmpty = block.content.isEmpty
-        let isDecoratedTextContent = false // block.kind.isDecoratedTextContent
-        let isEmptyAndDecoratedTextContent = isEmpty && isDecoratedTextContent
+        let isParagraph = block.kind == .paragraph
+        let isEmptyNonParagraph = isEmpty && !isParagraph
         
         switch edit {
-        case .insertNewline where isEmptyAndDecoratedTextContent,
-             .deleteAtBeginning where isEmptyAndDecoratedTextContent:
+        case .insertNewline where isEmptyNonParagraph,
+             .deleteAtBeginning where isEmptyNonParagraph:
+            // newline or delete for empty non-paragraph removes formatting and turns back into paragraph
             return updateBlockKind(for: block, to: .paragraph)
         case .insertNewline:
             return insertBlock(block.next(), after: block)
@@ -104,11 +105,9 @@ final class DocumentEditor {
     func updateBlockKind(for block: Block, to kind: Block.Kind) -> EditResult? {
         guard let index = index(of: block) else { return nil }
         
-//        if let textBlockContent = block.content as? TextBlockContent, let contentType = kind.textBlockContentType {
-//            document.blocks[index] = contentType.init(text: textBlockContent.text).asBlock()
-//        } else {
-//            document.blocks[index] = kind.makeEmptyBlock()
-//        }
+        var updated = block
+        updated.kind = kind
+        document.blocks[index] = updated
         
         return .updated(index)
     }

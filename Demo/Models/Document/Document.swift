@@ -21,7 +21,7 @@ extension Document {
             Block(content: "Paragraph that is much longer so it will wrap to multiple lines"),
             Block(content: "Todo", kind: .todo),
             Block(content: "Another paragraph"),
-            Block(content: "Completed todo that is also much longer so we can test how it wraps", kind: .listItem, properties: ["completed": "true"]),
+            Block(content: "Completed todo that is also much longer so we can test how it wraps", kind: .todo, properties: ["completed": "true"]),
             Block(content: "Final paragraph"),
             Block(content: "You miss 100% of the shots you don't take - Wayne Gretzky\n— Michael Scott", kind: .quote)
         ]
