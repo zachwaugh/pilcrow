@@ -33,7 +33,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "92B32771273BFDE40071B0C4"
-               BuildableName = "PilcrowTests.xctest"
+               BuildableName = "Tests.xctest"
                BlueprintName = "Tests"
                ReferencedContainer = "container:Pilcrow.xcodeproj">
             </BuildableReference>

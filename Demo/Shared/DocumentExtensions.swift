@@ -1,4 +1,3 @@
-import Foundation
 import Pilcrow
 
 extension Document {
@@ -9,7 +8,7 @@ extension Document {
             Block(content: "Paragraph", kind: .paragraph),
             Block(content: "Bullet list item", kind: .listItem, properties: ["type": "bullet"]),
             Block(content: "Ordered list item", kind: .listItem, properties: ["type": "numbered", "index": "1"]),
-            Block(kind: .divider),
+            //Block(kind: .divider),
             Block(content: "Paragraph that is much longer so it will wrap to multiple lines"),
             Block(content: "Todo", kind: .todo),
             Block(content: "Another paragraph"),

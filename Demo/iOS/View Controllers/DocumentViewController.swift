@@ -211,13 +211,13 @@ final class DocumentViewController: UIViewController {
         switch result {
         case .inserted(let id):
             updateDataSource()
-            let block = document.blocks.first(where: { $0.id == id })!
+            let block = document.block(with: id)!
             focusBlock(block)
         case .updatedContent(let id):
-            let block = document.blocks.first(where: { $0.id == id })!
+            let block = document.block(with: id)!
             reconfigureBlocks([block])
         case .updatedKind(let id):
-            let block = document.blocks.first(where: { $0.id == id })!
+            let block = document.block(with: id)!
             reloadBlocks([block])
             focusBlock(block)
         case .deleted:
