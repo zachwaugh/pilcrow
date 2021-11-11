@@ -3,12 +3,12 @@ import Combine
 import Pilcrow
 
 enum EditResult {
-    case inserted(Int), invalidated(Int), updated(Int), deleted(Int)
+    case inserted(Block.ID), invalidated(Block.ID), updated(Block.ID), deleted(Block.ID)
     
-    var index: Int {
+    var id: Block.ID {
         switch self {
-        case .inserted(let index), .invalidated(let index), .updated(let index), .deleted(let index):
-            return index
+        case .inserted(let id), .invalidated(let id), .updated(let id), .deleted(let id):
+            return id
         }
     }
 }
@@ -46,7 +46,7 @@ final class DocumentEditor {
             return deleteBlock(block)
         case .update(let content):
             let result = updateBlockTextContent(content, block: block)
-            return result.map { .invalidated($0.index) }
+            return result.map { .invalidated($0.id) }
         }
     }
     
@@ -76,7 +76,7 @@ final class DocumentEditor {
         
         let newIndex = index + 1
         document.blocks.insert(newBlock, at: newIndex)
-        return .inserted(newIndex)
+        return .inserted(newBlock.id)
     }
     
     @discardableResult
@@ -91,14 +91,14 @@ final class DocumentEditor {
     @discardableResult
     func appendBlock(_ block: Block) -> EditResult {
         document.blocks.append(block)
-        return .inserted(document.blocks.endIndex - 1)
+        return .inserted(block.id)
     }
     
-    @discardableResult
-    func appendBlocks(_ blocks: [Block]) -> EditResult {
-        document.blocks += blocks
-        return .inserted(document.blocks.endIndex - 1)
-    }
+//    @discardableResult
+//    func appendBlocks(_ blocks: [Block]) -> EditResult {
+//        document.blocks += blocks
+//        return .inserted(document.blocks.endIndex - 1)
+//    }
     
     // MARK: - Updates
     
@@ -109,7 +109,7 @@ final class DocumentEditor {
         updated.kind = kind
         document.blocks[index] = updated
         
-        return .updated(index)
+        return .updated(block.id)
     }
     
     @discardableResult
@@ -124,7 +124,7 @@ final class DocumentEditor {
         guard let index = index(of: block) else { return nil }
 
         document.blocks[index] = updatedBlock
-        return .updated(index)
+        return .updated(block.id)
     }
     
     // MARK: - Deletions
@@ -136,7 +136,7 @@ final class DocumentEditor {
         }
         
         document.blocks.remove(at: index)
-        return .deleted(index)
+        return .deleted(block.id)
     }
     
     // MARK: - Blocks

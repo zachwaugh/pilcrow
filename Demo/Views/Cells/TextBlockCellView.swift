@@ -12,7 +12,12 @@ final class TextBlockCellView: BaseTextCellView {
 
     func configure(with viewModel: TextBlockViewModel) {
         textView.font = viewModel.textFont
-        textView.text = viewModel.text
+        
+        if !hasFocus {
+            textView.text = viewModel.text
+        } else {
+            print("ignoring text update for focused text view")
+        }
     }
 
     private func setup() {

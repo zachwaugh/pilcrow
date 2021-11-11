@@ -38,7 +38,7 @@ final class DocumentViewController: UIViewController {
         
         #if DEBUG
         let testDocument = UIAction(title: "Insert Test Blocks", image: UIImage(systemName: "rectangle.stack.badge.plus")) { [weak self] _ in
-            self?.editor.appendBlocks(Document.test.blocks)
+            //self?.document.blocks.append(contentsOf: Document.test.blocks)
             self?.updateDataSource()
         }
         let menu = UIMenu(title: "", children: [testDocument])
@@ -103,7 +103,7 @@ final class DocumentViewController: UIViewController {
     
     // MARK: - Data Source
     
-    private var dataSource: UICollectionViewDiffableDataSource<Section, Block>!
+    private var dataSource: UICollectionViewDiffableDataSource<Section, String>!
 
     private func setupDataSource() {
         let textCell = UICollectionView.CellRegistration<TextBlockCellView, Block> { cell, indexPath, block in
@@ -148,7 +148,9 @@ final class DocumentViewController: UIViewController {
             cell.configure(with: viewModel)
         }
         
-        dataSource = UICollectionViewDiffableDataSource<Section, Block>(collectionView: collectionView) { collectionView, indexPath, block in
+        dataSource = UICollectionViewDiffableDataSource<Section, String>(collectionView: collectionView) { [unowned self] collectionView, indexPath, id in
+            let block = self.document.blocks.first(where: { $0.id == id })!
+            
             switch block.kind {
             case .quote:
                 return collectionView.dequeueConfiguredReusableCell(using: quoteCell, for: indexPath, item: block)
@@ -166,11 +168,27 @@ final class DocumentViewController: UIViewController {
         updateDataSource()
     }
     
+    private func makeSnapshot() -> NSDiffableDataSourceSnapshot<Section, String> {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, String>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(document.blocks.map(\.id))
+        return snapshot
+    }
+    
     /// Update data source snapshot from document
     private func updateDataSource(animated: Bool = false) {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, Block>()
-        snapshot.appendSections([.main])
-        snapshot.appendItems(document.blocks)
+        dataSource.apply(makeSnapshot(), animatingDifferences: animated)
+    }
+    
+    private func reconfigureBlocks(_ blocks: [Block], animated: Bool = false) {
+        var snapshot = makeSnapshot()
+        snapshot.reconfigureItems(blocks.map(\.id))
+        dataSource.apply(snapshot, animatingDifferences: animated)
+    }
+    
+    private func reloadBlocks(_ blocks: [Block], animated: Bool = false) {
+        var snapshot = makeSnapshot()
+        snapshot.reloadItems(blocks.map(\.id))
         dataSource.apply(snapshot, animatingDifferences: animated)
     }
     
@@ -185,20 +203,20 @@ final class DocumentViewController: UIViewController {
         guard let result = result else { return }
         
         switch result {
-        case .inserted(let index):
+        case .inserted(let id):
             updateDataSource()
-            focusCell(at: index)
-        case .invalidated:
-            // For some operations (like updating text), we invalidate the layout so it has the correct height
-            // but don't need to create a whole new snapshot
-            // TODO: find a better way than invalidating the whole layout when we know what row has changed
-            collectionView.collectionViewLayout.invalidateLayout()
-        case .updated(let index):
+            let block = document.blocks.first(where: { $0.id == id })!
+            focusBlock(block)
+        case .invalidated(let id):
+            let block = document.blocks.first(where: { $0.id == id })!
+            reconfigureBlocks([block])
+        case .updated(let id):
+            let block = document.blocks.first(where: { $0.id == id })!
+            reloadBlocks([block])
+            focusBlock(block)
+        case .deleted(let _):
             updateDataSource()
-            focusCell(at: index)
-        case .deleted(let index):
-            updateDataSource()
-            focusCell(before: index)
+            //focusCell(before: index)
         }
     }
         
@@ -257,6 +275,10 @@ final class DocumentViewController: UIViewController {
         return document.blocks[indexPath.row]
     }
     
+    private func index(of block: Block) -> Int? {
+        document.blocks.firstIndex(where: { $0.id == block.id })
+    }
+    
     // MARK: - Gestures
     
     private func configureGestures() {
@@ -278,12 +300,21 @@ final class DocumentViewController: UIViewController {
     // MARK: - Focus
     
     private func focusBlock(_ block: Block) {
-        guard let index = document.blocks.firstIndex(of: block) else { return }
+        guard let index = index(of: block) else { return }
         focusCell(at: index)
     }
     
     private func focusCell(at index: Int) {
         focusCell(at: IndexPath(item: index, section: 0))
+    }
+    
+    private func focusCell(before block: Block) {
+        guard let index = index(of: block) else { return }
+
+        let previousIndex = index - 1
+        if previousIndex >= 0, !document.blocks.isEmpty {
+            focusCell(at: previousIndex)
+        }
     }
     
     private func focusCell(before index: Int) {
@@ -366,7 +397,6 @@ extension DocumentViewController: TodoCellDelegate {
 extension DocumentViewController: TextCellDelegate {
     func textCellDidEdit(cell: UICollectionViewCell, edit: TextEdit) {
         guard let block = block(for: cell) else { return }
-        
         applyEdit(edit, to: block)
     }
 }

@@ -15,6 +15,11 @@ class BaseTextCellView: UICollectionViewCell, FocusableView {
         textView.isFirstResponder
     }
     
+    override func resignFirstResponder() -> Bool {
+        print("[TextBlockCellView] resignFirstResponder")
+        return super.resignFirstResponder()
+    }
+    
     lazy var toolbarController = ToolbarController()
 
     // MARK: - Views
