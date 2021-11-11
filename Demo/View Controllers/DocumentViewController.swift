@@ -106,8 +106,61 @@ final class DocumentViewController: UIViewController {
     private var dataSource: UICollectionViewDiffableDataSource<Section, Block>!
 
     private func setupDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<Section, Block>(collectionView: collectionView) { [weak self] _, indexPath, block in
-            self?.cell(for: indexPath, block: block)
+        let textCell = UICollectionView.CellRegistration<TextBlockCellView, Block> { cell, indexPath, block in
+            let viewModel = TextBlockViewModel(block: block, style: block.kind == .heading ? .heading : .paragraph)
+            cell.configure(with: viewModel)
+            cell.delegate = self
+            cell.toolbarController.delegate = self
+        }
+        
+        let quoteCell = UICollectionView.CellRegistration<QuoteBlockCellView, Block> { cell, indexPath, block in
+            let viewModel = QuoteBlockViewModel(block: block)
+            cell.configure(with: viewModel)
+            cell.delegate = self
+            cell.delegate = self
+            cell.toolbarController.delegate = self
+        }
+
+        let todoCell = UICollectionView.CellRegistration<TodoBlockCellView, Block> { cell, indexPath, block in
+            let viewModel = TodoBlockViewModel(block: block)
+            cell.configure(with: viewModel)
+            cell.todoDelegate = self
+            cell.delegate = self
+            cell.toolbarController.delegate = self
+        }
+        
+        let bulletedListItemCell = UICollectionView.CellRegistration<ListItemBlockCellView, Block> { cell, indexPath, block in
+            let viewModel = ListItemBlockViewModel(block: block, listItemLabelString: "-")
+            cell.configure(with: viewModel)
+            cell.delegate = self
+            cell.toolbarController.delegate = self
+        }
+        
+//        let numberedListItemCell = UICollectionView.CellRegistration<ListItemBlockCellView, Block> { cell, indexPath, block in
+//            let viewModel = ListItemBlockViewModel(block: block, listItemLabelString: "1.")
+//            cell.configure(with: viewModel)
+//            cell.delegate = self
+//            cell.toolbarController.delegate = self
+//        }
+        
+        let dividerCell = UICollectionView.CellRegistration<DividerBlockCellView, Block> { cell, indexPath, block in
+            let viewModel = DividerBlockViewModel(block: block)
+            cell.configure(with: viewModel)
+        }
+        
+        dataSource = UICollectionViewDiffableDataSource<Section, Block>(collectionView: collectionView) { collectionView, indexPath, block in
+            switch block.kind {
+            case .quote:
+                return collectionView.dequeueConfiguredReusableCell(using: quoteCell, for: indexPath, item: block)
+            case .todo:
+                return collectionView.dequeueConfiguredReusableCell(using: todoCell, for: indexPath, item: block)
+            case .listItem:
+                return collectionView.dequeueConfiguredReusableCell(using: bulletedListItemCell, for: indexPath, item: block)
+            case .divider:
+                return collectionView.dequeueConfiguredReusableCell(using: dividerCell, for: indexPath, item: block)
+            default:
+                return collectionView.dequeueConfiguredReusableCell(using: textCell, for: indexPath, item: block)
+            }
         }
 
         updateDataSource()
@@ -202,85 +255,6 @@ final class DocumentViewController: UIViewController {
     private func block(at indexPath: IndexPath) -> Block? {
         guard indexPath.row >= 0, indexPath.row < document.blocks.count else { return nil }
         return document.blocks[indexPath.row]
-    }
-    
-    private func cell(for indexPath: IndexPath, block: Block) -> UICollectionViewCell {
-        let cell: UICollectionViewCell
-        
-        switch block.kind {
-        case .heading:
-            cell = self.headingBlockCell(for: indexPath, block: block)
-        case .paragraph:
-            cell = self.paragraphBlockCell(for: indexPath, block: block)
-        case .quote:
-            cell = self.quoteBlockCell(for: indexPath, block: block)
-        case .todo:
-            cell = self.todoBlockCell(for: indexPath, block: block)
-        case .listItem:
-            cell = self.bulletedListItemBlockCell(for: indexPath, block: block)
-            //cell = self.numberedListItemBlockCell(for: indexPath, block: block)
-        case .divider:
-            cell = self.dividerBlockCell(for: indexPath, block: block)
-        default:
-            fatalError("No cell for kind: \(block.kind)")
-        }
-        
-        if let textCell = cell as? BaseTextCellView {
-            textCell.delegate = self
-            textCell.toolbarController.delegate = self
-        }
-        
-        return cell
-    }
-    
-    private func paragraphBlockCell(for indexPath: IndexPath, block: Block) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(TextBlockCellView.self, for: indexPath)
-        let viewModel = TextBlockViewModel(block: block, style: .paragraph)
-        cell.configure(with: viewModel)
-        return cell
-    }
-    
-    private func headingBlockCell(for indexPath: IndexPath, block: Block) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(TextBlockCellView.self, for: indexPath)
-        let viewModel = TextBlockViewModel(block: block, style: .heading)
-        cell.configure(with: viewModel)
-        return cell
-    }
-    
-    private func quoteBlockCell(for indexPath: IndexPath, block: Block) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(QuoteBlockCellView.self, for: indexPath)
-        let viewModel = QuoteBlockViewModel(block: block)
-        cell.configure(with: viewModel)
-        return cell
-    }
-
-    private func todoBlockCell(for indexPath: IndexPath, block: Block) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(TodoBlockCellView.self, for: indexPath)
-        let viewModel = TodoBlockViewModel(block: block)
-        cell.configure(with: viewModel)
-        cell.todoDelegate = self
-        return cell
-    }
-    
-    private func bulletedListItemBlockCell(for indexPath: IndexPath, block: Block) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(ListItemBlockCellView.self, for: indexPath)
-        let viewModel = ListItemBlockViewModel(block: block, listItemLabelString: "-")
-        cell.configure(with: viewModel)
-        return cell
-    }
-    
-    private func numberedListItemBlockCell(for indexPath: IndexPath, block: Block) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(ListItemBlockCellView.self, for: indexPath)
-        let viewModel = ListItemBlockViewModel(block: block, listItemLabelString: "1.")
-        cell.configure(with: viewModel)
-        return cell
-    }
-    
-    private func dividerBlockCell(for indexPath: IndexPath, block: Block) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(DividerBlockCellView.self, for: indexPath)
-        let viewModel = DividerBlockViewModel(block: block)
-        cell.configure(with: viewModel)
-        return cell
     }
     
     // MARK: - Gestures
