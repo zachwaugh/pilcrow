@@ -22,7 +22,6 @@ final class ToolbarController {
     }
 
     private func setup() {
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(hStack)
         
         NSLayoutConstraint.activate([

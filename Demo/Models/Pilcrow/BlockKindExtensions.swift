@@ -49,4 +49,17 @@ extension Block.Kind {
             return nil
         }
     }
+    
+    var isText: Bool {
+        !isDecorative
+    }
+    
+    var isDecorative: Bool {
+        switch self {
+        case .divider, .color:
+            return true
+        default:
+            return false
+        }
+    }
 }

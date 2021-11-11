@@ -229,9 +229,19 @@ final class DocumentViewController: UIViewController {
         }
     }
         
-    // MARK: - Blocks
+    // MARK: - Block Edits
     
-    private func insertOrModifyBlock(for kind: Block.Kind) {
+    private func updateBlock(at indexPath: IndexPath, to kind: Block.Kind) {
+        guard let block = document.block(at: indexPath.row) else { return }
+        updateBlock(block, to: kind)
+    }
+    
+    private func updateBlock(_ block: Block, to kind: Block.Kind) {
+        guard kind != block.kind, block.kind.isDecorative == kind.isDecorative else { return }
+        editor.updateBlockKind(for: block, to: kind)
+    }
+    
+    private func insertOrModifyEditingBlock(for kind: Block.Kind) {
         if let block = editingBlock {
             guard kind != block.kind else { return }
             
@@ -400,15 +410,22 @@ extension DocumentViewController: TextCellDelegate {
 
 extension DocumentViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
-        UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { [unowned self] _ in
+        let deleteAction = UIAction(title: "Delete", image: UIImage(systemName: "trash"), attributes: .destructive) { [unowned self] _ in
+            self.deleteBlock(at: indexPath)
+        }
+        
+        let changeActions = Block.Kind.all.map { kind in
+            UIAction(title: kind.title, image: kind.image) { [unowned self] _ in
+                self.updateBlock(at: indexPath, to: kind)
+            }
+        }
+        
+        let changeMenu = UIMenu(title: "Change to…", children: changeActions)
+        
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
             UIMenu(children: [
-                UIAction(title: "Delete", image: UIImage(systemName: "trash"), attributes: .destructive) { _ in
-                    self.deleteBlock(at: indexPath)
-                },
-                
-                UIMenu(title: "Change to…", children: [
-                    
-                ])
+                deleteAction,
+                changeMenu
             ])
         }
     }
@@ -453,7 +470,7 @@ extension DocumentViewController: ToolbarDelegate {
     func toolbarDidTapButton(action: ToolbarAction) {
         switch action {
         case .selectBlock(let kind):
-            insertOrModifyBlock(for: kind)
+            insertOrModifyEditingBlock(for: kind)
         case .dismissKeyboard:
             view.endEditing(true)
         }
