@@ -1,4 +1,5 @@
 import UIKit
+import Pilcrow
 
 protocol TextCellDelegate: AnyObject {
     func textCellDidEdit(cell: UICollectionViewCell, edit: TextEdit)

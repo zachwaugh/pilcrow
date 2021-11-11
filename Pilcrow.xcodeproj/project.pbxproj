@@ -18,13 +18,11 @@
 		928EF89D26444F1D00437680 /* TodoBlockCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928EF89C26444F1D00437680 /* TodoBlockCellView.swift */; };
 		92973A952644BBAB00B836B5 /* TextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92973A942644BBAB00B836B5 /* TextStyle.swift */; };
 		92973A97264589FE00B836B5 /* ListItemBlockCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92973A96264589FE00B836B5 /* ListItemBlockCellView.swift */; };
-		92973A9A26458D4A00B836B5 /* TextEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92973A9926458D4A00B836B5 /* TextEdit.swift */; };
 		92973A9D26458E4200B836B5 /* FocusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92973A9C26458E4200B836B5 /* FocusableView.swift */; };
 		92973A9F2645908C00B836B5 /* TextBlockCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92973A9E2645908C00B836B5 /* TextBlockCellView.swift */; };
 		92973AAA2645B20300B836B5 /* ListItemStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92973AA92645B20300B836B5 /* ListItemStyle.swift */; };
 		92973AAE2645B9B200B836B5 /* BlockKindExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92973AAD2645B9B200B836B5 /* BlockKindExtensions.swift */; };
 		92973AB12645BAB300B836B5 /* ReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92973AB02645BAB300B836B5 /* ReusableCell.swift */; };
-		92973AB42645E3B500B836B5 /* DocumentEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92973AB32645E3B500B836B5 /* DocumentEditor.swift */; };
 		92B17561264D77D10016C279 /* DividerBlockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B17560264D77D10016C279 /* DividerBlockViewModel.swift */; };
 		92B17563264D77F60016C279 /* DividerBlockCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B17562264D77F60016C279 /* DividerBlockCellView.swift */; };
 		92B3276D273BFDE30071B0C4 /* Pilcrow.docc in Sources */ = {isa = PBXBuildFile; fileRef = 92B3276C273BFDE30071B0C4 /* Pilcrow.docc */; };
@@ -37,6 +35,11 @@
 		92B3278C273D49160071B0C4 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B3278B273D49160071B0C4 /* Document.swift */; };
 		92B32790273D49D10071B0C4 /* Pilcrow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B32769273BFDE30071B0C4 /* Pilcrow.framework */; };
 		92B32791273D49D10071B0C4 /* Pilcrow.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 92B32769273BFDE30071B0C4 /* Pilcrow.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		92B32798273D4A9D0071B0C4 /* ColorBlockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B32797273D4A9D0071B0C4 /* ColorBlockViewModel.swift */; };
+		92B3279A273D4B180071B0C4 /* ColorBlockCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B32799273D4B180071B0C4 /* ColorBlockCellView.swift */; };
+		92B3279C273D4C8D0071B0C4 /* TextEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92973A9926458D4A00B836B5 /* TextEdit.swift */; };
+		92B3279D273D4C910071B0C4 /* DocumentEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92973AB32645E3B500B836B5 /* DocumentEditor.swift */; };
+		92B3279F273D4CF10071B0C4 /* EditResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B3279E273D4CF10071B0C4 /* EditResult.swift */; };
 		92C2264E26542E8C00FB5D97 /* DocumentBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C2264D26542E8C00FB5D97 /* DocumentBrowserViewController.swift */; };
 		92C22651265431C200FB5D97 /* DocumentFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C22650265431C200FB5D97 /* DocumentFile.swift */; };
 		92C336192655DA8800AF6F4F /* ToolbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C336182655DA8800AF6F4F /* ToolbarController.swift */; };
@@ -57,13 +60,6 @@
 			remoteInfo = Pilcrow;
 		};
 		92B3278D273D49BC0071B0C4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 92C5810B2644472700E062A0 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 92B32768273BFDE30071B0C4;
-			remoteInfo = Pilcrow;
-		};
-		92B32792273D49D10071B0C4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 92C5810B2644472700E062A0 /* Project object */;
 			proxyType = 1;
@@ -119,6 +115,9 @@
 		92B32787273C00710071B0C4 /* BlockKindTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockKindTests.swift; sourceTree = "<group>"; };
 		92B32789273C04590071B0C4 /* BlockKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockKind.swift; sourceTree = "<group>"; };
 		92B3278B273D49160071B0C4 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
+		92B32797273D4A9D0071B0C4 /* ColorBlockViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorBlockViewModel.swift; sourceTree = "<group>"; };
+		92B32799273D4B180071B0C4 /* ColorBlockCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorBlockCellView.swift; sourceTree = "<group>"; };
+		92B3279E273D4CF10071B0C4 /* EditResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditResult.swift; sourceTree = "<group>"; };
 		92C22629265421A200FB5D97 /* DocumentEditorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentEditorTests.swift; sourceTree = "<group>"; };
 		92C2264D26542E8C00FB5D97 /* DocumentBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentBrowserViewController.swift; sourceTree = "<group>"; };
 		92C22650265431C200FB5D97 /* DocumentFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentFile.swift; sourceTree = "<group>"; };
@@ -163,11 +162,14 @@
 		922590DA26471CFE000113B3 /* View Models */ = {
 			isa = PBXGroup;
 			children = (
+				92973AA92645B20300B836B5 /* ListItemStyle.swift */,
+				92973A942644BBAB00B836B5 /* TextStyle.swift */,
 				922590DF26471E7E000113B3 /* TextBlockViewModel.swift */,
 				922590DB26471D0F000113B3 /* ListItemBlockViewModel.swift */,
 				922590DD26471DC1000113B3 /* TodoBlockViewModel.swift */,
 				924A7C7D2649D2A7003C5073 /* QuoteBlockViewModel.swift */,
 				92B17560264D77D10016C279 /* DividerBlockViewModel.swift */,
+				92B32797273D4A9D0071B0C4 /* ColorBlockViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -190,14 +192,13 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		928EF89E264460F700437680 /* Document */ = {
+		928EF89E264460F700437680 /* Pilcrow */ = {
 			isa = PBXGroup;
 			children = (
-				92973AA02645B1A500B836B5 /* Blocks */,
-				92973A9826458D4000B836B5 /* Edit */,
 				928EF89626444AF000437680 /* DocumentExtensions.swift */,
+				92973AAD2645B9B200B836B5 /* BlockKindExtensions.swift */,
 			);
-			path = Document;
+			path = Pilcrow;
 			sourceTree = "<group>";
 		};
 		928EF8A12644618700437680 /* Assets */ = {
@@ -217,15 +218,6 @@
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
-		92973A9826458D4000B836B5 /* Edit */ = {
-			isa = PBXGroup;
-			children = (
-				92973A9926458D4A00B836B5 /* TextEdit.swift */,
-				92973AB32645E3B500B836B5 /* DocumentEditor.swift */,
-			);
-			path = Edit;
-			sourceTree = "<group>";
-		};
 		92973A9B26458E3400B836B5 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -233,14 +225,6 @@
 				92973AB02645BAB300B836B5 /* ReusableCell.swift */,
 			);
 			path = Protocols;
-			sourceTree = "<group>";
-		};
-		92973AA02645B1A500B836B5 /* Blocks */ = {
-			isa = PBXGroup;
-			children = (
-				92973AAD2645B9B200B836B5 /* BlockKindExtensions.swift */,
-			);
-			path = Blocks;
 			sourceTree = "<group>";
 		};
 		92973AB22645E0F500B836B5 /* Cells */ = {
@@ -252,6 +236,7 @@
 				92973A96264589FE00B836B5 /* ListItemBlockCellView.swift */,
 				924A7C7B2649D259003C5073 /* QuoteBlockCellView.swift */,
 				92B17562264D77F60016C279 /* DividerBlockCellView.swift */,
+				92B32799273D4B180071B0C4 /* ColorBlockCellView.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -259,9 +244,8 @@
 		92B3276A273BFDE30071B0C4 /* Pilcrow */ = {
 			isa = PBXGroup;
 			children = (
-				92B32783273BFE4F0071B0C4 /* Block.swift */,
-				92B32789273C04590071B0C4 /* BlockKind.swift */,
-				92B3278B273D49160071B0C4 /* Document.swift */,
+				92B32796273D4A060071B0C4 /* Models */,
+				92B32795273D4A000071B0C4 /* Views */,
 				92B3276B273BFDE30071B0C4 /* Pilcrow.h */,
 				92B3276C273BFDE30071B0C4 /* Pilcrow.docc */,
 			);
@@ -285,6 +269,34 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		92B32795273D4A000071B0C4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		92B32796273D4A060071B0C4 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				92B3279B273D4C7E0071B0C4 /* Editing */,
+				92B32783273BFE4F0071B0C4 /* Block.swift */,
+				92B32789273C04590071B0C4 /* BlockKind.swift */,
+				92B3278B273D49160071B0C4 /* Document.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		92B3279B273D4C7E0071B0C4 /* Editing */ = {
+			isa = PBXGroup;
+			children = (
+				92973A9926458D4A00B836B5 /* TextEdit.swift */,
+				92B3279E273D4CF10071B0C4 /* EditResult.swift */,
+				92973AB32645E3B500B836B5 /* DocumentEditor.swift */,
+			);
+			path = Editing;
 			sourceTree = "<group>";
 		};
 		92C2264F265431B300FB5D97 /* UIDocument */ = {
@@ -337,9 +349,7 @@
 			isa = PBXGroup;
 			children = (
 				92C2264F265431B300FB5D97 /* UIDocument */,
-				928EF89E264460F700437680 /* Document */,
-				92973AA92645B20300B836B5 /* ListItemStyle.swift */,
-				92973A942644BBAB00B836B5 /* TextStyle.swift */,
+				928EF89E264460F700437680 /* Pilcrow */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -417,7 +427,6 @@
 			);
 			dependencies = (
 				92B3278E273D49BC0071B0C4 /* PBXTargetDependency */,
-				92B32793273D49D10071B0C4 /* PBXTargetDependency */,
 			);
 			name = Demo;
 			productName = Taper;
@@ -498,9 +507,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				92B3278C273D49160071B0C4 /* Document.swift in Sources */,
+				92B3279D273D4C910071B0C4 /* DocumentEditor.swift in Sources */,
+				92B3279F273D4CF10071B0C4 /* EditResult.swift in Sources */,
 				92B3278A273C04590071B0C4 /* BlockKind.swift in Sources */,
 				92B3276D273BFDE30071B0C4 /* Pilcrow.docc in Sources */,
 				92B32784273BFE4F0071B0C4 /* Block.swift in Sources */,
+				92B3279C273D4C8D0071B0C4 /* TextEdit.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -530,19 +542,19 @@
 				924A7C7A2649C7AC003C5073 /* Metrics.swift in Sources */,
 				92C5811B2644472800E062A0 /* DocumentViewController.swift in Sources */,
 				92C22651265431C200FB5D97 /* DocumentFile.swift in Sources */,
-				92973A9A26458D4A00B836B5 /* TextEdit.swift in Sources */,
 				92C581172644472800E062A0 /* AppDelegate.swift in Sources */,
 				92973AAA2645B20300B836B5 /* ListItemStyle.swift in Sources */,
+				92B3279A273D4B180071B0C4 /* ColorBlockCellView.swift in Sources */,
 				92973A9D26458E4200B836B5 /* FocusableView.swift in Sources */,
 				928EF89D26444F1D00437680 /* TodoBlockCellView.swift in Sources */,
 				92973AB12645BAB300B836B5 /* ReusableCell.swift in Sources */,
-				92973AB42645E3B500B836B5 /* DocumentEditor.swift in Sources */,
 				92B17561264D77D10016C279 /* DividerBlockViewModel.swift in Sources */,
 				92C336192655DA8800AF6F4F /* ToolbarController.swift in Sources */,
 				92C2264E26542E8C00FB5D97 /* DocumentBrowserViewController.swift in Sources */,
 				924A7C7E2649D2A7003C5073 /* QuoteBlockViewModel.swift in Sources */,
 				92C581192644472800E062A0 /* SceneDelegate.swift in Sources */,
 				92973A97264589FE00B836B5 /* ListItemBlockCellView.swift in Sources */,
+				92B32798273D4A9D0071B0C4 /* ColorBlockViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -558,11 +570,6 @@
 			isa = PBXTargetDependency;
 			target = 92B32768273BFDE30071B0C4 /* Pilcrow */;
 			targetProxy = 92B3278D273D49BC0071B0C4 /* PBXContainerItemProxy */;
-		};
-		92B32793273D49D10071B0C4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 92B32768273BFDE30071B0C4 /* Pilcrow */;
-			targetProxy = 92B32792273D49D10071B0C4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

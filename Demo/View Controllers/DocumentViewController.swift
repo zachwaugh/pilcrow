@@ -147,6 +147,11 @@ final class DocumentViewController: UIViewController {
             cell.configure(with: viewModel)
         }
         
+        let colorCell = UICollectionView.CellRegistration<ColorBlockCellView, Block> { cell, indexPath, block in
+            let viewModel = ColorBlockViewModel(block: block)
+            cell.configure(with: viewModel)
+        }
+        
         dataSource = UICollectionViewDiffableDataSource<Section, String>(collectionView: collectionView) { [unowned self] collectionView, indexPath, id in
             guard let block = self.document.block(with: id) else {
                 fatalError("Couldn't find block with id: \(id)")
@@ -163,6 +168,8 @@ final class DocumentViewController: UIViewController {
                 return collectionView.dequeueConfiguredReusableCell(using: dividerCell, for: indexPath, item: block)
             case .heading, .paragraph:
                 return collectionView.dequeueConfiguredReusableCell(using: textCell, for: indexPath, item: block)
+            case .color:
+                return collectionView.dequeueConfiguredReusableCell(using: colorCell, for: indexPath, item: block)
             default:
                 print("No cell for block kind: \(block.kind), falling back to text")
                 return collectionView.dequeueConfiguredReusableCell(using: textCell, for: indexPath, item: block)

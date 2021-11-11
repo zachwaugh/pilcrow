@@ -1,31 +1,19 @@
 import Foundation
 import Combine
-import Pilcrow
-
-enum EditResult {
-    case inserted(Block.ID), updatedKind(Block.ID), updatedContent(Block.ID), deleted(Block.ID)
-    
-    var id: Block.ID {
-        switch self {
-        case .inserted(let id), .updatedKind(let id), .updatedContent(let id), .deleted(let id):
-            return id
-        }
-    }
-}
 
 /// Editor manages all edits to the document
-/// ensuring a consistent state
-final class DocumentEditor {
-    var changes = PassthroughSubject<EditResult, Never>()
-    private(set) var document: Document
+/// ensuring a consistent state and notifying subscribers about changes
+public final class DocumentEditor {
+    public var changes = PassthroughSubject<EditResult, Never>()
+    public private(set) var document: Document
 
-    init(document: Document) {
+    public init(document: Document) {
         self.document = document
     }
     
     // MARK: - Editing
     
-    func apply(edit: TextEdit, to block: Block) {
+    public func apply(edit: TextEdit, to block: Block) {
         let isEmpty = block.content.isEmpty
         let isParagraph = block.kind == .paragraph
         let isEmptyNonParagraph = isEmpty && !isParagraph
@@ -44,15 +32,17 @@ final class DocumentEditor {
         }
     }
     
-    func moveBlock(_ block: Block, to row: Int) {
+    public func moveBlock(_ block: Block, to row: Int) {
         guard let sourceRow = document.index(of: block) else { return }
         
         let destinationRow = min(row, document.blocks.count - 1)
         let block = document.blocks.remove(at: sourceRow)
         document.blocks.insert(block, at: destinationRow)
     }
+    
+    // MARK: - Todo
 
-    func toggleCompletion(for block: Block) {
+    public func toggleCompletion(for block: Block) {
         guard block.kind == .todo else { return }
         
         var updated = block
@@ -62,7 +52,7 @@ final class DocumentEditor {
     
     // MARK: - Inserts
     
-    func insertBlock(_ newBlock: Block, after existingBlock: Block) {
+    public func insertBlock(_ newBlock: Block, after existingBlock: Block) {
         guard let index = document.index(of: existingBlock) else {
             fatalError("Block not found in document! \(existingBlock)")
         }
@@ -72,7 +62,7 @@ final class DocumentEditor {
         changes.send(.inserted(newBlock.id))
     }
     
-    func appendNewBlock() {
+    public func appendNewBlock() {
         if let block = document.blocks.last {
             appendBlock(block.next())
         } else {
@@ -80,22 +70,30 @@ final class DocumentEditor {
         }
     }
     
-    func appendBlock(_ block: Block) {
+    public func appendBlock(_ block: Block) {
         document.blocks.append(block)
         changes.send(.inserted(block.id))
     }
     
-    func appendBlocks(_ blocks: [Block]) {
+    public func appendBlocks(_ blocks: [Block]) {
         document.blocks.append(contentsOf: blocks)
     }
     
     // MARK: - Updates
     
-    func updateBlockKind(for block: Block, to kind: Block.Kind) {
+    private func canTransformBlock(to kind: Block.Kind) -> Bool {
+        if kind == .divider {
+            return false
+        }
+        
+        return true
+    }
+    
+    public func updateBlockKind(for block: Block, to kind: Block.Kind) {
         guard let index = document.index(of: block) else { return }
         
-        // Don't transform blocks into dividers
-        if kind == .divider {
+        // Insert new block if it can't be transformed
+        if !canTransformBlock(to: kind) {
             insertBlock(Block(kind: kind), after: block)
             return
         }
@@ -121,7 +119,7 @@ final class DocumentEditor {
     
     // MARK: - Deletions
     
-    func deleteBlock(_ block: Block) {
+    public func deleteBlock(_ block: Block) {
         guard let index = document.index(of: block) else {
             fatalError("Block not found in document! \(block)")
         }

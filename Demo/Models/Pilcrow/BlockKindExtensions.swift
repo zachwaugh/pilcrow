@@ -2,16 +2,15 @@ import UIKit
 import Pilcrow
 
 extension Block.Kind {
+    /// A custom "color" block provided by the application
+    static let color = Block.Kind("color")
+    
     static var all: [Block.Kind] {
-        [.paragraph, .heading, .listItem, .todo, .quote, .divider]
+        [.paragraph, .heading, .listItem, .todo, .quote, .divider, .color]
     }
     
     var title: String {
         switch self {
-        case .heading:
-            return "Heading"
-        case .paragraph:
-            return "Paragraph"
         case .todo:
             return "To do"
         case .listItem:
@@ -20,10 +19,6 @@ extension Block.Kind {
 //            return "Bulleted List"
 //        case .numberedListItem:
 //            return "Numbered List"
-        case .quote:
-            return "Quote"
-        case .divider:
-            return "Divider"
         default:
             return name.capitalized
         }
@@ -47,6 +42,8 @@ extension Block.Kind {
             return UIImage(systemName: "text.quote")
         case .divider:
             return UIImage(systemName: "divide")
+        case .color:
+            return UIImage(systemName: "paintpalette")
         default:
             print("[Pilcrow] *** error - no image provided for kind: \(self)")
             return nil
