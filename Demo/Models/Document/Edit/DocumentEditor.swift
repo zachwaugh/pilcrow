@@ -51,7 +51,7 @@ final class DocumentEditor {
     }
     
     func moveBlock(_ block: Block, to row: Int) {
-        guard let sourceRow = index(of: block) else { return }
+        guard let sourceRow = document.index(of: block) else { return }
         
         let destinationRow = min(row, document.blocks.count - 1)
         let block = document.blocks.remove(at: sourceRow)
@@ -62,15 +62,14 @@ final class DocumentEditor {
         guard block.kind == .todo else { return nil }
         
         var updated = block
-        updated.properties["completed"] = block["completed"] == "true" ? "false" : "true"
-        //content.toggleCompletion()
+        updated.toggleCompletion()
         return updateBlock(block, with: updated)
     }
     
     // MARK: - Inserts
     
     func insertBlock(_ newBlock: Block, after existingBlock: Block) -> EditResult {
-        guard let index = index(of: existingBlock) else {
+        guard let index = document.index(of: existingBlock) else {
             fatalError("Block not found in document! \(existingBlock)")
         }
         
@@ -94,16 +93,10 @@ final class DocumentEditor {
         return .inserted(block.id)
     }
     
-//    @discardableResult
-//    func appendBlocks(_ blocks: [Block]) -> EditResult {
-//        document.blocks += blocks
-//        return .inserted(document.blocks.endIndex - 1)
-//    }
-    
     // MARK: - Updates
     
     func updateBlockKind(for block: Block, to kind: Block.Kind) -> EditResult? {
-        guard let index = index(of: block) else { return nil }
+        guard let index = document.index(of: block) else { return nil }
         
         var updated = block
         updated.kind = kind
@@ -121,7 +114,7 @@ final class DocumentEditor {
     
     @discardableResult
     private func updateBlock(_ block: Block, with updatedBlock: Block) -> EditResult? {
-        guard let index = index(of: block) else { return nil }
+        guard let index = document.index(of: block) else { return nil }
 
         document.blocks[index] = updatedBlock
         return .updated(block.id)
@@ -131,17 +124,11 @@ final class DocumentEditor {
     
     @discardableResult
     func deleteBlock(_ block: Block) -> EditResult {
-        guard let index = index(of: block) else {
+        guard let index = document.index(of: block) else {
             fatalError("Block not found in document! \(block)")
         }
         
         document.blocks.remove(at: index)
         return .deleted(block.id)
-    }
-    
-    // MARK: - Blocks
-    
-    private func index(of block: Block) -> Int? {
-        document.blocks.firstIndex(of: block)
     }
 }

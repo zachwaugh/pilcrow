@@ -7,6 +7,10 @@ struct Document: Codable, Equatable {
     var isEmpty: Bool {
         blocks.isEmpty
     }
+    
+    func index(of block: Block) -> Int? {
+        blocks.firstIndex { $0.id == block.id }
+    }
 }
 
 extension Document {

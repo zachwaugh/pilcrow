@@ -214,8 +214,9 @@ final class DocumentViewController: UIViewController {
             let block = document.blocks.first(where: { $0.id == id })!
             reloadBlocks([block])
             focusBlock(block)
-        case .deleted(let _):
+        case .deleted:
             updateDataSource()
+            // TODO: fix focusing after cell deletion
             //focusCell(before: index)
         }
     }

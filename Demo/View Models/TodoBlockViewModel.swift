@@ -5,7 +5,7 @@ struct TodoBlockViewModel {
     let block: Block
     
     var isCompleted: Bool {
-        block["completed"] == "true"
+        block.isCompleted
     }
     
     var attributedText: NSAttributedString {

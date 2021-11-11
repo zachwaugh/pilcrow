@@ -8,20 +8,53 @@ public struct Block: Identifiable, Hashable, Codable {
     public var kind: Kind
     public var properties: Properties
     
-    public init(id: String = UUID().uuidString, content: String = "", kind: Kind = .paragraph, properties: Properties = [:]) {
+    public init(
+        id: String = UUID().uuidString,
+        content: String = "",
+        kind: Kind = .paragraph,
+        properties: Properties = [:]
+    ) {
         self.id = id
         self.content = content
         self.kind = kind
         self.properties = properties
     }
     
-    /// Returns
+    /// Returns an appropriate block as successor to this one
     public func next() -> Block {
         Block(kind: kind, properties: properties)
     }
     
-    /// Convenience method for returning property for key if any
+    /// Convenience method for getting/setting properties
     public subscript(key: String) -> String? {
-        properties[key]
+        get {
+            properties[key]
+        }
+        set {
+            properties[key] = newValue
+        }
+    }
+}
+
+// MARK: - Todos
+extension Block {
+    public var isCompleted: Bool {
+        self["completed"] == "true"
+    }
+    
+    public mutating func toggleCompletion() {
+        if isCompleted {
+            markAsUncompleted()
+        } else {
+            markAsCompleted()
+        }
+    }
+    
+    public mutating func markAsCompleted() {
+        self["completed"] = "true"
+    }
+    
+    public mutating func markAsUncompleted() {
+        self["completed"] = "false"
     }
 }
