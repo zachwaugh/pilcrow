@@ -1,22 +1,6 @@
 import Foundation
 import Pilcrow
 
-struct Document: Codable, Equatable {
-    var blocks: [Block] = []
-    
-    var isEmpty: Bool {
-        blocks.isEmpty
-    }
-    
-    func index(of block: Block) -> Int? {
-        blocks.firstIndex { $0.id == block.id }
-    }
-    
-    func block(with id: Block.ID) -> Block? {
-        blocks.first { $0.id == id }
-    }
-}
-
 extension Document {
     /// Test document contains a sample of all blocks
     static var test: Document {
