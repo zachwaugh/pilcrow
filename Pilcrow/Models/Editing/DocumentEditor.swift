@@ -28,16 +28,8 @@ public final class DocumentEditor {
         case .deleteAtBeginning:
             deleteBlock(block)
         case .update(let content):
-            updateBlockTextContent(content, block: block)
+            updateBlockContent(content, block: block)
         }
-    }
-    
-    public func moveBlock(_ block: Block, to row: Int) {
-        guard let sourceRow = document.index(of: block) else { return }
-        
-        let destinationRow = min(row, document.blocks.count - 1)
-        let block = document.blocks.remove(at: sourceRow)
-        document.blocks.insert(block, at: destinationRow)
     }
     
     // MARK: - Todo
@@ -79,24 +71,21 @@ public final class DocumentEditor {
         document.blocks.append(contentsOf: blocks)
     }
     
-    // MARK: - Updates
+    // MARK: - Moves
     
-    private func canTransformBlock(to kind: Block.Kind) -> Bool {
-        if kind == .divider {
-            return false
-        }
+    public func moveBlock(_ block: Block, to row: Int) {
+        guard let sourceRow = document.index(of: block) else { return }
         
-        return true
+        let destinationRow = min(row, document.blocks.count - 1)
+        let block = document.blocks.remove(at: sourceRow)
+        document.blocks.insert(block, at: destinationRow)
+        changes.send(.moved)
     }
+    
+    // MARK: - Updates
     
     public func updateBlockKind(for block: Block, to kind: Block.Kind) {
         guard let index = document.index(of: block) else { return }
-        
-        // Insert new block if it can't be transformed
-        if !canTransformBlock(to: kind) {
-            insertBlock(Block(kind: kind), after: block)
-            return
-        }
         
         var updated = block
         updated.kind = kind
@@ -104,7 +93,7 @@ public final class DocumentEditor {
         changes.send(.updatedKind(block.id))
     }
     
-    private func updateBlockTextContent(_ text: String, block: Block) {
+    private func updateBlockContent(_ text: String, block: Block) {
         var updated = block
         updated.content = text
         updateBlock(block, with: updated)

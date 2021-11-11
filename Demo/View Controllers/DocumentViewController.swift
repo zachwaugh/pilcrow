@@ -224,6 +224,8 @@ final class DocumentViewController: UIViewController {
             updateDataSource()
             // TODO: fix focusing after cell deletion
             //focusCell(before: index)
+        case .moved:
+            updateDataSource()
         }
     }
         
@@ -231,7 +233,18 @@ final class DocumentViewController: UIViewController {
     
     private func insertOrModifyBlock(for kind: Block.Kind) {
         if let block = editingBlock {
-            editor.updateBlockKind(for: block, to: kind)
+            guard kind != block.kind else { return }
+            
+            switch kind {
+            case .divider:
+                let newBlock = Block(kind: .divider)
+                editor.insertBlock(newBlock, after: block)
+            case .color:
+                let newBlock = Block(kind: .color, properties: ["color": "red"])
+                editor.insertBlock(newBlock, after: block)
+            default:
+                editor.updateBlockKind(for: block, to: kind)
+            }
         } else {
             editor.appendBlock(Block(kind: kind))
         }
@@ -263,23 +276,13 @@ final class DocumentViewController: UIViewController {
     
     private func deleteBlock(_ block: Block) {
         editor.deleteBlock(block)
-        updateDataSource(animated: true)
     }
     
     // MARK: - Cells
     
     private func block(for cell: UICollectionViewCell) -> Block? {
         guard let indexPath = collectionView.indexPath(for: cell) else { return nil }
-        return block(at: indexPath)
-    }
-    
-    private func block(at indexPath: IndexPath) -> Block? {
-        guard indexPath.row >= 0, indexPath.row < document.blocks.count else { return nil }
-        return document.blocks[indexPath.row]
-    }
-    
-    private func index(of block: Block) -> Int? {
-        document.blocks.firstIndex(where: { $0.id == block.id })
+        return document.block(at: indexPath.row)
     }
     
     // MARK: - Gestures
@@ -303,7 +306,7 @@ final class DocumentViewController: UIViewController {
     // MARK: - Focus
     
     private func focusBlock(_ block: Block) {
-        guard let index = index(of: block) else { return }
+        guard let index = document.index(of: block) else { return }
         focusCell(at: index)
     }
     
@@ -312,7 +315,7 @@ final class DocumentViewController: UIViewController {
     }
     
     private func focusCell(before block: Block) {
-        guard let index = index(of: block) else { return }
+        guard let index = document.index(of: block) else { return }
 
         let previousIndex = index - 1
         if previousIndex >= 0, !document.blocks.isEmpty {
@@ -380,7 +383,6 @@ final class DocumentViewController: UIViewController {
     }
 }
 
-extension DocumentViewController: UICollectionViewDelegate {}
 
 extension DocumentViewController: TodoCellDelegate {
     func todoCellDidToggleCheckBox(cell: TodoBlockCellView) {
@@ -395,6 +397,23 @@ extension DocumentViewController: TextCellDelegate {
         editor.apply(edit: edit, to: block)
     }
 }
+
+extension DocumentViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { [unowned self] _ in
+            UIMenu(children: [
+                UIAction(title: "Delete", image: UIImage(systemName: "trash"), attributes: .destructive) { _ in
+                    self.deleteBlock(at: indexPath)
+                },
+                
+                UIMenu(title: "Change to…", children: [
+                    
+                ])
+            ])
+        }
+    }
+}
+
 
 extension DocumentViewController: UICollectionViewDragDelegate {
     func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
@@ -419,15 +438,13 @@ extension DocumentViewController: UICollectionViewDropDelegate {
     func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
         guard let item = coordinator.items.first,
               let sourceIndexPath = item.sourceIndexPath,
-              let block = block(at: sourceIndexPath),
+              let block = document.block(at: sourceIndexPath.row),
               let destinationIndexPath = coordinator.destinationIndexPath
         else {
             return
         }
         
-        editor.moveBlock(block, to: destinationIndexPath.row)
-        updateDataSource()
-        
+        editor.moveBlock(block, to: destinationIndexPath.row)        
         coordinator.drop(item.dragItem, toItemAt: destinationIndexPath)
     }
 }
@@ -435,16 +452,10 @@ extension DocumentViewController: UICollectionViewDropDelegate {
 extension DocumentViewController: ToolbarDelegate {
     func toolbarDidTapButton(action: ToolbarAction) {
         switch action {
-        case .updateBlockKind(let kind):
-            updateEditingBlockKind(to: kind)
+        case .selectBlock(let kind):
+            insertOrModifyBlock(for: kind)
         case .dismissKeyboard:
             view.endEditing(true)
         }
-    }
-    
-    private func updateEditingBlockKind(to kind: Block.Kind) {
-        guard let block = editingBlock, block.kind != kind else { return }
-        
-        editor.updateBlockKind(for: block, to: kind)
     }
 }

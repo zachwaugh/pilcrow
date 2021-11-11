@@ -2,7 +2,7 @@ import UIKit
 import Pilcrow
 
 enum ToolbarAction {
-    case updateBlockKind(Block.Kind)
+    case selectBlock(Block.Kind)
     case dismissKeyboard
 }
 
@@ -22,6 +22,7 @@ final class ToolbarController {
     }
 
     private func setup() {
+        view.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(hStack)
         
         NSLayoutConstraint.activate([
@@ -67,7 +68,7 @@ final class ToolbarController {
     
     @objc private func handleBlockKindTap(_ button: UIButton) {
         let kind = Block.Kind.all[button.tag]
-        delegate?.toolbarDidTapButton(action: .updateBlockKind(kind))
+        delegate?.toolbarDidTapButton(action: .selectBlock(kind))
     }
     
     @objc private func handleDismissKeyboardButton() {

@@ -23,4 +23,10 @@ public struct Document: Codable, Equatable {
     public func block(with id: Block.ID) -> Block? {
         blocks.first { $0.id == id }
     }
+    
+    /// The block at the specified index or nil
+    public func block(at index: Int) -> Block? {
+        guard index >= 0, index < blocks.count else { return nil }
+        return blocks[index]
+    }
 }
