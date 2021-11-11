@@ -114,6 +114,6 @@ public final class DocumentEditor {
         }
         
         document.blocks.remove(at: index)
-        changes.send(.deleted(block.id))
+        changes.send(.deleted(block.id, index: index))
     }
 }

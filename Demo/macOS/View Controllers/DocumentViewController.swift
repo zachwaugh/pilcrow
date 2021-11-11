@@ -52,13 +52,12 @@ final class DocumentViewController: NSViewController {
             collectionView.collectionViewLayout?.invalidateLayout()
         case .updatedKind(let id):
             let block = document.block(with: id)!
-            focusBlock(block)
             updateDataSource()
-        case .deleted:
+            focusBlock(block)
+        case .deleted(let id, let index):
             updateDataSource()
             collectionView.collectionViewLayout?.invalidateLayout()
-            // TODO: fix focusing after cell deletion
-            //focusCell(before: index)
+            focusCell(before: index)
         case .moved:
             updateDataSource()
         }
@@ -128,11 +127,44 @@ final class DocumentViewController: NSViewController {
         guard let indexPath = collectionView.indexPath(for: cell) else { return nil }
         return document.block(at: indexPath.item)
     }
-    
+
+    // MARK: - Focus
+
     private func focusBlock(_ block: Block) {
-        guard let index = document.index(of: block), let cell = collectionView.item(at: IndexPath(item: index, section: 0)) else { return }
-        
-        (cell as? BaseTextCollectionViewItem)?.focus()
+        guard let index = document.index(of: block) else { return }
+        focusCell(at: index)
+    }
+    
+    private func focusCell(at index: Int) {
+        focusCell(at: IndexPath(item: index, section: 0))
+    }
+    
+    private func focusCell(before block: Block) {
+        guard let index = document.index(of: block) else { return }
+
+        let previousIndex = index - 1
+        if previousIndex >= 0, !document.blocks.isEmpty {
+            focusCell(at: previousIndex)
+        }
+    }
+    
+    private func focusCell(before index: Int) {
+        let previousIndex = index - 1
+        if previousIndex >= 0, !document.blocks.isEmpty {
+            focusCell(at: previousIndex)
+        }
+    }
+    
+    private func focusCell(after index: Int) {
+        let nextIndex = index + 1
+        if nextIndex < document.blocks.count - 1 {
+            focusCell(at: nextIndex)
+        }
+    }
+    
+    private func focusCell(at indexPath: IndexPath) {
+        guard let cell = collectionView.item(at: indexPath) as? BaseTextCollectionViewItem else { return }
+        cell.focus()
     }
 }
 
