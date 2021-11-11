@@ -3,11 +3,11 @@ import Combine
 import Pilcrow
 
 enum EditResult {
-    case inserted(Block.ID), invalidated(Block.ID), updated(Block.ID), deleted(Block.ID)
+    case inserted(Block.ID), updatedKind(Block.ID), updatedContent(Block.ID), deleted(Block.ID)
     
     var id: Block.ID {
         switch self {
-        case .inserted(let id), .invalidated(let id), .updated(let id), .deleted(let id):
+        case .inserted(let id), .updatedKind(let id), .updatedContent(let id), .deleted(let id):
             return id
         }
     }
@@ -16,21 +16,16 @@ enum EditResult {
 /// Editor manages all edits to the document
 /// ensuring a consistent state
 final class DocumentEditor {
-    private(set) var document: Document {
-        didSet {
-            edits += 1
-        }
-    }
-    
-    @Published var edits: Int = 0
-    
+    var changes = PassthroughSubject<EditResult, Never>()
+    private(set) var document: Document
+
     init(document: Document) {
         self.document = document
     }
     
     // MARK: - Editing
     
-    func apply(edit: TextEdit, to block: Block) -> EditResult? {
+    func apply(edit: TextEdit, to block: Block) {
         let isEmpty = block.content.isEmpty
         let isParagraph = block.kind == .paragraph
         let isEmptyNonParagraph = isEmpty && !isParagraph
@@ -39,14 +34,13 @@ final class DocumentEditor {
         case .insertNewline where isEmptyNonParagraph,
              .deleteAtBeginning where isEmptyNonParagraph:
             // newline or delete for empty non-paragraph removes formatting and turns back into paragraph
-            return updateBlockKind(for: block, to: .paragraph)
+            updateBlockKind(for: block, to: .paragraph)
         case .insertNewline:
-            return insertBlock(block.next(), after: block)
+            insertBlock(block.next(), after: block)
         case .deleteAtBeginning:
-            return deleteBlock(block)
+            deleteBlock(block)
         case .update(let content):
-            let result = updateBlockTextContent(content, block: block)
-            return result.map { .invalidated($0.id) }
+            updateBlockTextContent(content, block: block)
         }
     }
     
@@ -58,77 +52,75 @@ final class DocumentEditor {
         document.blocks.insert(block, at: destinationRow)
     }
 
-    func toggleCompletion(for block: Block) -> EditResult? {
-        guard block.kind == .todo else { return nil }
+    func toggleCompletion(for block: Block) {
+        guard block.kind == .todo else { return }
         
         var updated = block
         updated.toggleCompletion()
-        return updateBlock(block, with: updated)
+        updateBlock(block, with: updated)
     }
     
     // MARK: - Inserts
     
-    func insertBlock(_ newBlock: Block, after existingBlock: Block) -> EditResult {
+    func insertBlock(_ newBlock: Block, after existingBlock: Block) {
         guard let index = document.index(of: existingBlock) else {
             fatalError("Block not found in document! \(existingBlock)")
         }
         
         let newIndex = index + 1
         document.blocks.insert(newBlock, at: newIndex)
-        return .inserted(newBlock.id)
+        changes.send(.inserted(newBlock.id))
     }
     
-    @discardableResult
-    func appendNewBlock() -> EditResult {
+    func appendNewBlock() {
         if let block = document.blocks.last {
-            return appendBlock(block.next())
+            appendBlock(block.next())
         } else {
-            return appendBlock(Block(kind: .heading))
+            appendBlock(Block(kind: .heading))
         }
     }
     
-    @discardableResult
-    func appendBlock(_ block: Block) -> EditResult {
+    func appendBlock(_ block: Block) {
         document.blocks.append(block)
-        return .inserted(block.id)
+        changes.send(.inserted(block.id))
+    }
+    
+    func appendBlocks(_ blocks: [Block]) {
+        document.blocks.append(contentsOf: blocks)
     }
     
     // MARK: - Updates
     
-    func updateBlockKind(for block: Block, to kind: Block.Kind) -> EditResult? {
-        guard let index = document.index(of: block) else { return nil }
+    func updateBlockKind(for block: Block, to kind: Block.Kind) {
+        guard let index = document.index(of: block) else { return }
         
         var updated = block
         updated.kind = kind
         document.blocks[index] = updated
-        
-        return .updated(block.id)
+        changes.send(.updatedKind(block.id))
     }
     
-    @discardableResult
-    private func updateBlockTextContent(_ text: String, block: Block) -> EditResult? {
+    private func updateBlockTextContent(_ text: String, block: Block) {
         var updated = block
         updated.content = text
-        return updateBlock(block, with: updated)
+        updateBlock(block, with: updated)
     }
     
-    @discardableResult
-    private func updateBlock(_ block: Block, with updatedBlock: Block) -> EditResult? {
-        guard let index = document.index(of: block) else { return nil }
+    private func updateBlock(_ block: Block, with updatedBlock: Block) {
+        guard let index = document.index(of: block) else { return }
 
         document.blocks[index] = updatedBlock
-        return .updated(block.id)
+        changes.send(.updatedContent(block.id))
     }
     
     // MARK: - Deletions
     
-    @discardableResult
-    func deleteBlock(_ block: Block) -> EditResult {
+    func deleteBlock(_ block: Block) {
         guard let index = document.index(of: block) else {
             fatalError("Block not found in document! \(block)")
         }
         
         document.blocks.remove(at: index)
-        return .deleted(block.id)
+        changes.send(.deleted(block.id))
     }
 }

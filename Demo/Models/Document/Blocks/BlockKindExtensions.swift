@@ -52,22 +52,4 @@ extension Block.Kind {
             return nil
         }
     }
-    
-    var cellClass: UICollectionViewCell.Type {
-        switch self {
-        case .heading, .paragraph:
-            return TextBlockCellView.self
-        case .todo:
-            return TodoBlockCellView.self
-        case .listItem:
-            return ListItemBlockCellView.self
-        case .quote:
-            return QuoteBlockCellView.self
-        case .divider:
-            return DividerBlockCellView.self
-        default:
-            print("[Pilcrow] *** error - no cell for kind: \(self)")
-            return TextBlockCellView.self
-        }
-    }
 }

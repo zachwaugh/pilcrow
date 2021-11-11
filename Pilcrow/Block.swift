@@ -38,8 +38,10 @@ public struct Block: Identifiable, Hashable, Codable {
 
 // MARK: - Todos
 extension Block {
+    public static let completedKey = "completed"
+    
     public var isCompleted: Bool {
-        self["completed"] == "true"
+        self[Self.completedKey] == "true"
     }
     
     public mutating func toggleCompletion() {
@@ -51,10 +53,10 @@ extension Block {
     }
     
     public mutating func markAsCompleted() {
-        self["completed"] = "true"
+        self[Self.completedKey] = "true"
     }
     
     public mutating func markAsUncompleted() {
-        self["completed"] = "false"
+        self[Self.completedKey] = "false"
     }
 }

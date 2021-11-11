@@ -3,7 +3,7 @@ import Pilcrow
 
 struct ListItemBlockViewModel {
     let block: Block
-    let listItemLabelString: String
+    var listItemLabelString: String = "•"
     
     var text: String {
         block.content

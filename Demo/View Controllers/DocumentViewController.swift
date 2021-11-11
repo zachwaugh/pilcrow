@@ -25,7 +25,6 @@ final class DocumentViewController: UIViewController {
 
     private func setup() {
         setupViews()
-        configureCollectionView()
         configureGestures()
         configureNavigationBar()
         
@@ -38,7 +37,7 @@ final class DocumentViewController: UIViewController {
         
         #if DEBUG
         let testDocument = UIAction(title: "Insert Test Blocks", image: UIImage(systemName: "rectangle.stack.badge.plus")) { [weak self] _ in
-            //self?.document.blocks.append(contentsOf: Document.test.blocks)
+            self?.editor.appendBlocks(Document.test.blocks)
             self?.updateDataSource()
         }
         let menu = UIMenu(title: "", children: [testDocument])
@@ -50,9 +49,9 @@ final class DocumentViewController: UIViewController {
     }
     
     private func observeEditor() {
-        editor.$edits
-            .dropFirst()
-            .sink { [weak self] _ in
+        editor.changes
+            .sink { [weak self] editResult in
+                self?.applyEditResult(editResult)
                 self?.documentEdited()
             }
             .store(in: &subscriptions)
@@ -130,7 +129,7 @@ final class DocumentViewController: UIViewController {
         }
         
         let bulletedListItemCell = UICollectionView.CellRegistration<ListItemBlockCellView, Block> { cell, indexPath, block in
-            let viewModel = ListItemBlockViewModel(block: block, listItemLabelString: "-")
+            let viewModel = ListItemBlockViewModel(block: block)
             cell.configure(with: viewModel)
             cell.delegate = self
             cell.toolbarController.delegate = self
@@ -194,11 +193,6 @@ final class DocumentViewController: UIViewController {
     
     // MARK: - Editing
     
-    private func applyEdit(_ edit: TextEdit, to block: Block) {
-        let result = editor.apply(edit: edit, to: block)
-        applyEditResult(result)
-    }
-    
     private func applyEditResult(_ result: EditResult?) {
         guard let result = result else { return }
         
@@ -207,10 +201,10 @@ final class DocumentViewController: UIViewController {
             updateDataSource()
             let block = document.blocks.first(where: { $0.id == id })!
             focusBlock(block)
-        case .invalidated(let id):
+        case .updatedContent(let id):
             let block = document.blocks.first(where: { $0.id == id })!
             reconfigureBlocks([block])
-        case .updated(let id):
+        case .updatedKind(let id):
             let block = document.blocks.first(where: { $0.id == id })!
             reloadBlocks([block])
             focusBlock(block)
@@ -224,15 +218,11 @@ final class DocumentViewController: UIViewController {
     // MARK: - Blocks
     
     private func insertOrModifyBlock(for kind: Block.Kind) {
-        let result: EditResult?
-        
         if let block = editingBlock {
-            result = editor.updateBlockKind(for: block, to: kind)
+            editor.updateBlockKind(for: block, to: kind)
         } else {
-            result = editor.appendBlock(Block(kind: kind))
+            editor.appendBlock(Block(kind: kind))
         }
-        
-        applyEditResult(result)
     }
     
     /// Find the cell currently being edited if any
@@ -294,7 +284,7 @@ final class DocumentViewController: UIViewController {
             focusCell(at: indexPath)
         } else {
             // Tapped empty zone, add a new block
-            applyEditResult(editor.appendNewBlock())
+            editor.appendNewBlock()
         }
     }
     
@@ -351,12 +341,6 @@ final class DocumentViewController: UIViewController {
         ])
     }
     
-    private func configureCollectionView() {
-        Block.Kind.all.forEach {
-            collectionView.registerReusableCell($0.cellClass)
-        }
-    }
-    
     private lazy var collectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: makeCollectionViewLayout())
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -389,16 +373,14 @@ extension DocumentViewController: UICollectionViewDelegate {}
 extension DocumentViewController: TodoCellDelegate {
     func todoCellDidToggleCheckBox(cell: TodoBlockCellView) {
         guard let block = block(for: cell) else { return }
-        
-        let result = editor.toggleCompletion(for: block)
-        applyEditResult(result)
+        editor.toggleCompletion(for: block)
     }
 }
 
 extension DocumentViewController: TextCellDelegate {
     func textCellDidEdit(cell: UICollectionViewCell, edit: TextEdit) {
         guard let block = block(for: cell) else { return }
-        applyEdit(edit, to: block)
+        editor.apply(edit: edit, to: block)
     }
 }
 
@@ -451,7 +433,6 @@ extension DocumentViewController: ToolbarDelegate {
     private func updateEditingBlockKind(to kind: Block.Kind) {
         guard let block = editingBlock, block.kind != kind else { return }
         
-        let result = editor.updateBlockKind(for: block, to: kind)
-        applyEditResult(result)
+        editor.updateBlockKind(for: block, to: kind)
     }
 }
