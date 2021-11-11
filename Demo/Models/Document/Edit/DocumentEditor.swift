@@ -94,6 +94,12 @@ final class DocumentEditor {
     func updateBlockKind(for block: Block, to kind: Block.Kind) {
         guard let index = document.index(of: block) else { return }
         
+        // Don't transform blocks into dividers
+        if kind == .divider {
+            insertBlock(Block(kind: kind), after: block)
+            return
+        }
+        
         var updated = block
         updated.kind = kind
         document.blocks[index] = updated

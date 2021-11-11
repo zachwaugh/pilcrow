@@ -148,7 +148,9 @@ final class DocumentViewController: UIViewController {
         }
         
         dataSource = UICollectionViewDiffableDataSource<Section, String>(collectionView: collectionView) { [unowned self] collectionView, indexPath, id in
-            let block = self.document.blocks.first(where: { $0.id == id })!
+            guard let block = self.document.block(with: id) else {
+                fatalError("Couldn't find block with id: \(id)")
+            }
             
             switch block.kind {
             case .quote:
@@ -159,7 +161,10 @@ final class DocumentViewController: UIViewController {
                 return collectionView.dequeueConfiguredReusableCell(using: bulletedListItemCell, for: indexPath, item: block)
             case .divider:
                 return collectionView.dequeueConfiguredReusableCell(using: dividerCell, for: indexPath, item: block)
+            case .heading, .paragraph:
+                return collectionView.dequeueConfiguredReusableCell(using: textCell, for: indexPath, item: block)
             default:
+                print("No cell for block kind: \(block.kind), falling back to text")
                 return collectionView.dequeueConfiguredReusableCell(using: textCell, for: indexPath, item: block)
             }
         }
