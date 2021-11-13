@@ -46,8 +46,14 @@
 		92B327AF273D98CC0071B0C4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92B327AD273D98CC0071B0C4 /* Main.storyboard */; };
 		92B327B6273D99F20071B0C4 /* Pilcrow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B32769273BFDE30071B0C4 /* Pilcrow.framework */; };
 		92B327B7273D99F20071B0C4 /* Pilcrow.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 92B32769273BFDE30071B0C4 /* Pilcrow.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		92B327C1273D9BB50071B0C4 /* BaseTextCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B327C0273D9BB50071B0C4 /* BaseTextCollectionViewItem.swift */; };
+		92B327C1273D9BB50071B0C4 /* BaseTextCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B327C0273D9BB50071B0C4 /* BaseTextCellView.swift */; };
 		92B327C3273D9D850071B0C4 /* DocumentExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928EF89626444AF000437680 /* DocumentExtensions.swift */; };
+		92B327E0273DCB5A0071B0C4 /* TodoCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B327DF273DCB5A0071B0C4 /* TodoCellView.swift */; };
+		92B327E2273DFB7B0071B0C4 /* TextCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B327E1273DFB7B0071B0C4 /* TextCellView.swift */; };
+		92B327E6273DFC140071B0C4 /* TodoBlockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B327E5273DFC140071B0C4 /* TodoBlockViewModel.swift */; };
+		92B327E8273E028B0071B0C4 /* ListItemCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B327E7273E028B0071B0C4 /* ListItemCellView.swift */; };
+		92B327EA273E042D0071B0C4 /* QuoteCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B327E9273E042D0071B0C4 /* QuoteCellView.swift */; };
+		92B327EC273E0C4A0071B0C4 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B327EB273E0C4A0071B0C4 /* TextView.swift */; };
 		92C2264E26542E8C00FB5D97 /* DocumentBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C2264D26542E8C00FB5D97 /* DocumentBrowserViewController.swift */; };
 		92C22651265431C200FB5D97 /* DocumentFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C22650265431C200FB5D97 /* DocumentFile.swift */; };
 		92C336192655DA8800AF6F4F /* ToolbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C336182655DA8800AF6F4F /* ToolbarController.swift */; };
@@ -157,7 +163,13 @@
 		92B327AB273D98CC0071B0C4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		92B327AE273D98CC0071B0C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		92B327B0273D98CC0071B0C4 /* Demo_macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Demo_macOS.entitlements; sourceTree = "<group>"; };
-		92B327C0273D9BB50071B0C4 /* BaseTextCollectionViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTextCollectionViewItem.swift; sourceTree = "<group>"; };
+		92B327C0273D9BB50071B0C4 /* BaseTextCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTextCellView.swift; sourceTree = "<group>"; };
+		92B327DF273DCB5A0071B0C4 /* TodoCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCellView.swift; sourceTree = "<group>"; };
+		92B327E1273DFB7B0071B0C4 /* TextCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextCellView.swift; sourceTree = "<group>"; };
+		92B327E5273DFC140071B0C4 /* TodoBlockViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoBlockViewModel.swift; sourceTree = "<group>"; };
+		92B327E7273E028B0071B0C4 /* ListItemCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemCellView.swift; sourceTree = "<group>"; };
+		92B327E9273E042D0071B0C4 /* QuoteCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteCellView.swift; sourceTree = "<group>"; };
+		92B327EB273E0C4A0071B0C4 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		92C22629265421A200FB5D97 /* DocumentEditorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentEditorTests.swift; sourceTree = "<group>"; };
 		92C2264D26542E8C00FB5D97 /* DocumentBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentBrowserViewController.swift; sourceTree = "<group>"; };
 		92C22650265431C200FB5D97 /* DocumentFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentFile.swift; sourceTree = "<group>"; };
@@ -330,9 +342,9 @@
 			isa = PBXGroup;
 			children = (
 				92B3279B273D4C7E0071B0C4 /* Editing */,
+				92B3278B273D49160071B0C4 /* Document.swift */,
 				92B32783273BFE4F0071B0C4 /* Block.swift */,
 				92B32789273C04590071B0C4 /* BlockKind.swift */,
-				92B3278B273D49160071B0C4 /* Document.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -368,6 +380,7 @@
 			children = (
 				92B327BC273D9B6E0071B0C4 /* App */,
 				92B327BB273D9B660071B0C4 /* Views */,
+				92B327E4273DFC000071B0C4 /* View Models */,
 				92B327BD273D9B780071B0C4 /* View Controllers */,
 				92B327BE273D9B820071B0C4 /* Assets */,
 				92B327B0273D98CC0071B0C4 /* Demo_macOS.entitlements */,
@@ -379,7 +392,12 @@
 			isa = PBXGroup;
 			children = (
 				92B327BF273D9B880071B0C4 /* Storyboards */,
-				92B327C0273D9BB50071B0C4 /* BaseTextCollectionViewItem.swift */,
+				92B327C0273D9BB50071B0C4 /* BaseTextCellView.swift */,
+				92B327E1273DFB7B0071B0C4 /* TextCellView.swift */,
+				92B327DF273DCB5A0071B0C4 /* TodoCellView.swift */,
+				92B327E7273E028B0071B0C4 /* ListItemCellView.swift */,
+				92B327E9273E042D0071B0C4 /* QuoteCellView.swift */,
+				92B327EB273E0C4A0071B0C4 /* TextView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -422,6 +440,14 @@
 				928EF89626444AF000437680 /* DocumentExtensions.swift */,
 			);
 			path = Shared;
+			sourceTree = "<group>";
+		};
+		92B327E4273DFC000071B0C4 /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				92B327E5273DFC140071B0C4 /* TodoBlockViewModel.swift */,
+			);
+			path = "View Models";
 			sourceTree = "<group>";
 		};
 		92C2264F265431B300FB5D97 /* UIDocument */ = {
@@ -579,7 +605,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1310;
-				LastUpgradeCheck = 1250;
+				LastUpgradeCheck = 1310;
 				TargetAttributes = {
 					92B32768273BFDE30071B0C4 = {
 						CreatedOnToolsVersion = 13.1;
@@ -681,10 +707,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				92B327C1273D9BB50071B0C4 /* BaseTextCollectionViewItem.swift in Sources */,
+				92B327E0273DCB5A0071B0C4 /* TodoCellView.swift in Sources */,
+				92B327E2273DFB7B0071B0C4 /* TextCellView.swift in Sources */,
+				92B327E6273DFC140071B0C4 /* TodoBlockViewModel.swift in Sources */,
+				92B327C1273D9BB50071B0C4 /* BaseTextCellView.swift in Sources */,
+				92B327EA273E042D0071B0C4 /* QuoteCellView.swift in Sources */,
 				92B327AA273D98CB0071B0C4 /* DocumentViewController.swift in Sources */,
 				92B327C3273D9D850071B0C4 /* DocumentExtensions.swift in Sources */,
 				92B327A8273D98CB0071B0C4 /* AppDelegate.swift in Sources */,
+				92B327E8273E028B0071B0C4 /* ListItemCellView.swift in Sources */,
+				92B327EC273E0C4A0071B0C4 /* TextView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -898,6 +930,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_ENTITLEMENTS = Demo/macOS/Demo_macOS.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -928,6 +961,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_ENTITLEMENTS = Demo/macOS/Demo_macOS.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;

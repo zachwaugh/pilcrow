@@ -220,7 +220,7 @@ final class DocumentViewController: UIViewController {
             let block = document.block(with: id)!
             reloadBlocks([block])
             focusBlock(block)
-        case .deleted(let id, let index):
+        case .deleted(_, let index):
             updateDataSource()
             focusCell(before: index)
         case .moved:

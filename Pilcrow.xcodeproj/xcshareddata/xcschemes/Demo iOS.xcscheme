@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1250"
+   LastUpgradeVersion = "1310"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "92C581122644472800E062A0"
-               BuildableName = "Demo.app"
+               BuildableName = "Pilcrow Demo.app"
                BlueprintName = "Demo iOS"
                ReferencedContainer = "container:Pilcrow.xcodeproj">
             </BuildableReference>
@@ -65,7 +65,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "92C581122644472800E062A0"
-            BuildableName = "Demo.app"
+            BuildableName = "Pilcrow Demo.app"
             BlueprintName = "Demo iOS"
             ReferencedContainer = "container:Pilcrow.xcodeproj">
          </BuildableReference>
@@ -82,7 +82,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "92C581122644472800E062A0"
-            BuildableName = "Demo.app"
+            BuildableName = "Pilcrow Demo.app"
             BlueprintName = "Demo iOS"
             ReferencedContainer = "container:Pilcrow.xcodeproj">
          </BuildableReference>

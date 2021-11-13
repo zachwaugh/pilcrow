@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "92B327A4273D98CB0071B0C4"
-               BuildableName = "Demo macOS.app"
+               BuildableName = "Pilcrow Demo.app"
                BlueprintName = "Demo macOS"
                ReferencedContainer = "container:Pilcrow.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "92B327A4273D98CB0071B0C4"
-            BuildableName = "Demo macOS.app"
+            BuildableName = "Pilcrow Demo.app"
             BlueprintName = "Demo macOS"
             ReferencedContainer = "container:Pilcrow.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "92B327A4273D98CB0071B0C4"
-            BuildableName = "Demo macOS.app"
+            BuildableName = "Pilcrow Demo.app"
             BlueprintName = "Demo macOS"
             ReferencedContainer = "container:Pilcrow.xcodeproj">
          </BuildableReference>
