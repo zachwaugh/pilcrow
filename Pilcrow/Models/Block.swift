@@ -22,7 +22,7 @@ public struct Block: Identifiable, Hashable, Codable {
     
     /// Returns an appropriate block as successor to this one
     public func next() -> Block {
-        Block(kind: kind, properties: properties)
+        Block(content: "", kind: kind, properties: properties)
     }
     
     /// Convenience method for getting/setting properties

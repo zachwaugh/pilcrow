@@ -18,7 +18,6 @@ class BaseTextCellView: NSCollectionViewItem {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("[BaseTextCellView] viewDidLoad: \(self)")
 
         view.wantsLayer = true
         view.layer?.borderColor = NSColor.white.withAlphaComponent(0.1).cgColor
@@ -26,9 +25,26 @@ class BaseTextCellView: NSCollectionViewItem {
     }
     
     override func loadView() {
-        // Has to be non-zero or crashes
-        view = NSView(frame: CGRect(x: 0, y: 0, width: 500, height: 20))
+        view = NSView() // CGRect(x: 0, y: 0, width: 500, height: 20))
+        view.translatesAutoresizingMaskIntoConstraints = false
     }
+    
+    override func preferredLayoutAttributesFitting(_ layoutAttributes: NSCollectionViewLayoutAttributes) -> NSCollectionViewLayoutAttributes {
+        textView.invalidateIntrinsicContentSize()
+        return super.preferredLayoutAttributesFitting(layoutAttributes)
+    }
+    
+//    override func preferredLayoutAttributesFitting(_ layoutAttributes: NSCollectionViewLayoutAttributes) -> NSCollectionViewLayoutAttributes {
+//        print("===")
+//        print("[BaseTextCellView] preferredLayoutAttributesFitting() - \(self)")
+//        print("[BaseTextCellView] => [\(textView.string)]")
+//        textView.invalidateIntrinsicContentSize()
+//        let attributes = super.preferredLayoutAttributesFitting(layoutAttributes)
+//        print("[BaseTextCellView] preferredLayoutAttributesFitting -> \(attributes)")
+//        //attributes.size.height = 100
+//        print("===")
+//        return attributes
+//    }
     
     lazy var textView: TextView = {
         let textView = TextView()
@@ -40,19 +56,10 @@ class BaseTextCellView: NSCollectionViewItem {
         textView.allowsDocumentBackgroundColorChange = false
         textView.font = NSFont.systemFont(ofSize: 15)
         textView.allowsUndo = true
-        
-        //textView.isVerticallyResizable = true
-        //textView.textContainer?.heightTracksTextView = true
-        
-        //textView.setContentHuggingPriority(.defaultHigh, for: .vertical)
-        //textView.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
-        textView.layoutManager?.delegate = textView
-        
-        textView.backgroundColor = NSColor.systemYellow.withAlphaComponent(0.1)
-        
+                
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = 1.2
-        textView.defaultParagraphStyle = paragraphStyle
+        //textView.defaultParagraphStyle = paragraphStyle
         
         return textView
     }()

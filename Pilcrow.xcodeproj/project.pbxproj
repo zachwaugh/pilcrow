@@ -38,7 +38,7 @@
 		92B32798273D4A9D0071B0C4 /* ColorBlockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B32797273D4A9D0071B0C4 /* ColorBlockViewModel.swift */; };
 		92B3279A273D4B180071B0C4 /* ColorBlockCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B32799273D4B180071B0C4 /* ColorBlockCellView.swift */; };
 		92B3279C273D4C8D0071B0C4 /* TextEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92973A9926458D4A00B836B5 /* TextEdit.swift */; };
-		92B3279D273D4C910071B0C4 /* DocumentEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92973AB32645E3B500B836B5 /* DocumentEditor.swift */; };
+		92B3279D273D4C910071B0C4 /* Editor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92973AB32645E3B500B836B5 /* Editor.swift */; };
 		92B3279F273D4CF10071B0C4 /* EditResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B3279E273D4CF10071B0C4 /* EditResult.swift */; };
 		92B327A8273D98CB0071B0C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B327A7273D98CB0071B0C4 /* AppDelegate.swift */; };
 		92B327AA273D98CB0071B0C4 /* DocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B327A9273D98CB0071B0C4 /* DocumentViewController.swift */; };
@@ -142,7 +142,7 @@
 		92973AA92645B20300B836B5 /* ListItemStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemStyle.swift; sourceTree = "<group>"; };
 		92973AAD2645B9B200B836B5 /* BlockKindExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockKindExtensions.swift; sourceTree = "<group>"; };
 		92973AB02645BAB300B836B5 /* ReusableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableCell.swift; sourceTree = "<group>"; };
-		92973AB32645E3B500B836B5 /* DocumentEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentEditor.swift; sourceTree = "<group>"; };
+		92973AB32645E3B500B836B5 /* Editor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Editor.swift; sourceTree = "<group>"; };
 		92B17560264D77D10016C279 /* DividerBlockViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerBlockViewModel.swift; sourceTree = "<group>"; };
 		92B17562264D77F60016C279 /* DividerBlockCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerBlockCellView.swift; sourceTree = "<group>"; };
 		92B32769273BFDE30071B0C4 /* Pilcrow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pilcrow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -354,7 +354,7 @@
 			children = (
 				92973A9926458D4A00B836B5 /* TextEdit.swift */,
 				92B3279E273D4CF10071B0C4 /* EditResult.swift */,
-				92973AB32645E3B500B836B5 /* DocumentEditor.swift */,
+				92973AB32645E3B500B836B5 /* Editor.swift */,
 			);
 			path = Editing;
 			sourceTree = "<group>";
@@ -685,7 +685,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				92B3278C273D49160071B0C4 /* Document.swift in Sources */,
-				92B3279D273D4C910071B0C4 /* DocumentEditor.swift in Sources */,
+				92B3279D273D4C910071B0C4 /* Editor.swift in Sources */,
 				92B3279F273D4CF10071B0C4 /* EditResult.swift in Sources */,
 				92B3278A273C04590071B0C4 /* BlockKind.swift in Sources */,
 				92B3276D273BFDE30071B0C4 /* Pilcrow.docc in Sources */,
@@ -930,7 +930,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_ENTITLEMENTS = Demo/macOS/Demo_macOS.entitlements;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;

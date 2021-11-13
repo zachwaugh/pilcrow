@@ -2,17 +2,18 @@ import AppKit
 import Pilcrow
 
 final class TextCellView: BaseTextCellView {
-    static let reuseIdentifier = NSUserInterfaceItemIdentifier("text-cell-identifier")
+    static let reuseIdentifier = NSUserInterfaceItemIdentifier("pilcrow.text-cell-identifier")
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+        textView.backgroundColor = NSColor.systemYellow.withAlphaComponent(0.1)
     }
     
     func configure(with block: Block) {
         switch block.kind {
         case .heading:
-            textView.font = NSFont.systemFont(ofSize: 24, weight: .semibold)
+            textView.font = NSFont.systemFont(ofSize: 32, weight: .semibold)
             textView.textColor = .textColor
         default:
             textView.font = NSFont.systemFont(ofSize: 15)

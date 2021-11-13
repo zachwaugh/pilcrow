@@ -16,6 +16,7 @@ final class ListItemCellView: BaseTextCellView {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+        textView.backgroundColor = .systemBlue.withAlphaComponent(0.1)
     }
 
     func configure(with viewModel: ListItemBlockViewModel) {
@@ -29,7 +30,7 @@ final class ListItemCellView: BaseTextCellView {
 
         NSLayoutConstraint.activate([
             itemLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 2),
-            itemLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 4),
+            itemLabel.topAnchor.constraint(equalTo: view.topAnchor),
             textView.leadingAnchor.constraint(equalTo: itemLabel.trailingAnchor, constant: 4),
 
             textView.trailingAnchor.constraint(equalTo:  view.trailingAnchor),

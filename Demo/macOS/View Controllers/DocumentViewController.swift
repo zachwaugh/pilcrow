@@ -5,13 +5,13 @@ import Pilcrow
 final class DocumentViewController: NSViewController {
     @IBOutlet weak var collectionView: NSCollectionView!
     
-    private lazy var editor = DocumentEditor(document: .test)
+    private lazy var editor = Editor(document: .test)
     private var document: Document { editor.document }
     private var subscriptions: Set<AnyCancellable> = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("[DocumentViewController] viewDidLoad")
         configureCollectionView()
         configureDataSource()
         configureEditor()
@@ -35,11 +35,11 @@ final class DocumentViewController: NSViewController {
     }
     
     private func applyEditResult(_ result: EditResult) {
-        print("[DocumentViewController] applyEditResult: \(result)")
+//        print("[DocumentViewController] applyEditResult: \(result)")
         
         switch result {
         case .inserted(let id):
-            updateDataSource(animated: true)
+            updateDataSource(animated: false)
             let block = document.block(with: id)!
             focusBlock(block)
             //collectionView.collectionViewLayout?.invalidateLayout()
@@ -48,10 +48,10 @@ final class DocumentViewController: NSViewController {
             reconfigureBlocks([block])
         case .updatedKind(let id):
             let block = document.block(with: id)!
-            updateDataSource(animated: true)
+            updateDataSource(animated: false)
             focusBlock(block)
         case .deleted(_, let index):
-            updateDataSource(animated: true)
+            updateDataSource(animated: false)
             //collectionView.collectionViewLayout?.invalidateLayout()
             focusCell(before: index)
         case .moved:
@@ -73,10 +73,15 @@ final class DocumentViewController: NSViewController {
     }
     
     private func configureCollectionView() {
+        collectionView.register(TextCellView.self, forItemWithIdentifier: TextCellView.reuseIdentifier)
+        collectionView.register(TodoCellView.self, forItemWithIdentifier: TodoCellView.reuseIdentifier)
+        collectionView.register(ListItemCellView.self, forItemWithIdentifier: ListItemCellView.reuseIdentifier)
+        collectionView.register(QuoteCellView.self, forItemWithIdentifier: QuoteCellView.reuseIdentifier)
+        collectionView.backgroundColors = [.clear]
+
         collectionView.collectionViewLayout = makeLayout()
         //collectionView.isSelectable = true
         //collectionView.delegate = self
-        collectionView.backgroundColors = [.clear]
     }
     
     // MARK: - Data Source
@@ -84,18 +89,11 @@ final class DocumentViewController: NSViewController {
     private var dataSource: NSCollectionViewDiffableDataSource<Section, Block.ID>!
     
     private func configureDataSource() {
-        collectionView.register(TextCellView.self, forItemWithIdentifier: TextCellView.reuseIdentifier)
-        collectionView.register(TodoCellView.self, forItemWithIdentifier: TodoCellView.reuseIdentifier)
-        collectionView.register(ListItemCellView.self, forItemWithIdentifier: ListItemCellView.reuseIdentifier)
-        collectionView.register(QuoteCellView.self, forItemWithIdentifier: QuoteCellView.reuseIdentifier)
-
         dataSource = NSCollectionViewDiffableDataSource(collectionView: collectionView) { [unowned self] collectionView, indexPath, id in
             guard let block = document.block(with: id) else {
                 fatalError("No block for id! \(id)")
             }
-            
-            print("[DocumentViewController] cell for block: \(block)")
-            
+                        
             switch block.kind {
             case .todo:
                 guard let item = collectionView.makeItem(withIdentifier: TodoCellView.reuseIdentifier, for: indexPath) as? TodoCellView else {
@@ -110,7 +108,7 @@ final class DocumentViewController: NSViewController {
                 guard let item = collectionView.makeItem(withIdentifier: ListItemCellView.reuseIdentifier, for: indexPath) as? ListItemCellView else {
                     fatalError("Couldn't make list cell!")
                 }
-                
+
                 item.configure(with: ListItemBlockViewModel(block: block))
                 item.delegate = self
                 return item
@@ -133,7 +131,10 @@ final class DocumentViewController: NSViewController {
             }
         }
         
-        updateDataSource()
+        updateDataSource(animated: false)
+        DispatchQueue.main.async {
+            self.collectionView.collectionViewLayout?.invalidateLayout()
+        }
     }
         
     private func reconfigureBlocks(_ blocks: [Block]) {
@@ -224,7 +225,7 @@ extension DocumentViewController {
 
 extension DocumentViewController: TextCellDelegate {
     func textCellDidEdit(cell: NSCollectionViewItem, edit: TextEdit) {
-        print("[DocumentViewController] cell did edit: \(edit)")
+//        print("[DocumentViewController] cell did edit: \(edit)")
         guard let block = block(for: cell) else { return }
         editor.apply(edit: edit, to: block)
     }

@@ -3,7 +3,7 @@ import Combine
 
 /// Editor manages all edits to the document
 /// ensuring a consistent state and notifying subscribers about changes
-public final class DocumentEditor {
+public final class Editor {
     public var changes = PassthroughSubject<EditResult, Never>()
     public private(set) var document: Document
 
@@ -24,7 +24,9 @@ public final class DocumentEditor {
             // newline or delete for empty non-paragraph removes formatting and turns back into paragraph
             updateBlockKind(for: block, to: .paragraph)
         case .insertNewline:
-            insertBlock(block.next(), after: block)
+            let newBlock = block.next()
+            print("[Editor] inserting new block: \(newBlock)")
+            insertBlock(newBlock, after: block)
         case .deleteAtBeginning:
             deleteBlock(block)
         case .update(let content):

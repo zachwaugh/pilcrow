@@ -15,6 +15,7 @@ final class QuoteCellView: BaseTextCellView {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+        textView.backgroundColor = NSColor.systemPurple.withAlphaComponent(0.1)
     }
 
     func configure(with viewModel: QuoteBlockViewModel) {
@@ -34,9 +35,9 @@ final class QuoteCellView: BaseTextCellView {
             border.widthAnchor.constraint(equalToConstant: 4),
 
             textView.leadingAnchor.constraint(equalTo: border.trailingAnchor, constant: 8),
-            textView.trailingAnchor.constraint(equalTo:  view.trailingAnchor),
+            textView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             textView.topAnchor.constraint(equalTo: view.topAnchor, constant: 4),
-            textView.bottomAnchor.constraint(equalTo:  view.bottomAnchor, constant: -4),
+            textView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -4),
         ])
     }
 

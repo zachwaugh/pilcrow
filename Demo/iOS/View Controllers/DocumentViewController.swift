@@ -9,7 +9,7 @@ final class DocumentViewController: UIViewController {
     }
     
     private var file: DocumentFile
-    private var editor: DocumentEditor!
+    private var editor: Editor!
     private var document: Document { editor.document }
     private var subscriptions: Set<AnyCancellable> = []
     
@@ -78,7 +78,7 @@ final class DocumentViewController: UIViewController {
         title = file.name
         print("[Demo] documentOpened(), creating editor")
 
-        editor = DocumentEditor(document: document)
+        editor = Editor(document: document)
         observeEditor()
         setupDataSource()
     }

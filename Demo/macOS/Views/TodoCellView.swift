@@ -12,6 +12,7 @@ final class TodoCellView: BaseTextCellView {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+        textView.backgroundColor = NSColor.systemGreen.withAlphaComponent(0.1)
     }
 
     func configure(with viewModel: TodoBlockViewModel) {
@@ -36,7 +37,7 @@ final class TodoCellView: BaseTextCellView {
             textView.leadingAnchor.constraint(equalTo: checkboxButton.trailingAnchor, constant: 8),
             textView.trailingAnchor.constraint(equalTo:  view.trailingAnchor),
             textView.topAnchor.constraint(equalTo: view.topAnchor),
-            textView.bottomAnchor.constraint(equalTo:  view.bottomAnchor),
+            textView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
     }
 
