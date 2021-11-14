@@ -15,7 +15,7 @@ final class QuoteCellView: BaseTextCellView {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        textView.backgroundColor = NSColor.systemPurple.withAlphaComponent(0.1)
+        //textView.backgroundColor = NSColor.systemPurple.withAlphaComponent(0.1)
     }
 
     func configure(with viewModel: QuoteBlockViewModel) {

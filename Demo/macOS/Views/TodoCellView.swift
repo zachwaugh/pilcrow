@@ -12,14 +12,14 @@ final class TodoCellView: BaseTextCellView {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        textView.backgroundColor = NSColor.systemGreen.withAlphaComponent(0.1)
+        //textView.backgroundColor = NSColor.systemGreen.withAlphaComponent(0.1)
     }
 
     func configure(with viewModel: TodoBlockViewModel) {
         checkboxButton.state = viewModel.isCompleted ? .on : .off
-        textView.string = viewModel.text
-        //textView.textStorage?.setAttributedString(viewModel.attributedText)
-        //textView.typingAttributes = viewModel.isCompleted ? viewModel.completedTextAttributes : viewModel.defaultTextAttributes
+        //textView.string = viewModel.text
+        textView.textStorage?.setAttributedString(viewModel.attributedText)
+        textView.typingAttributes = viewModel.isCompleted ? viewModel.completedTextAttributes : viewModel.defaultTextAttributes
     }
 
     @objc private func toggleCheckbox(_ sender: Any) {

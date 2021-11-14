@@ -7,7 +7,7 @@ final class TextCellView: BaseTextCellView {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        textView.backgroundColor = NSColor.systemYellow.withAlphaComponent(0.1)
+        //textView.backgroundColor = NSColor.systemYellow.withAlphaComponent(0.1)
     }
     
     func configure(with block: Block) {

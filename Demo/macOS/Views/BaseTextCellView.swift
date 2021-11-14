@@ -20,8 +20,8 @@ class BaseTextCellView: NSCollectionViewItem {
         super.viewDidLoad()
 
         view.wantsLayer = true
-        view.layer?.borderColor = NSColor.white.withAlphaComponent(0.1).cgColor
-        view.layer?.borderWidth = 1
+//        view.layer?.borderColor = NSColor.white.withAlphaComponent(0.1).cgColor
+//        view.layer?.borderWidth = 1
     }
     
     override func loadView() {
@@ -33,18 +33,6 @@ class BaseTextCellView: NSCollectionViewItem {
         textView.invalidateIntrinsicContentSize()
         return super.preferredLayoutAttributesFitting(layoutAttributes)
     }
-    
-//    override func preferredLayoutAttributesFitting(_ layoutAttributes: NSCollectionViewLayoutAttributes) -> NSCollectionViewLayoutAttributes {
-//        print("===")
-//        print("[BaseTextCellView] preferredLayoutAttributesFitting() - \(self)")
-//        print("[BaseTextCellView] => [\(textView.string)]")
-//        textView.invalidateIntrinsicContentSize()
-//        let attributes = super.preferredLayoutAttributesFitting(layoutAttributes)
-//        print("[BaseTextCellView] preferredLayoutAttributesFitting -> \(attributes)")
-//        //attributes.size.height = 100
-//        print("===")
-//        return attributes
-//    }
     
     lazy var textView: TextView = {
         let textView = TextView()
@@ -58,8 +46,8 @@ class BaseTextCellView: NSCollectionViewItem {
         textView.allowsUndo = true
                 
         let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineHeightMultiple = 1.2
-        //textView.defaultParagraphStyle = paragraphStyle
+        paragraphStyle.lineSpacing = 4
+        textView.defaultParagraphStyle = paragraphStyle
         
         return textView
     }()
@@ -82,5 +70,34 @@ extension BaseTextCellView: NSTextViewDelegate {
         } else {
             return false
         }
+    }
+    
+    private var isEmpty: Bool {
+        textView.string.isEmpty
+    }
+    
+    private var isCollapsedCursorAtBeginning: Bool {
+        let range = textView.selectedRange()
+        return range.isCollapsed && range.isAtBeginning
+    }
+    
+    private var isCursorAtEnd: Bool {
+        let range = textView.selectedRange()
+        return range.isCollapsed && range.isAtEnd(of: textView.string)
+    }
+}
+
+
+extension NSRange {
+    var isCollapsed: Bool {
+        length == 0
+    }
+    
+    var isAtBeginning: Bool {
+        location == 0
+    }
+    
+    func isAtEnd(of string: String) -> Bool {
+        location >= string.utf16.count
     }
 }

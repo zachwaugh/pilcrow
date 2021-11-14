@@ -16,7 +16,7 @@ final class ListItemCellView: BaseTextCellView {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        textView.backgroundColor = .systemBlue.withAlphaComponent(0.1)
+        //textView.backgroundColor = .systemBlue.withAlphaComponent(0.1)
     }
 
     func configure(with viewModel: ListItemBlockViewModel) {
