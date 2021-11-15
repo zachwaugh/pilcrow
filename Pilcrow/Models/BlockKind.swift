@@ -1,11 +1,17 @@
 import Foundation
 
 extension Block {
-    public struct Kind: Hashable, Codable {
-        public let name: String
+    public struct Kind: Hashable, Equatable, Codable, RawRepresentable {
+        public typealias RawValue = String
         
-        public init(_ name: String) {
-            self.name = name
+        public let rawValue: RawValue
+        
+        public init?(rawValue: String) {
+            self.rawValue = rawValue
+        }
+        
+        public init(_ rawValue: String) {
+            self.rawValue = rawValue
         }
     }
 }
