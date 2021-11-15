@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		920D371D274175A2007FD811 /* NSRangeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920D371C274175A2007FD811 /* NSRangeExtensions.swift */; };
+		920D371E2742949E007FD811 /* DocumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922590D4264718A5000113B3 /* DocumentTests.swift */; };
+		920D3721274294A9007FD811 /* DocumentEditorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C22629265421A200FB5D97 /* DocumentEditorTests.swift */; };
+		920D3722274294AD007FD811 /* NumberedListItemContentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922590D826471C8D000113B3 /* NumberedListItemContentTests.swift */; };
 		922590DC26471D0F000113B3 /* ListItemBlockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922590DB26471D0F000113B3 /* ListItemBlockViewModel.swift */; };
 		922590DE26471DC1000113B3 /* TodoBlockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922590DD26471DC1000113B3 /* TodoBlockViewModel.swift */; };
 		922590E026471E7E000113B3 /* TextBlockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922590DF26471E7E000113B3 /* TextBlockViewModel.swift */; };
@@ -691,7 +694,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				920D3722274294AD007FD811 /* NumberedListItemContentTests.swift in Sources */,
 				92B32786273BFF510071B0C4 /* BlockTests.swift in Sources */,
+				920D3721274294A9007FD811 /* DocumentEditorTests.swift in Sources */,
+				920D371E2742949E007FD811 /* DocumentTests.swift in Sources */,
 				92B32788273C00710071B0C4 /* BlockKindTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

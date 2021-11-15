@@ -1,10 +1,10 @@
 import XCTest
-@testable import Demo
+@testable import Pilcrow
 
 class DocumentEditorTests: XCTestCase {
-    private let paragraphBlock = ParagraphContent(text: "paragraph").asBlock()
-    private let dividerBlock = DividerContent().asBlock()
-    private let headingBlock = HeadingContent(text: "heading").asBlock()
+    private let paragraphBlock = Block(content: "paragraph", kind: .paragraph)
+    private let dividerBlock = Block(kind: .divider)
+    private let headingBlock = Block(content: "heading", kind: .heading)
     
     private var simpleDocument: Document {
         Document(blocks: [
@@ -17,7 +17,7 @@ class DocumentEditorTests: XCTestCase {
     // MARK: - Moves
     
     func testMoveBlockToBeginning() {
-        let editor = DocumentEditor(document: simpleDocument)
+        let editor = Editor(document: simpleDocument)
         editor.moveBlock(paragraphBlock, to: 0)
         
         let expectedDocument = Document(blocks: [
@@ -31,7 +31,7 @@ class DocumentEditorTests: XCTestCase {
     
     func testMoveBlockToEnd() {
         let document = simpleDocument
-        let editor = DocumentEditor(document: document)
+        let editor = Editor(document: document)
         editor.moveBlock(paragraphBlock, to: document.blocks.count - 1)
         
         let expectedDocument = Document(blocks: [
@@ -45,7 +45,7 @@ class DocumentEditorTests: XCTestCase {
     
     func testMoveBlockPastEndInsertsAtEnd() {
         let document = simpleDocument
-        let editor = DocumentEditor(document: document)
+        let editor = Editor(document: document)
         editor.moveBlock(paragraphBlock, to: 100)
         
         let expectedDocument = Document(blocks: [

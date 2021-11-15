@@ -1,12 +1,12 @@
 import XCTest
-@testable import Demo
+@testable import Pilcrow
 
 class DocumentTests: XCTestCase {
     func testJSONEncodingAndDecoding() {
         let document = Document(blocks: [
-            .paragraph(ParagraphContent(text: "Text Block")),
-            .todo(TodoContent(text: "Text Block", completed: true)),
-            .bulletedListItem(BulletedListItemContent(text: "List Item Block")),
+            Block(content: "Text Block", kind: .paragraph),
+            Block(content: "Todo Block", kind: .todo, properties: ["completed": "true"]),
+            Block(content: "List Item Block", kind: .listItem)
         ])
         
         do {
