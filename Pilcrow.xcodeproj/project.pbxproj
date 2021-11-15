@@ -7,13 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		920D371D274175A2007FD811 /* NSRangeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920D371C274175A2007FD811 /* NSRangeExtensions.swift */; };
 		922590DC26471D0F000113B3 /* ListItemBlockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922590DB26471D0F000113B3 /* ListItemBlockViewModel.swift */; };
 		922590DE26471DC1000113B3 /* TodoBlockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922590DD26471DC1000113B3 /* TodoBlockViewModel.swift */; };
 		922590E026471E7E000113B3 /* TextBlockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922590DF26471E7E000113B3 /* TextBlockViewModel.swift */; };
 		924A7C7A2649C7AC003C5073 /* Metrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924A7C792649C7AC003C5073 /* Metrics.swift */; };
 		924A7C7C2649D259003C5073 /* QuoteBlockCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924A7C7B2649D259003C5073 /* QuoteBlockCellView.swift */; };
 		924A7C7E2649D2A7003C5073 /* QuoteBlockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924A7C7D2649D2A7003C5073 /* QuoteBlockViewModel.swift */; };
-		928EF89726444AF000437680 /* DocumentExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928EF89626444AF000437680 /* DocumentExtensions.swift */; };
+		928EF89726444AF000437680 /* PilcrowExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928EF89626444AF000437680 /* PilcrowExtensions.swift */; };
 		928EF89B26444E7E00437680 /* BaseTextCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928EF89A26444E7E00437680 /* BaseTextCellView.swift */; };
 		928EF89D26444F1D00437680 /* TodoBlockCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928EF89C26444F1D00437680 /* TodoBlockCellView.swift */; };
 		92973A952644BBAB00B836B5 /* TextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92973A942644BBAB00B836B5 /* TextStyle.swift */; };
@@ -21,7 +22,6 @@
 		92973A9D26458E4200B836B5 /* FocusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92973A9C26458E4200B836B5 /* FocusableView.swift */; };
 		92973A9F2645908C00B836B5 /* TextBlockCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92973A9E2645908C00B836B5 /* TextBlockCellView.swift */; };
 		92973AAA2645B20300B836B5 /* ListItemStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92973AA92645B20300B836B5 /* ListItemStyle.swift */; };
-		92973AAE2645B9B200B836B5 /* BlockKindExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92973AAD2645B9B200B836B5 /* BlockKindExtensions.swift */; };
 		92973AB12645BAB300B836B5 /* ReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92973AB02645BAB300B836B5 /* ReusableCell.swift */; };
 		92B17561264D77D10016C279 /* DividerBlockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B17560264D77D10016C279 /* DividerBlockViewModel.swift */; };
 		92B17563264D77F60016C279 /* DividerBlockCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B17562264D77F60016C279 /* DividerBlockCellView.swift */; };
@@ -47,7 +47,7 @@
 		92B327B6273D99F20071B0C4 /* Pilcrow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B32769273BFDE30071B0C4 /* Pilcrow.framework */; };
 		92B327B7273D99F20071B0C4 /* Pilcrow.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 92B32769273BFDE30071B0C4 /* Pilcrow.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		92B327C1273D9BB50071B0C4 /* BaseTextCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B327C0273D9BB50071B0C4 /* BaseTextCellView.swift */; };
-		92B327C3273D9D850071B0C4 /* DocumentExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928EF89626444AF000437680 /* DocumentExtensions.swift */; };
+		92B327C3273D9D850071B0C4 /* PilcrowExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928EF89626444AF000437680 /* PilcrowExtensions.swift */; };
 		92B327E0273DCB5A0071B0C4 /* TodoCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B327DF273DCB5A0071B0C4 /* TodoCellView.swift */; };
 		92B327E2273DFB7B0071B0C4 /* TextCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B327E1273DFB7B0071B0C4 /* TextCellView.swift */; };
 		92B327E6273DFC140071B0C4 /* TodoBlockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B327E5273DFC140071B0C4 /* TodoBlockViewModel.swift */; };
@@ -122,6 +122,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		920D371C274175A2007FD811 /* NSRangeExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSRangeExtensions.swift; sourceTree = "<group>"; };
 		922590D4264718A5000113B3 /* DocumentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentTests.swift; sourceTree = "<group>"; };
 		922590D826471C8D000113B3 /* NumberedListItemContentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberedListItemContentTests.swift; sourceTree = "<group>"; };
 		922590DB26471D0F000113B3 /* ListItemBlockViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemBlockViewModel.swift; sourceTree = "<group>"; };
@@ -130,7 +131,7 @@
 		924A7C792649C7AC003C5073 /* Metrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metrics.swift; sourceTree = "<group>"; };
 		924A7C7B2649D259003C5073 /* QuoteBlockCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteBlockCellView.swift; sourceTree = "<group>"; };
 		924A7C7D2649D2A7003C5073 /* QuoteBlockViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteBlockViewModel.swift; sourceTree = "<group>"; };
-		928EF89626444AF000437680 /* DocumentExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentExtensions.swift; sourceTree = "<group>"; };
+		928EF89626444AF000437680 /* PilcrowExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PilcrowExtensions.swift; sourceTree = "<group>"; };
 		928EF89A26444E7E00437680 /* BaseTextCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTextCellView.swift; sourceTree = "<group>"; };
 		928EF89C26444F1D00437680 /* TodoBlockCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoBlockCellView.swift; sourceTree = "<group>"; };
 		928EF8C32644816700437680 /* Pilcrow.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pilcrow.entitlements; sourceTree = "<group>"; };
@@ -140,7 +141,6 @@
 		92973A9C26458E4200B836B5 /* FocusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusableView.swift; sourceTree = "<group>"; };
 		92973A9E2645908C00B836B5 /* TextBlockCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBlockCellView.swift; sourceTree = "<group>"; };
 		92973AA92645B20300B836B5 /* ListItemStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemStyle.swift; sourceTree = "<group>"; };
-		92973AAD2645B9B200B836B5 /* BlockKindExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockKindExtensions.swift; sourceTree = "<group>"; };
 		92973AB02645BAB300B836B5 /* ReusableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableCell.swift; sourceTree = "<group>"; };
 		92973AB32645E3B500B836B5 /* Editor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Editor.swift; sourceTree = "<group>"; };
 		92B17560264D77D10016C279 /* DividerBlockViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerBlockViewModel.swift; sourceTree = "<group>"; };
@@ -219,6 +219,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		920D371B27417590007FD811 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				920D371C274175A2007FD811 /* NSRangeExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		922590DA26471CFE000113B3 /* View Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -251,14 +259,6 @@
 				924A7C792649C7AC003C5073 /* Metrics.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		928EF89E264460F700437680 /* Pilcrow */ = {
-			isa = PBXGroup;
-			children = (
-				92973AAD2645B9B200B836B5 /* BlockKindExtensions.swift */,
-			);
-			path = Pilcrow;
 			sourceTree = "<group>";
 		};
 		928EF8A12644618700437680 /* Assets */ = {
@@ -306,6 +306,7 @@
 			children = (
 				92B32796273D4A060071B0C4 /* Models */,
 				92B32795273D4A000071B0C4 /* Views */,
+				920D371B27417590007FD811 /* Extensions */,
 				92B3276B273BFDE30071B0C4 /* Pilcrow.h */,
 				92B3276C273BFDE30071B0C4 /* Pilcrow.docc */,
 			);
@@ -437,7 +438,7 @@
 		92B327C2273D9D740071B0C4 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				928EF89626444AF000437680 /* DocumentExtensions.swift */,
+				928EF89626444AF000437680 /* PilcrowExtensions.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -448,14 +449,6 @@
 				92B327E5273DFC140071B0C4 /* TodoBlockViewModel.swift */,
 			);
 			path = "View Models";
-			sourceTree = "<group>";
-		};
-		92C2264F265431B300FB5D97 /* UIDocument */ = {
-			isa = PBXGroup;
-			children = (
-				92C22650265431C200FB5D97 /* DocumentFile.swift */,
-			);
-			path = UIDocument;
 			sourceTree = "<group>";
 		};
 		92C5810A2644472700E062A0 = {
@@ -493,8 +486,7 @@
 		92C581462644472F00E062A0 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				92C2264F265431B300FB5D97 /* UIDocument */,
-				928EF89E264460F700437680 /* Pilcrow */,
+				92C22650265431C200FB5D97 /* DocumentFile.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -684,6 +676,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				920D371D274175A2007FD811 /* NSRangeExtensions.swift in Sources */,
 				92B3278C273D49160071B0C4 /* Document.swift in Sources */,
 				92B3279D273D4C910071B0C4 /* Editor.swift in Sources */,
 				92B3279F273D4CF10071B0C4 /* EditResult.swift in Sources */,
@@ -713,7 +706,7 @@
 				92B327C1273D9BB50071B0C4 /* BaseTextCellView.swift in Sources */,
 				92B327EA273E042D0071B0C4 /* QuoteCellView.swift in Sources */,
 				92B327AA273D98CB0071B0C4 /* DocumentViewController.swift in Sources */,
-				92B327C3273D9D850071B0C4 /* DocumentExtensions.swift in Sources */,
+				92B327C3273D9D850071B0C4 /* PilcrowExtensions.swift in Sources */,
 				92B327A8273D98CB0071B0C4 /* AppDelegate.swift in Sources */,
 				92B327E8273E028B0071B0C4 /* ListItemCellView.swift in Sources */,
 				92B327EC273E0C4A0071B0C4 /* TextView.swift in Sources */,
@@ -731,9 +724,8 @@
 				922590DE26471DC1000113B3 /* TodoBlockViewModel.swift in Sources */,
 				922590DC26471D0F000113B3 /* ListItemBlockViewModel.swift in Sources */,
 				92B17563264D77F60016C279 /* DividerBlockCellView.swift in Sources */,
-				92973AAE2645B9B200B836B5 /* BlockKindExtensions.swift in Sources */,
 				922590E026471E7E000113B3 /* TextBlockViewModel.swift in Sources */,
-				928EF89726444AF000437680 /* DocumentExtensions.swift in Sources */,
+				928EF89726444AF000437680 /* PilcrowExtensions.swift in Sources */,
 				924A7C7A2649C7AC003C5073 /* Metrics.swift in Sources */,
 				92C5811B2644472800E062A0 /* DocumentViewController.swift in Sources */,
 				92C22651265431C200FB5D97 /* DocumentFile.swift in Sources */,

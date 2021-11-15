@@ -87,17 +87,3 @@ extension BaseTextCellView: NSTextViewDelegate {
     }
 }
 
-
-extension NSRange {
-    var isCollapsed: Bool {
-        length == 0
-    }
-    
-    var isAtBeginning: Bool {
-        location == 0
-    }
-    
-    func isAtEnd(of string: String) -> Bool {
-        location >= string.utf16.count
-    }
-}
