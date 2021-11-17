@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "92B32768273BFDE30071B0C4"
-               BuildableName = "Pilcrow.framework"
-               BlueprintName = "Pilcrow"
+               BlueprintIdentifier = "92C581122644472800E062A0"
+               BuildableName = "Pilcrow Demo.app"
+               BlueprintName = "Demo iOS"
                ReferencedContainer = "container:Pilcrow.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -38,6 +38,16 @@
                ReferencedContainer = "container:Pilcrow.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "92C581332644472900E062A0"
+               BuildableName = "UITests.xctest"
+               BlueprintName = "UITests"
+               ReferencedContainer = "container:Pilcrow.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
@@ -50,6 +60,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "92C581122644472800E062A0"
+            BuildableName = "Pilcrow Demo.app"
+            BlueprintName = "Demo iOS"
+            ReferencedContainer = "container:Pilcrow.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -57,15 +77,16 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "92B32768273BFDE30071B0C4"
-            BuildableName = "Pilcrow.framework"
-            BlueprintName = "Pilcrow"
+            BlueprintIdentifier = "92C581122644472800E062A0"
+            BuildableName = "Pilcrow Demo.app"
+            BlueprintName = "Demo iOS"
             ReferencedContainer = "container:Pilcrow.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
